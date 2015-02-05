@@ -11,10 +11,42 @@
 |
 */
 
-Route::get('/', array('uses' => 'HomeController@showWelcome', 'as' => 'home' ));
+Route::get('/', 
+  array(
+    'before' => 'auth',
+    'uses' => 'HomeController@showWelcome', 
+    'as' => 'home' 
+));
 
 Route::get('patient/generate-profile', 
   array(
+    'before' => 'auth',
     'uses' => 'PatientProfileController@generateProfile',
     'as' => 'generateProfile' 
+));
+
+
+/*
+ * Authentication routes
+ */
+
+// Logout
+Route::get('logout', 
+  array(
+    'uses' => 'AuthController@logout', 
+    'as' => 'logout'
+));
+
+// Login
+Route::post('login', 
+  array(
+    'uses' => 'AuthController@login', 
+    'as' => 'login'
+));
+
+// Expiry
+Route::get('expiry', 
+  array(
+    'uses' => 'AuthController@expiry', 
+    'as' => 'expiry'
 ));

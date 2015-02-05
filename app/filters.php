@@ -40,12 +40,12 @@ Route::filter('auth', function()
 		if (Request::ajax())
 		{
 			return Response::make('Unauthorized', 401);
+		} else {
+			return Response::make(array('message' => 'Please log in.'), 401);
 		}
-		else
-		{
-			return Redirect::guest('login');
-		}
+		return Redirect::guest('login');
 	}
+
 });
 
 
