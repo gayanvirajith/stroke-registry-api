@@ -88,3 +88,15 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+/*
+ * Entrust roles/permissions can be used in filters 
+ * by simply using the can and hasRole methods from within the Facade.
+ */
+Route::filter('generate_new_patient_profile', function()
+{
+    if (! Entrust::can('generate_new_patient_profile') ) // Checks the current user
+    {
+        return Response::make(array('message' => 'Unauthorized.'), 401);
+    }
+});

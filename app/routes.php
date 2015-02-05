@@ -11,6 +11,12 @@
 |
 */
 
+/* 
+ * Only users with roles that have the 'generate_new_patient_profile' 
+ * permission will be able to access patient/generate-profile route.
+ */
+Route::when('patient/generate-profile', 'generate_new_patient_profile');
+
 Route::get('/', 
   array(
     'before' => 'auth',
