@@ -17,12 +17,27 @@
  */
 Route::when('patient/generate-profile', 'generate_new_patient_profile');
 
+
+/**
+ * Custom validation hooks
+ */
+Validator::extend('province', 'PatientValidation@provinceCheck');
+Validator::extend('marital', 'PatientValidation@maritialStatusCheck');
+
+/*
+ * GET Routes
+ */
+
+// Root route (Home page)
+
 Route::get('/', 
   array(
     'before' => 'auth',
     'uses' => 'HomeController@showWelcome', 
     'as' => 'home' 
 ));
+
+// Generate patient profile
 
 Route::get('patient/generate-profile', 
   array(
@@ -55,4 +70,18 @@ Route::get('expiry',
   array(
     'uses' => 'AuthController@expiry', 
     'as' => 'expiry'
+));
+
+
+/*
+ * POST Routes
+ */
+
+// Update patient profile
+
+Route::post('patient/update-profile/{id}', 
+  array(
+    'before' => 'auth', 
+    'uses' => 'PatientProfileController@updateProfile', 
+    'as' => 'updatePatientProfile'
 ));
