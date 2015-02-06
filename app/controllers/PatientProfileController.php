@@ -20,12 +20,19 @@ class PatientProfileController extends \BaseController {
 	 */
 	public function generateProfile() {
 
-		// Retrieve the patient by creating empty patient 
-		$patient = Patient::Create(array());
+		// Get Autheniticated user 
+		$user = Auth::user();
+
+		// Retrieve the patient by creating empty patient
+		$patient = Patient::Create(
+			array(
+				'hospital_id' => $user->hospital_id
+		));
 
 		$response = [
 			'message' => 'Patient profile has been created!',
-			'id' => $patient->id
+			'id' => $patient->id,
+			'hospital_id' => $patient->hospital_id
 		];
 
 		return Response::make($response);
