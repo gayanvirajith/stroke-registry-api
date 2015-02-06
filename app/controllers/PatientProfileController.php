@@ -11,7 +11,7 @@ class PatientProfileController extends \BaseController {
 	| and manage updates.
 	|	
 	| Actions:
-	| 	- generateId
+	| 	- generateProfile
 	|		- 
 	*/
 
