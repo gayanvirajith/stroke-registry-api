@@ -7,35 +7,55 @@ class PatientProfileController extends \BaseController {
 	| Patient profile controller
 	|--------------------------------------------------------------------------
 	|
-	| This controller will be responsibled for generating new patient recored
+	| This controller will responsible for generating new patient recored
 	| and manage updates.
 	|	
 	| Actions:
 	| 	- generateProfile
-	|		- 
+	|		- updateProfile
 	*/
 
-	/*
-	 * Generate empty patient profile and returns back the id
+
+	/**
+	 * Generate empty patient profile and returns back the id.
+	 * Accepts a GET request.
+	 *
+	 * @return JSON Response
 	 */
 	public function generateProfile() {
 
 		// Get Autheniticated user 
 		$user = Auth::user();
 
+		// Generate unique id
+		$uuid = Uuid::uuid4();
+
 		// Retrieve the patient by creating empty patient
 		$patient = Patient::Create(
 			array(
-				'hospital_id' => $user->hospital_id
+				'hospital_id' => $user->hospital_id,
+				'stroke_id'		=> $uuid->toString()
 		));
 
 		$response = [
 			'message' => 'Patient profile has been created!',
 			'id' => $patient->id,
-			'hospital_id' => $patient->hospital_id
+			'hospital_id' => $patient->hospital_id,
+			'stroke_id' => $patient->stroke_id
 		];
 
 		return Response::make($response);
 	}
 
+
+	/**
+	 * Update patient profile details via POST request.
+	 * Accepts JSON request and process JSON payload with model validations
+	 * and finally persist the data into storage.
+	 *
+	 * @return JSON Response
+ 	 */
+	public function updateProfile() {
+
+	}
 }
