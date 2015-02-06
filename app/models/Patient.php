@@ -13,6 +13,7 @@ class Patient extends BaseModel {
    */
   protected $guarded = ['id', 'stroke_id', 'hospital_id', 'nic'];
 
+
   /**
    * Validation rules set
    */
@@ -35,6 +36,7 @@ class Patient extends BaseModel {
     'living_arrangement' => 'numeric|min:1|livingArrangement',
   );
 
+
   /**
    * Custom validation messages defined under validators/*.php
    */
@@ -49,6 +51,7 @@ class Patient extends BaseModel {
     'levelOfIndependence'   => 'The level of independence status is not valid.',
     'livingArrangement'      => 'The living arrangement status is not valid.',
   ];
+
 
   /*
    * constant values used for education mapping
@@ -101,6 +104,7 @@ class Patient extends BaseModel {
   const MARITIAL_STATE_WIDOW       = 3;
   const MARITIAL_STATE_DIVORCE     = 4;
 
+
   /*
    * constant values used for ethinicity
    */
@@ -132,6 +136,7 @@ class Patient extends BaseModel {
   const DEXTERITY_RIGHT         = 1;
   const DEXTERITY_LEFT          = 2;
   const DEXTERITY_AMBIDEXTROUS  = 3;
+
 
   /*
    * constant values used for provinces
