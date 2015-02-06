@@ -28,12 +28,12 @@ class Patient extends BaseModel {
     'province' => 'numeric|min:1|province',
     'marital_status' => 'numeric|min:1|marital',
     'pregnant_status' => 'numeric|postpartum',
-    'ethnicity' => 'numeric|min:1|ethinicity',
-    'dexterity' => 'numeric|min:1|dexterity',
-    'education' => 'numeric|min:1|education',
-    'employement' => 'numeric|min:1|employement',
-    'level_of_independence' => 'numeric|min:1|levelOfIndependence',
-    'living_arrangement' => 'numeric|min:1|livingArrangement',
+    'ethnicity' => 'numeric|ethinicity',
+    'dexterity' => 'numeric|dexterity',
+    'education' => 'numeric|education',
+    'employement' => 'numeric|employment',
+    'level_of_independence' => 'numeric|levelOfIndependence',
+    'living_arrangement' => 'numeric|livingArrangement',
   );
 
 
@@ -43,13 +43,13 @@ class Patient extends BaseModel {
   public static $messages = [
     'province'                => 'The province field is not valid.',
     'marital'                 => 'The marital status is not valid.',
-    'postpartum'         => 'The postpartum status is not valid.',
+    'postpartum'              => 'The postpartum status is not valid.',
     'ethnicity'               => 'The ethnicity status is not valid.',
     'dexterity'               => 'The dexterity status is not valid.',
     'education'               => 'The education status is not valid.',
-    'employement'             => 'The employement status is not valid.',
-    'levelOfIndependence'   => 'The level of independence status is not valid.',
-    'livingArrangement'      => 'The living arrangement status is not valid.',
+    'employment'              => 'The employement status is not valid.',
+    'levelOfIndependence'     => 'The level of independence status is not valid.',
+    'livingArrangement'       => 'The living arrangement status is not valid.',
   ];
 
 
