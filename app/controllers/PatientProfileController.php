@@ -31,11 +31,10 @@ class PatientProfileController extends \BaseController {
 		$uuid = Uuid::uuid4();
 
 		// Retrieve the patient by creating empty patient
-		$patient = Patient::Create(
-			array(
-				'hospital_id' => $user->hospital_id,
-				'stroke_id'		=> $uuid->toString()
-		));
+		$patient = new Patient;
+		$patient->hospital_id = $user->hospital_id; 
+		$patient->stroke_id		= $uuid->toString();
+		$patient->save();
 
 		$response = [
 			'message' => 'Patient profile has been created!',
