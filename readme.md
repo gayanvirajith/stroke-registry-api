@@ -1,4 +1,4 @@
-# Stroke registry api
+# Stroke Registry API
 
 
 ### Login Request
