@@ -41,13 +41,13 @@ class Patient extends BaseModel {
   public static $messages = [
     'province'                => 'The province field is not valid.',
     'marital'                 => 'The marital status is not valid.',
-    'pregnant_status'         => 'The postpartum status is not valid.',
+    'postpartum'         => 'The postpartum status is not valid.',
     'ethnicity'               => 'The ethnicity status is not valid.',
     'dexterity'               => 'The dexterity status is not valid.',
     'education'               => 'The education status is not valid.',
     'employement'             => 'The employement status is not valid.',
-    'level_of_independence'   => 'The level of independence status is not valid.',
-    'living_arrangement'      => 'The living arrangement status is not valid.',
+    'levelOfIndependence'   => 'The level of independence status is not valid.',
+    'livingArrangement'      => 'The living arrangement status is not valid.',
   ];
 
   /*
