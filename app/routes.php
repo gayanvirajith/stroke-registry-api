@@ -23,6 +23,13 @@ Route::when('patient/generate-profile', 'generate_new_patient_profile');
  */
 Validator::extend('province', 'PatientValidation@provinceCheck');
 Validator::extend('marital', 'PatientValidation@maritialStatusCheck');
+Validator::extend('education', 'PatientValidation@educationCheck');
+Validator::extend('employment', 'PatientValidation@employmentCheck');
+Validator::extend('levelOfIndependence', 'PatientValidation@levelOfIndependenceCheck');
+Validator::extend('livingArrangement', 'PatientValidation@livingArrangementCheck');
+Validator::extend('ethinicity', 'PatientValidation@ethinicityCheck');
+Validator::extend('postpartum', 'PatientValidation@postpartumCheck');
+Validator::extend('dexterity', 'PatientValidation@dexterityCheck');
 
 /*
  * GET Routes
