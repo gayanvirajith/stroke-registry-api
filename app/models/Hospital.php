@@ -1,6 +1,12 @@
 <?php
 
-class Hospital extends \Eloquent {
+/**
+ *
+ * Hospital model 
+ * 
+ */
+
+class Hospital extends BaseModel {
 	
   protected $guarded = ['id'];
 
@@ -19,4 +25,5 @@ class Hospital extends \Eloquent {
   {
       return $this->hasMany('Users');
   }
+  
 }

@@ -5,7 +5,8 @@
  * Patient model 
  * 
  */
-class Patient extends \Eloquent {
+
+class Patient extends BaseModel {
 	
   protected $guarded = ['id', 'stroke_id', 'hospital_id'];
 
