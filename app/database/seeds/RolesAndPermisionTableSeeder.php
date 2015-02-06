@@ -58,6 +58,9 @@ class RolesAndPermisionTableSeeder extends Seeder {
 
     $user1 = User::where('username','=','admin')->first();
     $user1->roles()->attach($adminRole);
+
+    $user2 = User::where('username','=','user')->first();
+    $user2->roles()->attach($userRole);
     
   }
 
