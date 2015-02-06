@@ -8,7 +8,24 @@
 
 class Patient extends BaseModel {
 	
-  protected $guarded = ['id', 'stroke_id', 'hospital_id'];
+  protected $guarded = ['id', 'stroke_id', 'hospital_id', 'nic'];
+
+  public static $rules = array(
+    'name' => 'required|min:4|max:255',
+    'nic' => 'required|min:10|max:10',
+    'sex' => 'required|in:M,F',
+    'age' => 'min:1|max:150',
+    'dob' => 'date',
+    'bht_number' => 'numeric',
+    'pregnant' => 'in:0,1',
+    'province' => 'numeric|min:1|province',
+    'marital_status' => 'numeric|min:1|marital',
+  );
+
+  public static $messages = [
+    'province'  => 'The province field is not valid.',
+    'marital'   => 'The marital status is not valid.',
+  ];
 
   /*
    * constant values used for education mapping
@@ -96,14 +113,15 @@ class Patient extends BaseModel {
   /*
    * constant values used for provinces
    */
-  const PROVINCE_CENTRAL       = 1;
-  const PROVINCE_EASTERN       = 2;
-  const PROVINCE_NORTH_CENTRAL = 3;
-  const PROVINCE_NORTHERN      = 4;
-  const PROVINCE_NORTH_WESTERN = 5;
-  const PROVINCE_SOUTHERN      = 6;
-  const PROVINCE_UVA           = 7;
-  const PROVINCE_WESTERN       = 8;
+  const PROVINCE_CENTRAL        = 1;
+  const PROVINCE_EASTERN        = 2;
+  const PROVINCE_NORTH_CENTRAL  = 3;
+  const PROVINCE_NORTHERN       = 4;
+  const PROVINCE_NORTH_WESTERN  = 5;
+  const PROVINCE_SABARAGAMUWA   = 6;
+  const PROVINCE_SOUTHERN       = 7;
+  const PROVINCE_UVA            = 8;
+  const PROVINCE_WESTERN        = 9;
 
 
   /*
@@ -160,7 +178,7 @@ class Patient extends BaseModel {
   /*
    * Martial status options
    */
-  public static $martialStatusOptions = [
+  public static $maritialStatusOptions = [
     self::MARITIAL_STATE_SINGLE      => 'Single',
     self::MARITIAL_STATE_MARRIED     => 'Married',
     self::MARITIAL_STATE_WIDOW       => 'Widow',
@@ -204,14 +222,15 @@ class Patient extends BaseModel {
    * Provinces options
    */
   public static $provincesOptions = [
-    self::PROVINCE_CENTRAL       => 'Central',
-    self::PROVINCE_EASTERN       => 'Eastern',
-    self::PROVINCE_NORTH_CENTRAL => 'North central',
-    self::PROVINCE_NORTHERN      => 'Northern',
-    self::PROVINCE_NORTH_WESTERN => 'North western',
-    self::PROVINCE_SOUTHERN      => 'Southern',
-    self::PROVINCE_UVA           => 'Uva',
-    self::PROVINCE_WESTERN       => 'Western' 
+    self::PROVINCE_CENTRAL        => 'Central',
+    self::PROVINCE_EASTERN        => 'Eastern',
+    self::PROVINCE_NORTH_CENTRAL  => 'North central',
+    self::PROVINCE_NORTHERN       => 'Northern',
+    self::PROVINCE_NORTH_WESTERN  => 'North western',
+    self::PROVINCE_SABARAGAMUWA   => 'Sabaragamuwa',
+    self::PROVINCE_SOUTHERN       => 'Southern',
+    self::PROVINCE_UVA            => 'Uva',
+    self::PROVINCE_WESTERN        => 'Western' 
   ];
 
 
