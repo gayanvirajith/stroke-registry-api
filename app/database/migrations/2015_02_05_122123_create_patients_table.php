@@ -16,7 +16,7 @@ class CreatePatientsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('stroke_id')->unique();
-			$table->integer('bht_number');
+			$table->tinyInteger('bht_number');
 			$table->integer('hospital_id');
 			$table->string('name');
 			$table->tinyInteger('age');
