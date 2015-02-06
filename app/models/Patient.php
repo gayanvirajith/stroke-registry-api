@@ -7,7 +7,7 @@
  */
 class Patient extends \Eloquent {
 	
-  protected $guarded = ['id'];
+  protected $guarded = ['id', 'stroke_id', 'hospital_id'];
 
   /*
    * constant values used for education mapping
