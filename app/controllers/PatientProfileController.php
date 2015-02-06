@@ -54,7 +54,53 @@ class PatientProfileController extends \BaseController {
 	 *
 	 * @return JSON Response
  	 */
-	public function updateProfile() {
+	public function updateProfile($id) {
 
+		// Response array to return
+		$response = [
+			'message' => 'Patient profiles has been updated!'
+		];
+
+		// Find patient by id
+		$patient = Patient::find($id);
+
+		if (!$patient) {
+				$response['message'] = 
+					'Could not find a patient with the id of {$id}, Please try again';	
+				return Response::make($response, 500);
+		}
+
+		// Validate POST data 
+    $validator = Patient::validate(Input::all());
+
+    if ($validator->passes()) {
+
+    	// Build patient object
+    	$patientBuilder = new PatientBuilder(Input::all(), $patient);
+			$patientBuilder->build();
+			$patient = $patientBuilder->getPatient();
+
+			// Update patient data
+			$patient->save();
+
+			return Response::make($response);
+
+    } else {
+
+    	$messages = $validator->messages();
+      $errors = [];
+
+    	foreach(array_keys(Patient::$rules) as $key) {
+    		if ($messages->has($key)) $errors[] = $messages->first($key);
+    	}
+
+			$response['message'] = 'Patient profile update failed, Please try again';	
+			$response['errors'] = $errors;	
+
+			return Response::make($response, 500);
+			
+    }
+
+		return Response::make($response);
 	}
 }
