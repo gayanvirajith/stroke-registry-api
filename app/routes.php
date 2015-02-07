@@ -21,6 +21,13 @@ Route::when('patient/generate-profile', 'generate_new_patient_profile');
 /**
  * Custom validation hooks
  */
+
+Validator::resolver(function($translator, $data, $rules, $messages)
+{
+    return new ExtendedValidator($translator, $data, $rules, $messages);
+});
+
+// Patient profile
 Validator::extend('province', 'PatientValidation@provinceCheck');
 Validator::extend('marital', 'PatientValidation@maritialStatusCheck');
 Validator::extend('education', 'PatientValidation@educationCheck');
@@ -30,6 +37,14 @@ Validator::extend('livingArrangement', 'PatientValidation@livingArrangementCheck
 Validator::extend('ethinicity', 'PatientValidation@ethinicityCheck');
 Validator::extend('postpartum', 'PatientValidation@postpartumCheck');
 Validator::extend('dexterity', 'PatientValidation@dexterityCheck');
+
+// Event onset
+Validator::extend('symptoms', 'EventOnsetValidation@symptomsCheck');
+Validator::extend('presentationTo', 'EventOnsetValidation@presentationCheck');
+Validator::extend('transportOption', 'EventOnsetValidation@transportOptionCheck');
+Validator::extend('oxfordshireClassification', 
+  'EventOnsetValidation@oxfordshireCommunityClassificationOptionsCheck');
+Validator::extend('sideOfSymptoms', 'EventOnsetValidation@sideOfSymptomsOptionsCheck');
 
 /*
  * GET Routes
