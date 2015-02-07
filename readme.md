@@ -102,17 +102,16 @@ curl -i -H "Content-type: application/json" -b cookies.txt \
   -d '{
     "episode_id": "0",
     "onset_of_stroke_at": "0000-00-00 00:00:00",
-    "first_presentation_to": "0",
+    "first_presentation_to": 0,
     "admisson_time": "0000-00-00 00:00:00",
     "onset_to_admission_time": "0.00",
-    "transport_mode": "0",
-    "stroke_occur_in_hospital": "0",
+    "transport_mode": 0,
+    "stroke_occur_in_hospital": 0,
     "symptoms": "",
-    "oxfordshire_classification": "0",
-    "side_of_symptoms": "0",
+    "oxfordshire_classification": 0,
+    "side_of_symptoms": 0,
     "modified_rankin_scale": "",
     "barthel_index": "",
     "gcs": "",
-  }
-  '
+  }'
 ```
