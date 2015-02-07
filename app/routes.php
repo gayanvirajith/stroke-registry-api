@@ -53,6 +53,14 @@ Route::get('patient/generate-profile',
     'as' => 'generateProfile' 
 ));
 
+// Show patient's event onset data
+
+Route::get('patient/event-onset/{id}', 
+  array(
+    'before' => 'auth',
+    'uses' => 'EventOnsetController@index',
+    'as' => 'showEventOnset' 
+));
 
 /*
  * Authentication routes
@@ -91,4 +99,13 @@ Route::post('patient/update-profile/{id}',
     'before' => 'auth', 
     'uses' => 'PatientProfileController@updateProfile', 
     'as' => 'updatePatientProfile'
+));
+
+// Update event onset
+
+Route::post('patient/update-event-onset/{id}',
+  array(
+    'before' => 'auth',
+    'uses' => 'EventOnsetController@updateEventOnset',
+    'as' => 'updateEventOnset'
 ));
