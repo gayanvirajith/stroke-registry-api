@@ -47,9 +47,7 @@ class PatientBuilder {
    */
   public function build()
   {
-      Log::info("build method invoked ! - " . $this->patient->id);
       foreach ($this->config as $option => $value) {
-        $status = (property_exists(get_class($this->patient), $option) === true)? "true" : "false";
         $this->patient->$option = $value;
       }
   }
