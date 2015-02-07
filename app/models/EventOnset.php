@@ -71,10 +71,71 @@ class EventOnset extends BaseModel {
    * First presentation options 
    */
   public static $firstPresentationOptions = [
-    self::FIRST_PRESENTATION_TO_HOSPITAL   => '',
-    self::FIRST_PRESENTATION_TO_CONSULTANT => '',
-    self::FIRST_PRESENTATION_TO_AYURVEDIC  => '',
-    self::FIRST_PRESENTATION_TO_GP         => '',
+    self::FIRST_PRESENTATION_TO_HOSPITAL   => 'Hospital',
+    self::FIRST_PRESENTATION_TO_CONSULTANT => 'Consultant',
+    self::FIRST_PRESENTATION_TO_AYURVEDIC  => 'Ayurvedic',
+    self::FIRST_PRESENTATION_TO_GP         => 'GP',
   ];
 
+
+  /*
+   * Mode of transport options
+   */
+  public static $transportOptions = [
+    self::MODE_OF_TRANSPORT_TRANSFERRED_FROM_ANOTHER_HOSPITAL =>
+      'Another hospital',
+    self::MODE_OF_TRANSPORT_PERSONAL_VEHICLE  => 'Personal vehicle',
+    self::MODE_OF_TRANSPORT_TAXI              => 'Taxi',
+    self::MODE_OF_TRANSPORT_PUBLIC            => 'Public',
+    self::MODE_OF_TRANSPORT_AMBULANCE         => 'Ambulance',
+    self::MODE_OF_TRANSPORT_OTHER             => 'Other'
+  ];
+
+
+  /*
+   * Initialize symptoms options
+   */
+  public static $initialSymptomsOptions = [
+    self::SYMPTOM_WEAKNESS              => 'Weakness',
+    self::SYMPTOM_SPEECH_DISTURBANCE    => 'Speech disturbance',
+    self::SYMPTOM_SENSORY_SYMPTOMS      => 'Sensory symptoms',
+    self::SYMPTOM_DYSPHAGIA             => 'Dysphagia',
+    self::SYMPTOM_MONOCULAR_BLINDNESS   => 'Monocular blindness',
+    self::SYMPTOM_FIELD_DEFECT          => 'Field defect',
+    self::SYMPTOM_BRAINSTEM             => 'Brainstem',
+    self::SYMPTOM_CEREBELLAR            => 'Cerebellar',
+    self::SYMPTOM_COGNITIVE_SYMPTOMS    => 'Cognitive symptoms',
+    self::SYMPTOM_SEIZURE               => 'Seizure',
+    self::SYMPTOM_HEADACHE              => 'Headache'
+  ];
+
+
+  /*
+   * oxfordshire community options
+   */
+  public static $oxfordshireCommunityClassificationOptions = [
+    self::TACS    => 'TACS',
+    self::PACS    => 'PACS',
+    self::POCS    => 'POCS',
+    self::LACUNAR => 'LACUNAR'
+  ];
+
+
+  /*
+   * Side of symptoms options
+   */
+  public static $sideOfSymptomsOptions = [
+    self::SIDE_SYMPTOM_LEFT      => 'Left',
+    self::SIDE_SYMPTOM_RIGHT     => 'Right',
+    self::SIDE_SYMPTOM_BILATERAL => 'Bilateral'
+  ];
+
+
+  /*
+   * ORM: belongs to patient
+   */
+  public function patient()
+  {
+      return $this->belongsTo('Patient');
+  }
 }

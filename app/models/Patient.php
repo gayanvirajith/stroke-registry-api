@@ -262,8 +262,19 @@ class Patient extends BaseModel {
   ];
 
 
+  /*
+   * ORM: belongs to a hospital
+   */
   public function hospital()
   {
       return $this->belongsTo('Hospital');
+  }
+
+
+  /*
+   * ORM: belongs to eventoset
+   */
+  public function eventOnset() {
+    return $this->hasOne('EventOnset');
   }
 }
