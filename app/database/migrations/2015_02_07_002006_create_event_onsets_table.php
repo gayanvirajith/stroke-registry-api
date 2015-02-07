@@ -28,6 +28,7 @@ class CreateEventOnsetsTable extends Migration {
 			$table->string('modified_rankin_scale');
 			$table->string('barthel_index');
 			$table->string('gcs');
+			$table->integer('patient_id');
 			$table->timestamps();
 		});
 	}
