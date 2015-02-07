@@ -85,3 +85,30 @@ curl -i -H "Content-type: application/json" -b cookies.txt \
   }
   '
 ```
+
+
+### Show patient event onset
+
+curl -i -H "Content-type: application/json" -b cookies.txt \
+  -XGET "http://localhost:8000/patient/event-onset/1"
+
+
+### Update patient event onset
+
+curl -i -H "Content-type: application/json" -b cookies.txt \
+  -XPOST "http://localhost:8000/patient/update-event-onset/1" \
+  -d '{
+    "episode_id": "0",
+    "onset_of_stroke_at": "0000-00-00 00:00:00",
+    "first_presentation_to": "0",
+    "admisson_time": "0000-00-00 00:00:00",
+    "onset_to_admission_time": "0.00",
+    "transport_mode": "0",
+    "stroke_occur_in_hospital": "0",
+    "symptoms": "",
+    "oxfordshire_classification": "0",
+    "side_of_symptoms": "0",
+    "modified_rankin_scale": "",
+    "barthel_index": "",
+    "gcs": "",
+  }'
