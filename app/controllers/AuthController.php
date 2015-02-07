@@ -28,7 +28,7 @@ class AuthController extends \BaseController {
 			Auth::logout();
 			return Response::make(array('message' => 'You are now logged out!'));
 		} else {
-			return Response::make(array('message' => 'Please login!'),500);
+			return Response::make(array('message' => 'Please login!'), 500);
 		}
 	}
 

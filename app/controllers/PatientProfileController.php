@@ -44,6 +44,7 @@ class PatientProfileController extends \BaseController {
 		];
 
 		return Response::make($response);
+
 	}
 
 
@@ -102,5 +103,6 @@ class PatientProfileController extends \BaseController {
     }
 
 		return Response::make($response);
+		
 	}
 }
