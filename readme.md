@@ -89,12 +89,14 @@ curl -i -H "Content-type: application/json" -b cookies.txt \
 
 ### Show patient event onset
 
+```
 curl -i -H "Content-type: application/json" -b cookies.txt \
   -XGET "http://localhost:8000/patient/event-onset/1"
-
+```
 
 ### Update patient event onset
 
+```
 curl -i -H "Content-type: application/json" -b cookies.txt \
   -XPOST "http://localhost:8000/patient/update-event-onset/1" \
   -d '{
@@ -111,4 +113,6 @@ curl -i -H "Content-type: application/json" -b cookies.txt \
     "modified_rankin_scale": "",
     "barthel_index": "",
     "gcs": "",
-  }'
+  }
+  '
+```
