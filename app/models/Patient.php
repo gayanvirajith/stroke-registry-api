@@ -277,4 +277,13 @@ class Patient extends BaseModel {
   public function eventOnset() {
     return $this->hasOne('EventOnset');
   }
+
+
+  /*
+   * ORM: belongs to drug history
+   */
+  public function drugHistory() {
+    return $this->hasOne('DrugHistory');
+  }
+
 }
