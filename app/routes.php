@@ -46,6 +46,11 @@ Validator::extend('oxfordshireClassification',
   'EventOnsetValidation@oxfordshireCommunityClassificationOptionsCheck');
 Validator::extend('sideOfSymptoms', 'EventOnsetValidation@sideOfSymptomsOptionsCheck');
 
+// Drug history
+Validator::extend('antiplatelet', 'DrugHistoryValidation@antiplateletCheck');
+Validator::extend('anticoagulation', 'DrugHistoryValidation@anticoagulationCheck');
+
+
 /*
  * GET Routes
  */

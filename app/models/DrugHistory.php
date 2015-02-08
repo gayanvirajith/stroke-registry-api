@@ -14,6 +14,23 @@ class DrugHistory extends \Eloquent {
 	protected $guarded = ['id'];
 
 
+  /**
+   * Validation rules set
+   */
+  public static $rules = [
+    'antiplatelet_status'          => 'numeric|antiplatelet', 
+    'anticoagulation_status'       => 'numeric|anticoagulation', 
+  ];
+
+
+  /**
+   * Custom validation messages defined under validators/*.php
+   */
+  public static $messages = [
+    'antiplatelet_status'        => 'The antiplatelet field is not valid.',
+    'anticoagulation_status'     => 'The anticoagulation field is not valid.',
+  ];
+
   /*
    * constant values used for `antiplatelet agents`
    */
@@ -69,5 +86,5 @@ class DrugHistory extends \Eloquent {
   {
       return $this->belongsTo('Patient');
   }
-  
+
 }
