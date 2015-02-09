@@ -48,6 +48,7 @@ class EventOnsetController extends \BaseController {
 
 	}
 
+
 	/**
 	 * Update patient's event onset data via POST request.
 	 * Access JSON request, process payload with model validations 
