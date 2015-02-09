@@ -82,6 +82,14 @@ Route::get('patient/event-onset/{id}',
     'as' => 'showEventOnset' 
 ));
 
+// Show patient's drug history data
+
+Route::get('patient/drug-history/{id}', 
+  array(
+    'before' => 'auth',
+    'uses' => 'DrugHistoryController@index',
+    'as' => 'showDrugHistory' 
+));
 /*
  * Authentication routes
  */

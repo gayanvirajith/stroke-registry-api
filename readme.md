@@ -115,3 +115,11 @@ curl -i -H "Content-type: application/json" -b cookies.txt \
     "gcs": "",
   }'
 ```
+
+
+### Show patient drug history
+
+```
+curl -i -H "Content-type: application/json" -b cookies.txt \
+  -XGET "http://localhost:8000/patient/drug-history/1"
+```
