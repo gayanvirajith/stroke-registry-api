@@ -137,3 +137,12 @@ Route::post('patient/update-event-onset/{id}',
     'uses' => 'EventOnsetController@updateEventOnset',
     'as' => 'updateEventOnset'
 ));
+
+// Update drug history
+
+Route::post('patient/update-drug-history/{id}',
+  array(
+    'before' => 'auth',
+    'uses' => 'DrugHistoryController@updateDrugHistory',
+    'as' => 'updateDrugHistory'
+));

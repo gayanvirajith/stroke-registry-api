@@ -123,3 +123,18 @@ curl -i -H "Content-type: application/json" -b cookies.txt \
 curl -i -H "Content-type: application/json" -b cookies.txt \
   -XGET "http://localhost:8000/patient/drug-history/1"
 ```
+
+### Update patient drug history
+
+```
+curl -i -H "Content-type: application/json" -b cookies.txt \
+  -XPOST "http://localhost:8000/patient/update-drug-history/1" \
+  -d '{
+    "use_antiplatelet": 1,
+    "use_anticoagulation": 1,
+    "antiplatelet_status": 0,
+    "anticoagulation_status": 0,
+    "thrombolysis_for_stemi": 0,
+    "thrombolysis_for_stroke": 0
+  }'
+```

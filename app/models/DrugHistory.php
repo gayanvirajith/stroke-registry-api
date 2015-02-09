@@ -6,7 +6,7 @@
  *
  */
 
-class DrugHistory extends \Eloquent {
+class DrugHistory extends BaseModel {
 
   /*
    * Guarded array 
@@ -27,8 +27,8 @@ class DrugHistory extends \Eloquent {
    * Custom validation messages defined under validators/*.php
    */
   public static $messages = [
-    'antiplatelet_status'        => 'The antiplatelet field is not valid.',
-    'anticoagulation_status'     => 'The anticoagulation field is not valid.',
+    'antiplatelet'        => 'The antiplatelet field is not valid.',
+    'anticoagulation'     => 'The anticoagulation field is not valid.',
   ];
 
   /*
