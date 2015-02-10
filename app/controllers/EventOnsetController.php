@@ -20,7 +20,11 @@ class EventOnsetController extends \BaseController {
 
 	/**
 	 * Return patient's event onset data  
+	 * GET patient/event-onset/{id}
 	 *
+	 * @param id
+	 * @return Response
+	 * 
 	 */		
 	public function index($id) {
 
