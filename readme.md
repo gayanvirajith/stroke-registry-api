@@ -137,4 +137,5 @@ curl -i -H "Content-type: application/json" -b cookies.txt \
     "thrombolysis_for_stemi": 0,
     "thrombolysis_for_stroke": 0
   }'
+  
 ```
