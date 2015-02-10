@@ -59,8 +59,7 @@ Validator::extend('anticoagulation', 'DrugHistoryValidation@anticoagulationCheck
 
 Route::get('/', 
   array(
-    'before' => 'auth',
-    'uses' => 'HomeController@showWelcome', 
+    'uses' => 'HomeController@index', 
     'as' => 'home' 
 ));
 
