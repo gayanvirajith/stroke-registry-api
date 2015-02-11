@@ -64,8 +64,8 @@ class ApiController extends BaseController {
         return Response::json([
             'error' => [
                 'message' => $message,
-                'status_code' => $this->getStatusCode()
+                'statusCode' => $this->getStatusCode()
             ]
-        ]);
+        ], $this->getStatusCode());
     }
 }
