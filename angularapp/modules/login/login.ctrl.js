@@ -33,13 +33,14 @@ app.controller("LoginController",[
         authService.loginConfirmed(); 
         $location.path('/dashboard');  
       }else {
+        console.log("Failed");
         flash.setMessage(data.message, 'danger');     
       }
       
     });
 
-    login.error(function(data, status, headers, config){
-      flash.setMessage(data.message, 'danger');     
+    login.error(function(data, status, headers, config){      
+      flash.setMessage(data.error.message, 'danger');     
     });
 
   };
