@@ -8,9 +8,9 @@ app.factory('flash',['$rootScope', function($rootScope) {
   // supports boostrap alert types. e.g: success, info, warning, danger
   $rootScope.flashMessage =  { type: 'info', msg: '' };
 
-  $rootScope.$on("$routeChangeSuccess", function() {
-    $rootScope.flashMessage = { type: 'danger', msg: '' };
-  });
+  // $rootScope.$on("$routeChangeSuccess", function() {
+  //   $rootScope.flashMessage = { type: 'danger', msg: '' };
+  // });
 
   $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams, error){ 
     $rootScope.flashMessage = { type: 'danger', msg: '' };
@@ -20,6 +20,14 @@ app.factory('flash',['$rootScope', function($rootScope) {
     setMessage: function(message, t) {
       t = typeof t !== 'undefined' ? t : 'info';
       $rootScope.flashMessage = { type: t, msg: message};
+    }
+  };
+}]);
+
+app.factory('sessionexpiry', ['$http', function($http){
+  return {
+    get: function() {
+      return $http.get('/expiry');
     }
   };
 }]);
