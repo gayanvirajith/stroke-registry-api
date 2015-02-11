@@ -7,12 +7,12 @@ class PatientProfileController extends \BaseController {
 	| Patient profile controller
 	|--------------------------------------------------------------------------
 	|
-	| This controller will responsible for generating new patient recored
+	| This controller will responsible for generating new patient recorded
 	| and manage updates.
 	|	
 	| Actions:
 	| 	- generateProfile
-	|		- updateProfile
+	|	- updateProfile
 	*/
 
 
@@ -32,7 +32,7 @@ class PatientProfileController extends \BaseController {
 
 		// Retrieve the patient by creating empty patient
 		$patient = new Patient;
-		$patient->hospital_id = $user->hospital_id; 
+		$patient->hospital_id = $user->hospital_id;
 		$patient->stroke_id		= $uuid->toString();
 		$patient->save();
 
@@ -54,7 +54,7 @@ class PatientProfileController extends \BaseController {
 	 * and finally persist the data into storage.
 	 *
 	 * @return JSON Response
- 	 */
+	 */
 	public function updateProfile($id) {
 
 		// Response array to return
@@ -66,18 +66,18 @@ class PatientProfileController extends \BaseController {
 		$patient = Patient::find($id);
 
 		if (!$patient) {
-				$response['message'] = 
-					'Could not find a patient with the id of {$id}, Please try again';	
-				return Response::make($response, 500);
+			$response['message'] =
+				'Could not find a patient with the id of {$id}, Please try again';
+			return Response::make($response, 500);
 		}
 
 		// Validate POST data 
-    $validator = Patient::validate(Input::all());
+		$validator = Patient::validate(Input::all());
 
-    if ($validator->passes()) {
+		if ($validator->passes()) {
 
-    	// Build patient object
-    	$patientBuilder = new PatientBuilder(Input::all(), $patient);
+			// Build patient object
+			$patientBuilder = new PatientBuilder(Input::all(), $patient);
 			$patientBuilder->build();
 			$patient = $patientBuilder->getPatient();
 
@@ -86,23 +86,23 @@ class PatientProfileController extends \BaseController {
 
 			return Response::make($response);
 
-    } else {
+		} else {
 
-    	$messages = $validator->messages();
-      $errors = [];
+			$messages = $validator->messages();
+			$errors = [];
 
-    	foreach(array_keys(Patient::$rules) as $key) {
-    		if ($messages->has($key)) $errors[] = $messages->first($key);
-    	}
+			foreach(array_keys(Patient::$rules) as $key) {
+				if ($messages->has($key)) $errors[] = $messages->first($key);
+			}
 
-			$response['message'] = 'Patient profile update failed, Please try again';	
-			$response['errors'] = $errors;	
+			$response['message'] = 'Patient profile update failed, Please try again';
+			$response['errors'] = $errors;
 
 			return Response::make($response, 500);
-			
-    }
+
+		}
 
 		return Response::make($response);
-		
+
 	}
 }
