@@ -1,9 +1,39 @@
 <?php
 
-class AuthController extends \BaseController {
+class AuthController extends ApiController {
 
 	/*
-	 * Login action
+	|--------------------------------------------------------------------------
+	| Authentication controller
+	|--------------------------------------------------------------------------
+	|
+	| This controller will responsible for handle authentication.
+	|
+	| Actions:
+	|	- login
+	| 	- logout
+	|	- expiry
+	*/
+
+	/**
+	 * @var Acme\Transformers\UserTransformer
+     */
+	protected $userTransformer;
+
+
+	/**
+	 * @param \Acme\Transformers\UserTransformer $userTransformer
+     */
+	function __construct(Acme\Transformers\UserTransformer $userTransformer)
+	{
+		$this->userTransformer = $userTransformer;
+	}
+
+
+	/*
+	 * User login action
+	 * POST /login
+	 *
 	 */
 	public function login() {
 
@@ -13,34 +43,50 @@ class AuthController extends \BaseController {
 		];
 
 		if (Auth::attempt($user)) {
-			return Response::make(array('message' => 'You are logged in!', 'user' => Auth::user()));
+
+			return $this->respond([
+				'data' => $this->userTransformer->transform(Auth::user())
+			]);
 		} else {
-			return Response::make(array('message' => 'Your username/password combination was incorrect!'), 500);
+			return
+				$this->respondUnauthorized(
+					'Your username/password combination was incorrect!'
+				);
 		}
 
 	}
 
 	/*
-	 * Logout action
+	 * User logout action
+	 * GET /logout
+	 *
 	 */
 	public function logout() {
 		if (Auth::check()) {
+
 			Auth::logout();
-			return Response::make(array('message' => 'You are now logged out!'));
+
+			return $this->respond([
+				'message' => 'You are now logged out!'
+			]);
 		} else {
-			return Response::make(array('message' => 'Please login!'), 500);
+			return $this->respondUnauthorized('Please login!');
 		}
 	}
 
 	/*
-	 * Session expirty check action
+	 * Session expiry check action
+	 * GET /expiry
+	 *
 	 */
 	public function expiry() {
 		
 		if (Auth::check()) {
-			return Response::make(array('message' => 'You are good to go!')); 
+			return $this->respond([
+				'message' => 'You are good to go!'
+			]);
 		} else {
-			return Response::make(array('message' => 'Your session has been expired!'), 401);
+			return $this->respondUnauthorized('Your session has been expired!');
 		}
 	}
 }
