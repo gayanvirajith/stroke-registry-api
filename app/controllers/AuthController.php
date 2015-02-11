@@ -49,7 +49,7 @@ class AuthController extends ApiController {
 			]);
 		} else {
 			return
-				$this->respondUnauthorized(
+				$this->respondBadRequest(
 					'Your username/password combination was incorrect!'
 				);
 		}
