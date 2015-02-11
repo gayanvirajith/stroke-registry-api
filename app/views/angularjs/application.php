@@ -58,12 +58,9 @@
                         App
                     </a>
                 </li>
-               <li>
-                 <a ui-sref="home">Home</a>
-               </li>
-               <li>
-                 <a ui-sref="page">Page</a>
-               </li>
+                <li>
+                  <a ui-sref="dashboard">Dashboard</a>
+                </li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
