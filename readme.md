@@ -1,12 +1,20 @@
 # Stroke Registry API
 
+Curl responses can be more readable if we prettify the JSON output. So
+I use python `python -mjson.tool` to prettify JSON.
+
+It would be more useful if we can create an alias for `python -mjson.tool`.
+
+```
+alias prettify="python -mjson.tool"
+```
 
 ### Login Request
 
 ```
 curl -i -H "Content-type: application/json" -c cookies.txt \
   -XPOST "http://localhost:8000/login" \
-  -d '{"username": "user", "password": "user"}'
+  -d '{"username": "user", "password": "user"}' | prettify
 ```
 
 ### Logout request
