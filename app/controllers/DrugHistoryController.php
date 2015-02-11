@@ -7,7 +7,7 @@ class DrugHistoryController extends \BaseController {
 	| Drug History controller
 	|--------------------------------------------------------------------------
 	|
-	| This controller will responsible for patient's drug history.
+	| This controller will responsible for manage drug history of a patient.
 	|
 	| Actions:
 	|		- index
