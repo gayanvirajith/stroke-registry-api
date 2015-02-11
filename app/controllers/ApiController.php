@@ -45,6 +45,13 @@ class ApiController extends BaseController {
         return $this->setStatusCode(401)->respondWithError($message);
     }
 
+    /**
+     * @param string $message
+     * @return mixed
+     */
+    public function respondBadRequest($message = 'Bad Request!') {
+        return $this->setStatusCode(400)->respondWithError($message);
+    }
 
     /**
      *
