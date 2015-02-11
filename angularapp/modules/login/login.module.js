@@ -18,6 +18,20 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('dashboard', {
       url: "/dashboard",
       templateUrl: "angularapp/templates/dashboard.html",
-      constroller: 'AppCtrl'
+      constroller: 'AppCtrl',
+      resolve: {
+        authExpiry: function(sessionexpiry) {
+          return sessionexpiry.get();
+        } 
+      }
     })
 });
+
+app.run(['$rootScope', '$location', 'flash', function($rootScope, $location, flash) {
+
+  $rootScope.$on('event:auth-loginRequired', function() {
+    flash.setMessage('Login required.', 'danger');
+    $location.path('/login');
+  });
+
+}]);

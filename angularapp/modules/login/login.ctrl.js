@@ -2,7 +2,14 @@
 
 var app = angular.module('stroke-registry.loginModule');
 
-app.controller("LoginController",['$scope', '$http', '$sanitize','flash', 'authService', function($scope, $http, $sanitize, flash, authService) {
+app.controller("LoginController",[
+  '$location', 
+  '$scope', 
+  '$http', 
+  '$sanitize',
+  'flash', 
+  'authService', 
+  function($location, $scope, $http, $sanitize, flash, authService) {
 
   $scope.credential = {
     username: '',
@@ -19,13 +26,20 @@ app.controller("LoginController",['$scope', '$http', '$sanitize','flash', 'authS
   $scope.login = function() {
     var login = $http.post('/login', sanitizeCredential($scope.credential));
     
-    login.success(function(response){
-      flash.setMessage(response.message)
-      authService.loginConfirmed(); 
+    login.success(function(data, status, headers, config){
+
+      if (status === 200) {
+        flash.setMessage(data.message)
+        authService.loginConfirmed(); 
+        $location.path('/dashboard');  
+      }else {
+        flash.setMessage(data.message, 'danger');     
+      }
+      
     });
 
-    login.error(function(response){
-      flash.setMessage(response.message, 'danger');     
+    login.error(function(data, status, headers, config){
+      flash.setMessage(data.message, 'danger');     
     });
 
   };
