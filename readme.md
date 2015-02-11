@@ -9,12 +9,21 @@ It would be more useful if we can create an alias for `python -mjson.tool`.
 alias prettify="python -mjson.tool"
 ```
 
+So when we execute curl calls we can use `prettify` alias with a pipe.
+
+```
+curl -H "Content-type: application/json" -b cookies.txt \
+  -XGET "http://localhost:8000/logout" | prettify
+
+```  
+
+
 ### Login Request
 
 ```
 curl -i -H "Content-type: application/json" -c cookies.txt \
   -XPOST "http://localhost:8000/login" \
-  -d '{"username": "user", "password": "user"}' | prettify
+  -d '{"username": "user", "password": "user"}'
 ```
 
 ### Logout request
