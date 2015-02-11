@@ -14,12 +14,5 @@ var app = angular.module('stroke-registry', [
 
 app.controller('AppCtrl', ['$scope', '$location', 'flash', function ($scope, $location, flash) {
   
-  $scope.$on('event:auth-loginRequired', function() {
-    flash.setMessage('Login required');
-  });
-
-  $scope.$on('event:auth-loginConfirmed', function() {
-
-  });
   
 }]);
