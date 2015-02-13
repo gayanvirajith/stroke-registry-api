@@ -1,5 +1,5 @@
 <?php
-use Illuminate\Http\Response;
+use Illuminate\Http\Response as IlluminateResponse;
 
 /**
  * Class ApiController
@@ -9,7 +9,7 @@ class ApiController extends BaseController {
     /**
      * @var
      */
-    protected $statusCode = Response::HTTP_OK;
+    protected $statusCode = IlluminateResponse::HTTP_OK;
 
     /**
      * @return mixed
@@ -49,7 +49,8 @@ class ApiController extends BaseController {
      */
     public function respondCreated($data = array())
     {
-        return $this->setStatusCode(Response::HTTP_CREATED)->respond($data);
+        return $this->setStatusCode(IlluminateResponse::HTTP_CREATED)->respond
+        ($data);
     }
 
     /**
@@ -58,7 +59,7 @@ class ApiController extends BaseController {
      */
     public function respondNotFound($message = 'Not Found!')
     {
-        return $this->setStatusCode(Response::HTTP_NOT_FOUND)
+        return $this->setStatusCode(IlluminateResponse::HTTP_NOT_FOUND)
             ->respondWithError($message);
     }
 
@@ -68,7 +69,7 @@ class ApiController extends BaseController {
      */
     public function respondUnauthorized($message)
     {
-        return $this->setStatusCode(Response::HTTP_UNAUTHORIZED)
+        return $this->setStatusCode(IlluminateResponse::HTTP_UNAUTHORIZED)
             ->respondWithError($message);
     }
 
@@ -79,7 +80,7 @@ class ApiController extends BaseController {
      */
     public function respondBadRequest($message = 'Bad Request!')
     {
-        return $this->setStatusCode(Response::HTTP_BAD_REQUEST)
+        return $this->setStatusCode(IlluminateResponse::HTTP_BAD_REQUEST)
             ->respondWithError($message);
     }
 
@@ -90,7 +91,8 @@ class ApiController extends BaseController {
     public function respondInternalServerError($message = 'Internal Server
     Error !')
     {
-        return $this->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR)
+        return $this->setStatusCode
+        (IlluminateResponse::HTTP_INTERNAL_SERVER_ERROR)
             ->respondWithError($message);
     }
 
