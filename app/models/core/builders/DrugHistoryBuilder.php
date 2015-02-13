@@ -15,7 +15,7 @@ class DrugHistoryBuilder {
 
 
   /**
-   * Parameterized constructor with:
+   * Parametrized constructor with:
    *
    * @param array $config
    * @param DrugHistory $drugHistory

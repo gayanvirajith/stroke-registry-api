@@ -18,7 +18,7 @@ class CreateEventOnsetsTable extends Migration {
 			$table->integer('episode_id');
 			$table->dateTime('onset_of_stroke_at');
 			$table->tinyInteger('first_presentation_to'); 
-			$table->dateTime('admisson_time');
+			$table->dateTime('admission_time');
 			$table->float('onset_to_admission_time');
 			$table->tinyInteger('transport_mode');
 			$table->boolean('stroke_occur_in_hospital');

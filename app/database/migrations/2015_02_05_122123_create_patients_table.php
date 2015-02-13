@@ -29,14 +29,14 @@ class CreatePatientsTable extends Migration {
 			$table->date('dob');
 			$table->tinyInteger('age');
 			$table->tinyInteger('bht_number');
-			$table->boolean('pregnant'); // if femail, 
+			$table->boolean('pregnant'); // if female,
 			$table->tinyInteger('marital_status');
-			$table->tinyInteger('pregnant_status'); // if femail, 
+			$table->tinyInteger('pregnant_status'); // if female,
 			$table->tinyInteger('ethnicity'); 
 			$table->tinyInteger('dexterity'); 
 			$table->tinyInteger('province');  
 			$table->tinyInteger('education');  
-			$table->tinyInteger('employement');  
+			$table->tinyInteger('employment');
 			$table->tinyInteger('level_of_independence');  
 			$table->tinyInteger('living_arrangement');  
 			$table->integer('hospital_id');

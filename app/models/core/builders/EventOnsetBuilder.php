@@ -15,7 +15,7 @@ class EventOnsetBuilder {
 
 
   /**
-   * Parameterized constructor with:
+   * Parametrized constructor with:
    *
    * @param array $config
    * @param eventOnset $eventOnset

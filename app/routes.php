@@ -34,7 +34,7 @@ Validator::extend('education', 'PatientValidation@educationCheck');
 Validator::extend('employment', 'PatientValidation@employmentCheck');
 Validator::extend('levelOfIndependence', 'PatientValidation@levelOfIndependenceCheck');
 Validator::extend('livingArrangement', 'PatientValidation@livingArrangementCheck');
-Validator::extend('ethinicity', 'PatientValidation@ethinicityCheck');
+Validator::extend('ethnicity', 'PatientValidation@ethnicityCheck');
 Validator::extend('postpartum', 'PatientValidation@postpartumCheck');
 Validator::extend('dexterity', 'PatientValidation@dexterityCheck');
 

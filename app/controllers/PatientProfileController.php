@@ -7,7 +7,7 @@ class PatientProfileController extends \BaseController {
 	| Patient profile controller
 	|--------------------------------------------------------------------------
 	|
-	| This controller will responsible for generating new patient recorded
+	| This controller will responsible for generating new patient record
 	| and manage updates.
 	|	
 	| Actions:
@@ -24,7 +24,7 @@ class PatientProfileController extends \BaseController {
 	 */
 	public function generateProfile() {
 
-		// Get Autheniticated user 
+		// Get Authenticated user
 		$user = Auth::user();
 
 		// Generate unique id

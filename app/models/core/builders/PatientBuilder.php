@@ -15,7 +15,7 @@ class PatientBuilder {
 
 
   /**
-   * Parameterized constructor with:
+   * Parametrized constructor with:
    *
    * @param array $config
    * @param Patient $patient
