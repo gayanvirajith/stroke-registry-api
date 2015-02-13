@@ -1,9 +1,7 @@
 <?php
 
 /**
- *
  * Patient model
- *
  */
 class Patient extends BaseModel {
 
