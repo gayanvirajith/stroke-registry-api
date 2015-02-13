@@ -19,6 +19,14 @@ class EventOnsetController extends \BaseController {
 
 
 	/**
+	 * Default constructor
+	 */
+	function __construct()
+	{
+		$this->beforeFilter('auth');
+	}
+
+	/**
 	 * Return patient's event onset data  
 	 * GET patient/event-onset/{id}
 	 *

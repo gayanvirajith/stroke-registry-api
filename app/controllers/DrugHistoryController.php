@@ -14,6 +14,14 @@ class DrugHistoryController extends \BaseController {
 	| 	- updateDrugHistory
 	*/
 
+
+	/**
+	 * Default constructor
+	 */
+	function __construct()
+	{
+		$this->beforeFilter('auth');
+	}
 	/**
 	 * Returns patient's drug history data.
 	 * GET patient/drug-history/{id}

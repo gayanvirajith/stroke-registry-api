@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Http\Response;
 
 /**
  * Class ApiController
@@ -8,7 +9,7 @@ class ApiController extends BaseController {
     /**
      * @var
      */
-    protected $statusCode = 200;
+    protected $statusCode = Response::HTTP_OK;
 
     /**
      * @return mixed
@@ -25,32 +26,9 @@ class ApiController extends BaseController {
     public function setStatusCode($statusCode)
     {
         $this->statusCode = $statusCode;
+
         // Returns the object for method chaining.
         return $this;
-    }
-
-    /**
-     * @param string $message
-     * @return mixed
-     */
-    public function respondNotFound($message = 'Not Found!') {
-        return $this->setStatusCode(404)->respondWithError($message);
-    }
-
-    /**
-     * @param $message
-     * @return mixed
-     */
-    public function respondUnauthorized($message) {
-        return $this->setStatusCode(401)->respondWithError($message);
-    }
-
-    /**
-     * @param string $message
-     * @return mixed
-     */
-    public function respondBadRequest($message = 'Bad Request!') {
-        return $this->setStatusCode(400)->respondWithError($message);
     }
 
     /**
@@ -59,20 +37,73 @@ class ApiController extends BaseController {
      * @param array $headers
      * @return mixed
      */
-    public function respond($data, $headers = []) {
+    public function respond($data, $headers = [])
+    {
         return Response::json($data, $this->getStatusCode(), $headers);
+    }
+
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function respondCreated($data = array())
+    {
+        return $this->setStatusCode(Response::HTTP_CREATED)->respond($data);
+    }
+
+    /**
+     * @param string $message
+     * @return mixed
+     */
+    public function respondNotFound($message = 'Not Found!')
+    {
+        return $this->setStatusCode(Response::HTTP_NOT_FOUND)
+            ->respondWithError($message);
     }
 
     /**
      * @param $message
      * @return mixed
      */
-    public function respondWithError($message) {
-        return Response::json([
-            'error' => [
-                'message' => $message,
-                'statusCode' => $this->getStatusCode()
-            ]
-        ], $this->getStatusCode());
+    public function respondUnauthorized($message)
+    {
+        return $this->setStatusCode(Response::HTTP_UNAUTHORIZED)
+            ->respondWithError($message);
+    }
+
+
+    /**
+     * @param string $message
+     * @return mixed
+     */
+    public function respondBadRequest($message = 'Bad Request!')
+    {
+        return $this->setStatusCode(Response::HTTP_BAD_REQUEST)
+            ->respondWithError($message);
+    }
+
+    /**
+     * @param string $message
+     * @return mixed
+     */
+    public function respondInternalServerError($message = 'Internal Server
+    Error !')
+    {
+        return $this->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR)
+            ->respondWithError($message);
+    }
+
+    /**
+     * @param $message
+     * @param array $data
+     * @return mixed
+     */
+    public function respondWithError($message, array $data = array())
+    {
+        $message = ['message' => $message];
+        $data = array_merge($message, $data);
+
+        return Response::json($data, $this->getStatusCode());
     }
 }

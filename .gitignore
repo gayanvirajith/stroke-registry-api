@@ -27,3 +27,4 @@ api/docs
 # cache
 .tmp
 # End generator-langular #
+_ide_helper.php

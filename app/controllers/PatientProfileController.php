@@ -1,6 +1,6 @@
 <?php
 
-class PatientProfileController extends \BaseController {
+class PatientProfileController extends ApiController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -14,6 +14,15 @@ class PatientProfileController extends \BaseController {
 	| 	- generateProfile
 	|	- updateProfile
 	*/
+
+
+	/**
+	 * Default constructor
+     */
+	function __construct()
+	{
+		$this->beforeFilter('auth');
+	}
 
 
 	/**
@@ -43,7 +52,7 @@ class PatientProfileController extends \BaseController {
 			'stroke_id' => $patient->stroke_id
 		];
 
-		return Response::make($response);
+		return $this->respondCreated($response);
 
 	}
 
@@ -98,7 +107,7 @@ class PatientProfileController extends \BaseController {
 			$response['message'] = 'Patient profile update failed, Please try again';
 			$response['errors'] = $errors;
 
-			return Response::make($response, 500);
+			return Response::make($response, 400);
 
 		}
 

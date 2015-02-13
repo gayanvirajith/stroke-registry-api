@@ -29,7 +29,7 @@ class PatientValidation {
      * @param array $parameters
      * @return bool
      */
-  public function maritialStatusCheck($attribute, $value, $parameters)
+  public function martialStatusCheck($attribute, $value, $parameters)
   {
       return array_key_exists($value, Patient::$maritalStatusOptions);
   }
