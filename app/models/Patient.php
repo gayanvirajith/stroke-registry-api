@@ -87,23 +87,31 @@ class Patient extends BaseModel {
     const DEXTERITY_AMBIDEXTROUS = 3;
 
 
-    /*
-     * constant values used for dexterity
-     */
-    const PROVINCE_CENTRAL = 1;
-    const PROVINCE_EASTERN = 2;
-    const PROVINCE_NORTH_CENTRAL = 3;
-
 
     /*
      * constant values used for provinces
      */
+    const PROVINCE_CENTRAL = 1;
+    const PROVINCE_EASTERN = 2;
+    const PROVINCE_NORTH_CENTRAL = 3;
     const PROVINCE_NORTHERN = 4;
     const PROVINCE_NORTH_WESTERN = 5;
     const PROVINCE_SABARAGAMUWA = 6;
     const PROVINCE_SOUTHERN = 7;
     const PROVINCE_UVA = 8;
     const PROVINCE_WESTERN = 9;
+
+
+
+    /*
+     * constant values used for admitted options
+     */
+    const ADMITTED_TO_MEDICAL_WARD = 1;
+    const ADMITTED_TO_STROKE_UNIT = 2;
+    const ADMITTED_TO_NEUROSURGERY_WARD = 3;
+    const ADMITTED_TO_NEUROLOGY_WARD = 4;
+
+
     /**
      * Validation rules set
      */
@@ -111,34 +119,21 @@ class Patient extends BaseModel {
         'name'                  => 'required|min:4|max:255',
         'nic'                   => 'required|min:10|max:10',
         'sex'                   => 'required|in:M,F',
-        'age'                   => 'min:1|max:150',
+        'age'                   => 'min:1|max:199',
         'dob'                   => 'date',
-        'bht_number'            => 'numeric',
-        'pregnant'              => 'in:0,1',
+        'health_care_number'    => 'numeric',
         'province'              => 'numeric|min:1|province',
-        'marital_status'        => 'numeric|min:1|marital',
-        'pregnant_status'       => 'numeric|postpartum',
-        'ethnicity'             => 'numeric|ethnicity',
-        'dexterity'             => 'numeric|dexterity',
-        'education'             => 'numeric|education',
-        'employment'            => 'numeric|employment',
-        'level_of_independence' => 'numeric|levelOfIndependence',
-        'living_arrangement'    => 'numeric|livingArrangement',
+        'admitted_to'           => 'required|numeric|min:1|admittedTo',
+        'hospital_id'           => 'required|exists:hospitals,id',
     );
     /**
      * Custom validation messages defined under validators/*.php
      */
     public static $messages = [
         'province'            => 'The province field is not valid.',
-        'marital'             => 'The marital status is not valid.',
-        'postpartum'          => 'The postpartum status is not valid.',
-        'ethnicity'           => 'The ethnicity status is not valid.',
-        'dexterity'           => 'The dexterity status is not valid.',
-        'education'           => 'The education status is not valid.',
-        'employment'          => 'The employment status is not valid.',
-        'levelOfIndependence' => 'The level of independence status is not valid.',
-        'livingArrangement'   => 'The living arrangement status is not valid.',
+        'admitted_to'         => 'The admitted-to field is not valid.',
     ];
+
     public static $educationOptions = [
         self::EDU_NO_FORMAL        => 'No formal',
         self::EDU_PRIMARY_LEVEL    => 'Primary level',
@@ -246,10 +241,25 @@ class Patient extends BaseModel {
     ];
 
 
+
+    /*
+     *
+     * Admitted to
+     */
+    public static $admittedTo = [
+        self::ADMITTED_TO_MEDICAL_WARD        => 'Medical ward/Medical ICU',
+        self::ADMITTED_TO_STROKE_UNIT         => 'Stroke unit',
+        self::ADMITTED_TO_NEUROSURGERY_WARD   => 'Neurosurgery
+        ward/Neurosurgery ICU',
+        self::ADMITTED_TO_NEUROLOGY_WARD         => 'Neurology ward/Neurology
+         ICU',
+    ];
+
+
     /**
      * Guarded array
      */
-    protected $guarded = ['id', 'stroke_id', 'hospital_id'];
+    protected $guarded = ['id', 'hospital_id'];
 
 
     /*

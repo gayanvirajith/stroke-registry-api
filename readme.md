@@ -54,20 +54,15 @@ curl -i -H "Content-type: application/json" -b cookies.txt \
     "address_2": "Pannipitiya",
     "province": 8,
     "dob": "1987-11-27",
-    "bht_number": 19,
+    "health_care_number": 1234567891,
     "contact_no_1": "94719057970",
     "contact_no_2": "0112837853",
     "guardian_name": "Maheshika Lakmali",
     "guardian_contact_no_1": "94719057971",
     "guardian_contact_no_2": "0112837853",
     "age": "27",
-    "pregnant": 0,
-    "ethnicity": 1,
-    "dexterity": 1,
-    "education": 6,
-    "employement": 4,
-    "level_of_independence": 1,
-    "living_arrangement": 1
+    "admitted_to": 1,
+    "hospital_id": 1
   }
   '
 ```
@@ -91,14 +86,6 @@ curl -i -H "Content-type: application/json" -b cookies.txt \
     "guardian_contact_no_1": "94719057971",
     "guardian_contact_no_2": "0112837853",
     "age": "26",
-    "pregnant": 1,
-    "pregnant_status": 4,
-    "ethnicity": 1,
-    "dexterity": 1,
-    "education": 6,
-    "employement": 1,
-    "level_of_independence": 1,
-    "living_arrangement": 1
   }
   '
 ```

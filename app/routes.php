@@ -38,7 +38,7 @@ Validator::extend('levelOfIndependence', 'PatientValidation@levelOfIndependenceC
 Validator::extend('livingArrangement', 'PatientValidation@livingArrangementCheck');
 Validator::extend('ethnicity', 'PatientValidation@ethnicityCheck');
 Validator::extend('postpartum', 'PatientValidation@postpartumCheck');
-Validator::extend('dexterity', 'PatientValidation@dexterityCheck');
+Validator::extend('admittedTo', 'PatientValidation@admittedCheck');
 
 // Event onset
 Validator::extend('symptoms', 'EventOnsetValidation@symptomsCheck');

@@ -15,11 +15,10 @@ class CreatePatientsTable extends Migration {
 		Schema::create('patients', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('stroke_id', 36)->unique();
 			$table->string('name');
 			$table->string('nic', 10);
 			$table->string('sex', 1);
-			$table->string('address_1'); 
+			$table->string('address_1');
 			$table->string('address_2');
 			$table->string('contact_no_1', 20);
 			$table->string('contact_no_2', 20);
@@ -28,21 +27,12 @@ class CreatePatientsTable extends Migration {
 			$table->string('guardian_contact_no_2', 20);
 			$table->date('dob');
 			$table->tinyInteger('age');
-			$table->tinyInteger('bht_number');
-			$table->boolean('pregnant'); // if female,
-			$table->tinyInteger('marital_status');
-			$table->tinyInteger('pregnant_status'); // if female,
-			$table->tinyInteger('ethnicity'); 
-			$table->tinyInteger('dexterity'); 
-			$table->tinyInteger('province');  
-			$table->tinyInteger('education');  
-			$table->tinyInteger('employment');
-			$table->tinyInteger('level_of_independence');  
-			$table->tinyInteger('living_arrangement');  
+			$table->integer('health_care_number');
+			$table->tinyInteger('province');
+			$table->tinyInteger('admitted_to');
 			$table->integer('hospital_id');
-			$table->index('stroke_id');  
-			$table->index('nic');  
-			$table->index('hospital_id');  
+			$table->index('nic');
+			$table->index('hospital_id');
 			$table->timestamps();
 		});
 	}

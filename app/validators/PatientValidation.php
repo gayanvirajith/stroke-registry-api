@@ -120,15 +120,15 @@ class PatientValidation {
 
 
     /**
-     * Validate dexterity option
+     * Validate admitted-to option
      *
      * @param array $attribute
      * @param String $value
      * @param array $parameters
      * @return bool
      */
-  public function dexterityCheck($attribute, $value, $parameters)
+  public function admittedCheck($attribute, $value, $parameters)
   {
-      return array_key_exists($value, Patient::$dexterityOptions);
+      return array_key_exists($value, Patient::$admittedTo);
   }
 }
