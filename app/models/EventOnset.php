@@ -19,11 +19,6 @@ class EventOnset extends BaseModel {
    */
   public static $rules = [
     'symptoms'                    => 'array|each:symptoms', 
-    'first_presentation_to'       => 'numeric|presentationTo', 
-    'transport_mode'              => 'numeric|transportOption', 
-    'stroke_occur_in_hospital'    => 'in:0,1', 
-    'oxfordshire_classification'  => 'numeric|oxfordshireClassification', 
-    'side_of_symptoms'            => 'numeric|sideOfSymptoms', 
   ];
 
 
@@ -32,13 +27,6 @@ class EventOnset extends BaseModel {
    */
   public static $messages = [
     'symptoms'                  => 'The symptoms field is not valid.',
-    'first_presentation_to'     => 'The presentation mode is not valid.',
-    'transport_mode'            => 'The transport field is not valid.',
-    'oxfordshire_classification'     
-        => 'The oxfordshire classification field is not valid.',  
-    'side_of_symptoms'     
-        => 'The side of symptoms field is not valid.',
-
   ];
 
 

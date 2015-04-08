@@ -34,13 +34,14 @@ app.controller("LoginController",[
         $location.path('/dashboard');  
       }else {
         console.log("Failed");
-        flash.setMessage(data.message, 'danger');     
+        flash.setMessage(data.message, 'danger');
       }
       
     });
 
-    login.error(function(data, status, headers, config){      
-      flash.setMessage(data.error.message, 'danger');     
+    login.error(function(data, status, headers, config){
+      console.log(data);
+      flash.setMessage(data.message, 'danger');
     });
 
   };

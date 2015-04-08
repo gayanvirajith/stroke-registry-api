@@ -9,7 +9,7 @@ class EventOnsetController extends \BaseController {
 	|
 	| This controller will responsible for patient's event onset.
 	|
-	|	TODO: 
+	|	TODO:
 	|		-	patient may have multiple event onsets.
 	|
 	| Actions:
@@ -27,26 +27,26 @@ class EventOnsetController extends \BaseController {
 	}
 
 	/**
-	 * Return patient's event onset data  
+	 * Return patient's event onset data
 	 * GET patient/event-onset/{id}
 	 *
 	 * @param id
 	 * @return Response
-	 * 
-	 */		
+	 *
+	 */
 	public function index($id) {
 
 		// Find patient by id
 		$patient = Patient::find($id);
 
 		if (!$patient) {
-				$response['message'] = 
-					"Could not find a patient with the id of {$id}, Please try again";	
-				return Response::make($response, 500);
+			$response['message'] =
+				"Could not find a patient with the id of {$id}, Please try again";
+			return Response::make($response, 500);
 		}
 
-		// Retrieve the event onset by the patient id, 
-		// Or create it if it doesn't exist...		
+		// Retrieve the event onset by the patient id,
+		// Or create it if it doesn't exist...
 		$eventOnset = EventOnset::firstOrCreate(array('patient_id' => $id));
 
 		// Response array to return
@@ -63,7 +63,7 @@ class EventOnsetController extends \BaseController {
 
 	/**
 	 * Update patient's event onset data via POST request.
-	 * Access JSON request, process payload with model validations 
+	 * Access JSON request, process payload with model validations
 	 * and finally save data into persistent storage.
 	 *
 	 * @return JSON Response
@@ -74,12 +74,12 @@ class EventOnsetController extends \BaseController {
 		$patient = Patient::find($id);
 
 		if (!$patient) {
-				$response['message'] = 
-					"Could not find a patient with the id of {$id}, Please try again";	
-				return Response::make($response, 500);
+			$response['message'] =
+				"Could not find a patient with the id of {$id}, Please try again";
+			return Response::make($response, 500);
 		}
 
-		// Retrieve the event onset by the patient id, 
+		// Retrieve the event onset by the patient id,
 		// Or create it if it doesn't exist...
 		$eventOnset = EventOnset::firstOrCreate(array('patient_id' => $id));
 
@@ -88,17 +88,17 @@ class EventOnsetController extends \BaseController {
 			'message' => 'Event onset has been updated!'
 		];
 
-		// Validate POST data 
-    $validator = EventOnset::validate(Input::all());
+		// Validate POST data
+		$validator = EventOnset::validate(Input::all());
 		if ($validator->passes()) {
-			
+
 			// Build event onset object object
 
 			$data = Input::all();
 			if (Input::get('symptoms')) {
 				$data['symptoms'] = json_encode(array_unique(Input::get('symptoms')));
 			}
-    	$eventOnsetBuilder = new EventOnsetBuilder($data, $eventOnset);
+			$eventOnsetBuilder = new EventOnsetBuilder($data, $eventOnset);
 			$eventOnsetBuilder->build();
 			$eventOnset = $eventOnsetBuilder->getEventOnset();
 
@@ -110,14 +110,14 @@ class EventOnsetController extends \BaseController {
 		} else {
 
 			$messages = $validator->messages();
-      $errors = [];
+			$errors = [];
 
-    	foreach(array_keys(EventOnset::$rules) as $key) {
-    		if ($messages->has($key)) $errors[] = $messages->first($key);
-    	}
+			foreach(array_keys(EventOnset::$rules) as $key) {
+				if ($messages->has($key)) $errors[] = $messages->first($key);
+			}
 
-			$response['message'] = 'Event onset update failed, Please try again';	
-			$response['errors'] = $errors;	
+			$response['message'] = 'Event onset update failed, Please try again';
+			$response['errors'] = $errors;
 
 			return Response::make($response, 500);
 		}
