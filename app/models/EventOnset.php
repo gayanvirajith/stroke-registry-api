@@ -18,7 +18,7 @@ class EventOnset extends BaseModel {
    * Validation rules set
    */
   public static $rules = [
-    'symptoms'                    => 'array|each:symptoms', 
+//    'symptoms'                    => 'array|exists:symptoms,id',
   ];
 
 

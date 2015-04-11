@@ -30,8 +30,8 @@ class EventOnsetController extends \ApiController {
 	function __construct(Acme\Transformers\EventOnsetTransformer
 						 $eventOnsetTransformer)
 	{
-		$this->eventOnsetTransformer = $eventOnsetTransformer;
 		$this->beforeFilter('auth');
+		$this->eventOnsetTransformer = $eventOnsetTransformer;
 	}
 
 
@@ -109,7 +109,7 @@ class EventOnsetController extends \ApiController {
 			$data = Input::all();
 
 			$eventOnsetBuilder = new EventOnsetBuilder($data, $eventOnset);
-			$eventOnsetBuilder->build();
+//			$eventOnsetBuilder->build();
 			$eventOnset = $eventOnsetBuilder->getEventOnset();
 
 			// Update event onset data data
