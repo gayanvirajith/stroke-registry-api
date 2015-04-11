@@ -1,6 +1,6 @@
 <?php
 
-class EventOnsetController extends \BaseController {
+class EventOnsetController extends \ApiController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -13,18 +13,27 @@ class EventOnsetController extends \BaseController {
 	|		-	patient may have multiple event onsets.
 	|
 	| Actions:
-	|		- index
+	|	- index
 	| 	- updateEventOnset
 	*/
 
 
 	/**
-	 * Default constructor
-	 */
-	function __construct()
+	 * @var \Acme\Transformers\EventOnsetTransformer
+     */
+	protected $eventOnsetTransformer;
+
+
+	/**
+	 * @param \Acme\Transformers\EventOnsetTransformer $eventOnsetTransformer
+     */
+	function __construct(Acme\Transformers\EventOnsetTransformer
+						 $eventOnsetTransformer)
 	{
+		$this->eventOnsetTransformer = $eventOnsetTransformer;
 		$this->beforeFilter('auth');
 	}
+
 
 	/**
 	 * Return patient's event onset data
@@ -40,9 +49,10 @@ class EventOnsetController extends \BaseController {
 		$patient = Patient::find($id);
 
 		if (!$patient) {
-			$response['message'] =
-				"Could not find a patient with the id of {$id}, Please try again";
-			return Response::make($response, 500);
+			return
+				$this->respondBadRequest(
+					"Could not find a patient with the id of {$id}, Please try again!"
+				);
 		}
 
 		// Retrieve the event onset by the patient id,
@@ -53,10 +63,12 @@ class EventOnsetController extends \BaseController {
 		$response = [
 			'message' => 'Event onset data retrieved!'
 		];
-
+		$eventOnset->symptoms;
 		$response['eventOnset'] = $eventOnset;
 
-		return Response::make($response);
+		return $this->respond([
+			'data' => $this->eventOnsetTransformer->transform($eventOnset)
+		]);
 
 	}
 
@@ -95,15 +107,16 @@ class EventOnsetController extends \BaseController {
 			// Build event onset object object
 
 			$data = Input::all();
-			if (Input::get('symptoms')) {
-				$data['symptoms'] = json_encode(array_unique(Input::get('symptoms')));
-			}
+
 			$eventOnsetBuilder = new EventOnsetBuilder($data, $eventOnset);
 			$eventOnsetBuilder->build();
 			$eventOnset = $eventOnsetBuilder->getEventOnset();
 
 			// Update event onset data data
 			$eventOnset->save();
+
+			// Sync symptoms
+			$eventOnset->symptoms()->sync(array_unique(Input::get('symptoms')));
 
 			return Response::make($response);
 

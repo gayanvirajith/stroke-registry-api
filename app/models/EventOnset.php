@@ -74,7 +74,12 @@ class EventOnset extends BaseModel {
   }
 
 
+  /**
+   * Get the symptoms associated with the corresponding patient event onset
+   *
+   * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+   */
   public function symptoms() {
-    return $this->belongsToMany('Symptom');
+    return $this->belongsToMany('Symptom')->withTimestamps();
   }
 }

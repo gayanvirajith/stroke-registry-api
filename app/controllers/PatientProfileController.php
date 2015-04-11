@@ -11,19 +11,52 @@ class PatientProfileController extends ApiController {
 	| and manage updates.
 	|	
 	| Actions:
+	|	- index
 	| 	- generateProfile
 	|	- updateProfile
 	*/
 
 
 	/**
-	 * Default constructor
+	 * @var \Acme\Transformers\PatientTransformer
      */
-	function __construct()
+	protected $patientTransformer;
+
+
+	/**
+	 * @param \Acme\Transformers\PatientTransformer $patientTransformer
+     */
+	function __construct(Acme\Transformers\PatientTransformer
+						 $patientTransformer)
 	{
+		$this->patientTransformer = $patientTransformer;
 		$this->beforeFilter('auth');
 	}
 
+
+	/**
+	 * Return patient's data
+	 * GET patient/{id}
+	 *
+	 * @param id
+	 * @return Response
+	 *
+	 */
+	public function index($id) {
+
+		// Find patient by id
+		$patient = Patient::find($id);
+
+		if (!$patient) {
+			return
+				$this->respondBadRequest(
+					"Could not find a patient with the id of {$id}, Please try again!"
+				);
+		}
+		return $this->respond([
+			'data' => $this->patientTransformer->transform($patient)
+		]);
+	}
 
 	/**
 	 * Generate empty patient profile and returns back the id.
@@ -41,13 +74,9 @@ class PatientProfileController extends ApiController {
 		$patient->hospital_id = $user->hospital_id;
 		$patient->save();
 
-		$response = [
-			'message' => 'Patient profile has been created!',
-			'id' => $patient->id,
-			'hospital_id' => $patient->hospital_id
-		];
-
-		return $this->respondCreated($response);
+		return $this->respond([
+			'data' => $this->patientTransformer->transform($patient)
+		]);
 
 	}
 

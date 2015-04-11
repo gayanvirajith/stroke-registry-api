@@ -65,6 +65,13 @@ Route::get('/',
         'as'   => 'home'
     ));
 
+// Get patient data
+Route::get('patient/{id}',
+    array(
+        'uses' => 'PatientProfileController@index',
+        'as'   => 'PatientProfile'
+    ));
+
 // Generate patient profile
 
 Route::get('patient/generate-profile',
