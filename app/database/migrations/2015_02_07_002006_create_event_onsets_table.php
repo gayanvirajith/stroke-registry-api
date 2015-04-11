@@ -19,7 +19,6 @@ class CreateEventOnsetsTable extends Migration {
 			$table->dateTime('onset_of_stroke_at');
 			$table->dateTime('admission_time');
 			$table->float('onset_to_admission_time');
-			$table->string('symptoms');
 			$table->string('modified_rankin_scale');
 			$table->integer('patient_id');
 			$table->timestamps();

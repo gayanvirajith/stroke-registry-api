@@ -141,3 +141,10 @@ Route::post('patient/update-drug-history/{id}',
         'uses' => 'DrugHistoryController@updateDrugHistory',
         'as'   => 'updateDrugHistory'
     ));
+
+Route::get('test-j', function() {
+
+    $eo = EventOnset::find(1);
+    $eo->symptoms()->sync(array(1,2,3, 4));
+    return $eo->symptoms;
+});

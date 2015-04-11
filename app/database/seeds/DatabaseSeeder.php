@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder {
 		Eloquent::unguard();
 		
 		$this->call('HospitalTableSeeder');
+		$this->call('SymptomTableSeeder');
 		$this->call('UserTableSeeder');
 		$this->call('RolesAndPermisionTableSeeder');
 	}
