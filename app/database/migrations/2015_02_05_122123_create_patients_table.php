@@ -15,22 +15,22 @@ class CreatePatientsTable extends Migration {
 		Schema::create('patients', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name');
-			$table->string('nic', 10);
-			$table->string('sex', 1);
-			$table->string('address_1');
-			$table->string('address_2');
-			$table->string('contact_no_1', 20);
-			$table->string('contact_no_2', 20);
-			$table->string('guardian_name');
-			$table->string('guardian_contact_no_1', 20);
-			$table->string('guardian_contact_no_2', 20);
-			$table->date('dob');
-			$table->tinyInteger('age');
-			$table->integer('health_care_number')->unsigned();
-			$table->tinyInteger('province')->unsigned();
-			$table->tinyInteger('admitted_to');
-			$table->integer('hospital_id')->unsigned();
+			$table->string('name')->default('No name');
+			$table->string('nic', 10)->default('');
+			$table->string('sex', 1)->default('');
+			$table->string('address_1')->default('');
+			$table->string('address_2')->default('');
+			$table->string('contact_no_1', 20)->default('');
+			$table->string('contact_no_2', 20)->default('');
+			$table->string('guardian_name')->default('');
+			$table->string('guardian_contact_no_1', 20)->default('');
+			$table->string('guardian_contact_no_2', 20)->default('');
+			$table->date('dob')->default('0000-00-00');
+			$table->tinyInteger('age')->default(0);
+			$table->integer('health_care_number')->unsigned()->default(0);
+			$table->tinyInteger('province')->default(0);
+			$table->tinyInteger('admitted_to')->default('0.00');
+			$table->integer('hospital_id')->default(0);
 			$table->index('nic');
 			$table->index('hospital_id');
 			$table->timestamps();

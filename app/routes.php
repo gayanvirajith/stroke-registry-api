@@ -65,13 +65,6 @@ Route::get('/',
         'as'   => 'home'
     ));
 
-// Get patient data
-Route::get('patient/{id}',
-    array(
-        'uses' => 'PatientProfileController@index',
-        'as'   => 'PatientProfile'
-    ));
-
 // Generate patient profile
 
 Route::get('patient/generate-profile',
@@ -79,6 +72,15 @@ Route::get('patient/generate-profile',
         'uses' => 'PatientProfileController@generateProfile',
         'as'   => 'generateProfile'
     ));
+
+// Get patient data
+Route::get('patient/{id}',
+    array(
+        'uses' => 'PatientProfileController@index',
+        'as'   => 'PatientProfile'
+    ));
+
+
 
 // Show patient's event onset data
 
@@ -95,6 +97,14 @@ Route::get('patient/drug-history/{id}',
         'uses' => 'DrugHistoryController@index',
         'as'   => 'showDrugHistory'
     ));
+
+// Show patient's risk factor data
+Route::get('patient/risk-factor/{id}',
+    array(
+        'uses' => 'RiskFactorController@index',
+        'as'   => 'showRiskFactor'
+    ));
+
 /*
  * Authentication routes
  */
