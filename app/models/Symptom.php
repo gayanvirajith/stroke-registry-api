@@ -4,6 +4,8 @@ class Symptom extends \Eloquent {
 
 
 	/**
+	 * Guarded array
+	 *
 	 * @var array
      */
 	protected $guarded = ['id'];

@@ -8,8 +8,11 @@
 
 class EventOnset extends BaseModel {
 
-  /*
-   * Guarded array 
+
+  /**
+   * Guarded array
+   *
+   * @var array
    */
   protected $guarded = ['id', 'episode_id'];
 

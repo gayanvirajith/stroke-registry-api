@@ -7,7 +7,13 @@
  */
 
 class Hospital extends BaseModel {
-	
+
+
+  /**
+   * Guarded array
+   *
+   * @var array
+   */
   protected $guarded = ['id'];
 
   /*

@@ -85,6 +85,8 @@ class Patient extends BaseModel {
 
     /**
      * Guarded array
+     *
+     * @var array
      */
     protected $guarded = ['id', 'hospital_id'];
 

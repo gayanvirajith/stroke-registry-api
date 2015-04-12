@@ -8,10 +8,13 @@
 
 class DrugHistory extends BaseModel {
 
-  /*
-   * Guarded array 
+
+  /**
+   * Guarded array
+   *
+   * @var array
    */
-	protected $guarded = ['id'];
+  protected $guarded = ['id'];
 
 
   /**
