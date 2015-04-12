@@ -2,6 +2,10 @@
 
 class Symptom extends \Eloquent {
 
+
+	/**
+	 * @var array
+     */
 	protected $guarded = ['id'];
 
 
@@ -10,7 +14,7 @@ class Symptom extends \Eloquent {
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-	public function event_onsets() {
+	public function eventOnsets() {
 		return $this->belongsToMany('EventOnset');
 	}
 }

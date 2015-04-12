@@ -27,10 +27,10 @@ class CreatePatientsTable extends Migration {
 			$table->string('guardian_contact_no_2', 20);
 			$table->date('dob');
 			$table->tinyInteger('age');
-			$table->integer('health_care_number');
-			$table->tinyInteger('province');
+			$table->integer('health_care_number')->unsigned();
+			$table->tinyInteger('province')->unsigned();
 			$table->tinyInteger('admitted_to');
-			$table->integer('hospital_id');
+			$table->integer('hospital_id')->unsigned();
 			$table->index('nic');
 			$table->index('hospital_id');
 			$table->timestamps();

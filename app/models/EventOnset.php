@@ -18,7 +18,11 @@ class EventOnset extends BaseModel {
    * Validation rules set
    */
   public static $rules = [
-//    'symptoms'                    => 'array|exists:symptoms,id',
+      'episode_id'                  => 'required',
+      'onset_of_stroke_at'          => 'required',
+      'admission_time'              => 'required',
+      'onset_to_admission_time'     => 'required',
+      'patient_id'                  => 'required|exists:patients,id',
   ];
 
 
@@ -80,6 +84,6 @@ class EventOnset extends BaseModel {
    * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
    */
   public function symptoms() {
-    return $this->belongsToMany('Symptom')->withTimestamps();
+    return $this->belongsToMany('Symptom');
   }
 }

@@ -19,7 +19,6 @@ class CreateEventOnsetSymptomTable extends Migration {
 			$table->foreign('event_onset_id')->references('id')->on('event_onsets')->onDelete('cascade');
 			$table->integer('symptom_id')->unsigned()->index();
 			$table->foreign('symptom_id')->references('id')->on('symptoms')->onDelete('cascade');
-			$table->timestamps();
 		});
 	}
 

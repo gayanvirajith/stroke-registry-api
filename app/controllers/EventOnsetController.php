@@ -107,16 +107,17 @@ class EventOnsetController extends \ApiController {
 			// Build event onset object object
 
 			$data = Input::all();
+			$symptoms = Input::get('symptoms');
+			unset($data['symptoms']);
 
 			$eventOnsetBuilder = new EventOnsetBuilder($data, $eventOnset);
-//			$eventOnsetBuilder->build();
+			$eventOnsetBuilder->build();
 			$eventOnset = $eventOnsetBuilder->getEventOnset();
 
 			// Update event onset data data
 			$eventOnset->save();
-
 			// Sync symptoms
-			$eventOnset->symptoms()->sync(array_unique(Input::get('symptoms')));
+			$eventOnset->symptoms()->sync(array_unique($symptoms));
 
 			return Response::make($response);
 
@@ -132,12 +133,12 @@ class EventOnsetController extends \ApiController {
 			$response['message'] = 'Event onset update failed, Please try again';
 			$response['errors'] = $errors;
 
-			return Response::make($response, 500);
+			return
+				$this->respondWithError(
+					'Event onset update failed, Please try again!',
+					$response
+				);
 		}
-
-		$response['eventOnset'] = $eventOnset;
-
-		return Response::make($response);
 
 	}
 
