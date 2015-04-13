@@ -159,6 +159,16 @@ Route::post('patient/update-drug-history/{id}',
         'as'   => 'updateDrugHistory'
     ));
 
+// Update risk factor
+
+Route::post('patient/update-risk-factor/{id}',
+    array(
+        'uses' => 'RiskFactorController@updateRiskFactor',
+        'as'   => 'updateRiskFactor'
+    ));
+
+
+
 Route::get('test-j', function() {
 
     $eo = EventOnset::find(1);

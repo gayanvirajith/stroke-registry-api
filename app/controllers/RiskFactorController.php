@@ -102,23 +102,25 @@ class RiskFactorController extends \ApiController {
             $otherHeartDiseases = Input::get('otherHeartDiseases');
             unset($data['otherHeartDiseases']);
 
-            $eventOnsetBuilder = new EventOnsetBuilder($data, $eventOnset);
-            $eventOnsetBuilder->build();
-            $eventOnset = $eventOnsetBuilder->getEventOnset();
+            $riskFactorBuilder = new RiskFactorBuilder($data, $riskFactor);
+            $riskFactorBuilder->build();
+            $riskFactor = $riskFactorBuilder->getRiskFactor();
 
-            // Update event onset data data
-            $eventOnset->save();
-            // Sync symptoms
-            $eventOnset->symptoms()->sync(array_unique($symptoms));
+            // Update risk factor data
+            $riskFactor->save();
+            // Sync $otherHeartDiseases
+            $riskFactor->otherHeartDiseases()->sync(array_unique($otherHeartDiseases));
 
-            return Response::make($response);
+            return $this->respond([
+                'message' => 'Risk factor data has been updated!'
+            ]);
 
         } else {
 
             $messages = $validator->messages();
             $errors = [];
 
-            foreach(array_keys(EventOnset::$rules) as $key) {
+            foreach(array_keys(RiskFactor::$rules) as $key) {
                 if ($messages->has($key)) $errors[] = $messages->first($key);
             }
 

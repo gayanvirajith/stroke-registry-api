@@ -41,7 +41,7 @@ class PatientBuilder {
   }
 
   /**
-   * Build the patient using the supplied configuration parameters
+   * Build patient using the supplied configuration parameters
    *
    * @return null
    */

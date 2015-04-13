@@ -41,7 +41,7 @@ class EventOnsetBuilder {
   }
 
   /**
-   * Build the eventOnset using the supplied configuration parameters
+   * Build eventOnset using the supplied configuration parameters
    *
    * @return null
    */

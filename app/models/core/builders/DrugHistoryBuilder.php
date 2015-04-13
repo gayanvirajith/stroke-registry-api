@@ -41,7 +41,7 @@ class DrugHistoryBuilder {
   }
 
   /**
-   * Build the drugHistory using the supplied configuration parameters
+   * Build drugHistory using the supplied configuration parameters
    *
    * @return null
    */
