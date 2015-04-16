@@ -6,14 +6,16 @@
     <title>Stroke registry</title>
 
     <!-- build:css(assets/) /styles.css -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="/vendor/angular-material/angular-material.css" rel="stylesheet"/>
-
-    <link href="/css/animate.css" rel="stylesheet"/>
     <link href="/css/screen.css" rel="stylesheet"/>
+    <link href="/css/simple-sidebar.css" rel="stylesheet"/>
+
+    <link href="/vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="/vendor/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet"/>
+
     <!-- endbuild -->
 
     <!-- build:js(assets/) /vendors.js -->
+    <script src="/vendor/jquery/dist/jquery.js"></script>
     <script src="/vendor/angular/angular.js"></script>
     <script src="/vendor/underscore/underscore.js"></script>
     <script src="/vendor/angular-underscore-module/angular-underscore-module.js"></script>
@@ -21,10 +23,6 @@
     <script src="/vendor/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/vendor/angular-http-auth/src/http-auth-interceptor.js"></script>
     <script src="/vendor/angular-sanitize/angular-sanitize.js"></script>
-    <script src="/vendor/angular-animate/angular-animate.js"></script>
-    <script src="/vendor/angular-aria/angular-aria.js"></script>
-    <script src="/vendor/angular-material/angular-material.js"></script>
-    <script src="/vendor/angular-messages/angular-messages.js"></script>
     <!-- endbuild -->
 
     <!-- build:js /angularapp.js -->
@@ -44,28 +42,44 @@
     <script src="/angularapp/modules/common-service.js"></script>
     <!-- endbuild -->
   </head>
-  <body layout="row">
+  <body>
 
    <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-   <div layout="column" tabindex="-1" role="main" flex="">
-     <md-toolbar class="md-default-theme">
-       <div class="md-toolbar-tools"  tabindex="0">
+    <div id="wrapper">
 
-         <div layout="row" flex class="fill-height">
-           <h1>NSR</h1>
-         </div>
-       </div>
-     </md-toolbar>
-     <md-content md-scroll-y="" flex=""
-                 class="md-default-theme reveal-animation">
-       <div ui-view></div>
-       <div loading-indicator></div>
-     </md-content>
-   </div>
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#/">
+                        App
+                    </a>
+                </li>
+                <li>
+                  <a ui-sref="dashboard">Dashboard</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
 
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+            <div ng-show="flashMessage.msg" class="alert alert-{{flashMessage.type}}">
+              {{ flashMessage.msg }}
+            </div>
+               <div ui-view></div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    
+    
 
   </body>
 </html>

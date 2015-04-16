@@ -8,8 +8,23 @@ app.controller("LoginController",[
   '$http', 
   '$sanitize',
   'flash', 
-  'authService', 
+  'authService',
+  '$mdToast',
   function($location, $scope, $http, $sanitize, flash, authService) {
+
+    var config = {
+      params: {
+        'rows': 10,
+        'id' : '{index}',
+        'content': '{lorem|10}',
+        'delay' : 1,
+        'callback': "JSON_CALLBACK"
+      }
+    };
+    $http.jsonp("http://www.filltext.com", config, {})
+        .success(function(data) {
+          $scope.rows = data;
+        });
 
   $scope.credential = {
     username: '',
