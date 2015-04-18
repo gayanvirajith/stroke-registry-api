@@ -43,6 +43,10 @@
     <script src="/angularapp/modules/login/login.module.js"></script>
     <script src="/angularapp/modules/login/login.ctrl.js"></script>
 
+    <!-- patient signup module -->
+    <script src="/angularapp/modules/patient-signup/patient-signup.module.js"></script>
+    <script src="/angularapp/modules/patient-signup/patient-signup.ctrl.js"></script>
+
     <!-- common service  -->
     <script src="/angularapp/modules/common-service.js"></script>
     <!-- endbuild -->
@@ -52,7 +56,7 @@
     </script>
 
   </head>
-  <body layout="row" ng-controller="AppCtrl">
+  <body layout="row" ng-controller="AppCtrl as appCtrl">
 
    <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>

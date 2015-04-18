@@ -12,10 +12,15 @@ var app = angular.module('stroke-registry', [
   'http-auth-interceptor',
   'stroke-registry.commonService',
   'stroke-registry.loginModule',  
+  'stroke-registry.patientSignup',  
 ]);
 
-app.controller('AppCtrl', ['$rootScope', '$location', 'flash', function ($rootScope, $location, flash) {
+
+app.controller('AppCtrl', ['$rootScope', '$mdDialog', function ($rootScope, $mdDialog) {
   
+
+  var self = this;
+
   $rootScope.$on('event:auth-loginConfirmed', function(event, data){
     $rootScope.isLoggedin = true;
   });
@@ -25,7 +30,35 @@ app.controller('AppCtrl', ['$rootScope', '$location', 'flash', function ($rootSc
     $rootScope.isLoggedin = false;
   });
 
+  self.patientRegistrationPopup = function patientRegistrationPopup($event) {
+    var parentEl = angular.element(document.body);
+    $mdDialog.show({
+      parent: parentEl,
+      targetEvent: $event,
+      templateUrl: 'angularapp/modules/patient-signup/patient-registration-form.html',
+      bindToController: false,
+      locals: {
+        item: 'asdf'
+      },
+      controller: patientSignupController
+    });
+    
+     function patientSignupController(scope, $mdDialog, $rootScope) {
+
+      
+      scope.closeDialog = function() {
+        $mdDialog.hide();
+      }
+
+
+    }
+
+  };
+
 }]);
+
+
+
 
 app.config(function($httpProvider) {
   $httpProvider.interceptors.push(function($q, $rootScope) {
@@ -48,14 +81,12 @@ app.directive("loadingIndicator", function($mdToast) {
     template: "",
     link : function(scope, element, attrs) {
       scope.$on("loading-started", function(e) {
-        console.log("invoke toast!");
        var preset = $mdToast.simple().content("Loading...");
               // console.log(preset);
               preset._options.parent = angular.element( document.querySelector( '#toastContent' ) );
               $mdToast.show(preset);
       });
       scope.$on("loading-complete", function(e) {
-        console.log("hiding");
         $mdToast.hide();
       });
     }

@@ -445,16 +445,16 @@ div.user-account-info-panel {
 }
 
 div.user-account-info-panel.ng-hide-add-active {
-    -webkit-animation: fadeOut .4s;
-    -moz-animation: fadeOut .4s;
-    -ms-animation: fadeOut .4s;
-    animation: fadeOut .4s;
+    -webkit-animation: fadeOutUp .4s;
+    -moz-animation: fadeOutUp .4s;
+    -ms-animation: fadeOutUp .4s;
+    animation: fadeOutUp .4s;
 }
 div.user-account-info-panel.ng-hide-remove-active {
-    -webkit-animation: fadeIn .4s;
-    -moz-animation: fadeIn .4s;
-    -ms-animation: fadeIn .4s;
-    animation: fadeIn .4s;
+    -webkit-animation: fadeInDown .4s;
+    -moz-animation: fadeInDown .4s;
+    -ms-animation: fadeInDown .4s;
+    animation: fadeInDown .4s;
 }
 
 .user-account-backdrop {
@@ -479,3 +479,15 @@ div.user-account-info-panel ul li a {
     &:hover, &:active, &:focus {
     }
 }
+
+
+/*
+ * Patient popup
+ */
+ .patient-registration-popup-content {
+    min-width: 300px;
+    max-width: 500px;
+    h1 {
+        font-size: 20px;
+    }
+ }

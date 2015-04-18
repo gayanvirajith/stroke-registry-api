@@ -23,11 +23,10 @@ app.config(['$urlRouterProvider', '$locationProvider', '$stateProvider',  functi
         authExpiry: function(sessionexpiry, authService) {
           var exp = sessionexpiry.get();
           exp.success(function(data, status, headers, config){
-            console.log("success authExpiry")
             authService.loginConfirmed(); 
           });
           exp.error(function(data, status, headers, config){
-            console.log(data);
+            // console.log(data);
           });
         } 
       }

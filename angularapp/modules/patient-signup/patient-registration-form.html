@@ -1,0 +1,17 @@
+<md-dialog aria-label="Patient Registration">
+  <md-content class="patient-registration-popup-content">
+    <h1>Patient Registration</h1>
+
+    <md-input-container>
+      <label for="patient-name">Patient name</label>
+      <input type="text" ng-model="patient.name" required="" id="patient-name" class="md-input">
+    </md-input-container>
+
+    <md-input-container>
+      <label for="patient-nic">NIC number</label>
+      <input type="text" ng-model="patient.nic" required="" id="patient-nic" class="md-input">
+    </md-input-container>
+
+    <md-button class="md-raised md-primary">Login</md-button>
+  </md-content>
+</md-dialog>
