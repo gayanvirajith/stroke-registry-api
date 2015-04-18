@@ -175,3 +175,24 @@ Route::get('test-j', function() {
     $eo->symptoms()->sync(array(1,2,3, 4));
     return $eo->symptoms;
 });
+
+
+//This will redirect all missing routes to AngularJS Framework .
+App::missing(function($exception)
+{
+    /*
+     * The reason for this is that when you first visit 
+     * the page (/about), e.g. after a refresh, the browser has 
+     * no way of knowing that this isn't a real url, 
+     * so it goes ahead and loads it. However if you have loaded 
+     * up the root page first, and all the javascript code, 
+     * then when you navigate to /about angular can get in there 
+     * before the browser tries to hit the server and handle it accordingly.
+     * @see: http://stackoverflow.com/questions/16569841/angularjs-html5-mode-reloading-the-page-gives-wrong-get-request/16570533#16570533
+     */
+    if (App::environment() === 'production')
+        return View::make('angularjs.application_production');
+    
+    return View::make('angularjs.application');
+
+});

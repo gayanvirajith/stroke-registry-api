@@ -1,0 +1,17 @@
+<div id="login" ng-click="toggleContent()">
+	<div class="info-container">
+		<div class="profile-picture">
+			<md-icon md-svg-src="img/icons/account-circle.svg" class="s48"></md-icon>
+		</div>
+		<div class="account-username">
+			<span>{{ name }}</span>
+		</div>
+	</div>
+	<div ng-show="isContentVisible" class="user-account-info-panel md-whiteframe-z1">
+		<ul>
+	        <!-- <li><a href="#"><i class="fa fa-fw fa-user"></i>Account</a></li> -->
+	        <li><a href="#" ng-click='signOut()'><i class="fa fa-fw fa-sign-out"></i>Logout</a></li>
+	    </ul>
+	</div>
+</div>
+<md-backdrop class="md-opaque ng-scope md-default-theme user-account-backdrop"  ng-show="isContentVisible" ng-click="toggleContent()"></md-backdrop>

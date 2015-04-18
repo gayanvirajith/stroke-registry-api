@@ -1,9 +1,12 @@
     <!DOCTYPE html>
 <html lang="en" ng-app="stroke-registry">
   <head>
+    <base href="/">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Stroke registry</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
     <!-- build:css(assets/) /styles.css -->
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
@@ -43,8 +46,13 @@
     <!-- common service  -->
     <script src="/angularapp/modules/common-service.js"></script>
     <!-- endbuild -->
+
+    <script type="text/javascript">
+      angular.module('stroke-registry').constant('CSRF_TOKEN', '<?php echo csrf_token(); ?>');
+    </script>
+
   </head>
-  <body layout="row">
+  <body layout="row" ng-controller="AppCtrl">
 
    <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -57,12 +65,18 @@
          <div layout="row" flex class="fill-height">
            <h1>NSR</h1>
          </div>
+
+         <div ng-show="isLoggedin" class="account-toggle" ng-controller="LoginController">
+           <account name="NHS Admin" on-logout="logout()"> </account>
+         </div>
        </div>
      </md-toolbar>
      <md-content md-scroll-y="" flex=""
-                 class="md-default-theme reveal-animation">
+                 class="md-default-theme nsr-main-content md-padding">
        <div ui-view></div>
-       <div loading-indicator></div>
+       <div id="toastContent">
+         <loading-indicator></loading-indicator>
+       </div>       
      </md-content>
    </div>
 

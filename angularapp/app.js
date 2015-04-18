@@ -11,14 +11,20 @@ var app = angular.module('stroke-registry', [
   'ExampleModule',
   'http-auth-interceptor',
   'stroke-registry.commonService',
-  'stroke-registry.loginModule',
-
-  
+  'stroke-registry.loginModule',  
 ]);
 
-app.controller('AppCtrl', ['$scope', '$location', 'flash', function ($scope, $location, flash) {
+app.controller('AppCtrl', ['$rootScope', '$location', 'flash', function ($rootScope, $location, flash) {
   
-  
+  $rootScope.$on('event:auth-loginConfirmed', function(event, data){
+    $rootScope.isLoggedin = true;
+  });
+
+
+  $rootScope.$on('event:auth-loginCancelled', function(event, data){
+    $rootScope.isLoggedin = false;
+  });
+
 }]);
 
 app.config(function($httpProvider) {
@@ -35,19 +41,21 @@ app.config(function($httpProvider) {
     };
   });
 });
+
 app.directive("loadingIndicator", function($mdToast) {
   return {
-    restrict : "A",
-    template: "<div>Loading...</div>",
+    restrict : "E",
+    template: "",
     link : function(scope, element, attrs) {
       scope.$on("loading-started", function(e) {
-        //element.css({"display" : ""});
-        $mdToast.show(
-            $mdToast.simple()
-                .content('Loading')
-        );
+        console.log("invoke toast!");
+       var preset = $mdToast.simple().content("Loading...");
+              // console.log(preset);
+              preset._options.parent = angular.element( document.querySelector( '#toastContent' ) );
+              $mdToast.show(preset);
       });
       scope.$on("loading-complete", function(e) {
+        console.log("hiding");
         $mdToast.hide();
       });
     }

@@ -1,20 +1,18 @@
-<div class="row" ng-controller="LoginController">
-    <div class="col-md-12">
-    <h1 class="text-center">Login</h1>
-    <div class="col-md-4 col-md-offset-4">
-     <form ng-submit="login()" class="form">
-        <div class="form-group">
-          <label>Username</label>
-          <input type="text" ng-model="credential.username" class="form-control"/>
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" ng-model="credential.password" class="form-control"/>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="btn btn-success">Login</button>
-        </div>
+  
+  
+
+  <md-whiteframe ng-class="{shake: loginFailed}" id="login-form" ng-controller="LoginController" class="md-whiteframe-z1 animated" layout layout-align="center center">
+     <form ng-submit="login()" class="form" novalidate>
+        <md-input-container>
+          <label for="login-username">Username</label>
+          <input type="text" ng-model="credential.username" required="" id="login-username" class="md-input">
+        </md-input-container>
+
+        <md-input-container>
+          <label for="login-password">Password</label>
+          <input type="text" ng-model="credential.password" required="" id="login-password" class="md-input">
+        </md-input-container>
+
+          <md-button class="md-raised md-primary">Login</md-button>
       </form>
-  </div>
-  </div>
-</div>
+  </md-whiteframe>
