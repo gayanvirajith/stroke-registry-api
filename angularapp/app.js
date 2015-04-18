@@ -16,9 +16,10 @@ var app = angular.module('stroke-registry', [
 ]);
 
 
-app.controller('AppCtrl', ['$rootScope', '$mdDialog', function ($rootScope, $mdDialog) {
+app.controller('AppCtrl', [
+  '$rootScope', '$mdDialog', 'PatientSignupService', 
+  function ($rootScope, $mdDialog, PatientSignupService) {
   
-
   var self = this;
 
   $rootScope.$on('event:auth-loginConfirmed', function(event, data){
@@ -32,6 +33,7 @@ app.controller('AppCtrl', ['$rootScope', '$mdDialog', function ($rootScope, $mdD
 
   self.patientRegistrationPopup = function patientRegistrationPopup($event) {
     var parentEl = angular.element(document.body);
+    
     $mdDialog.show({
       parent: parentEl,
       targetEvent: $event,
@@ -40,16 +42,32 @@ app.controller('AppCtrl', ['$rootScope', '$mdDialog', function ($rootScope, $mdD
       locals: {
         item: 'asdf'
       },
+      clickOutsideToClose: false,
+      escapeToClose: false,
       controller: patientSignupController
     });
     
-     function patientSignupController(scope, $mdDialog, $rootScope) {
+    function patientSignupController(scope, $mdDialog, $rootScope, PatientSignupService) {
 
-      
-      scope.closeDialog = function() {
+      scope.patient = {
+        name: '',
+        nic: ''
+      };
+
+
+      scope.closeDialog = function closeDialog() {
         $mdDialog.hide();
-      }
+      };
 
+      scope.saveForm = function saveForm() {
+        console.log(scope.patient);
+
+        PatientSignupService.create(scope.patient).success(function(data) {
+          console.log("Success: " + data.data.id);
+        }).error(function(data){
+          console.log("Error: " + data);
+        });
+      };
 
     }
 

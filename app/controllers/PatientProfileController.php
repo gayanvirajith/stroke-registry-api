@@ -60,7 +60,7 @@ class PatientProfileController extends ApiController {
 
 	/**
 	 * Generate empty patient profile and returns back the id.
-	 * Accepts a GET request.
+	 * Accepts a POST request.
 	 *
 	 * @return JSON Response
 	 */
@@ -72,6 +72,8 @@ class PatientProfileController extends ApiController {
 		// Retrieve the patient by creating empty patient
 		$patient = new Patient;
 		$patient->hospital_id = $user->hospital_id;
+		$patient->name = Input::get('name');
+		$patient->nic = Input::get('nic');
 		$patient->save();
 
 		return $this->respond([

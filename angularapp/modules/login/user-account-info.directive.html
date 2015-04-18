@@ -10,7 +10,20 @@
 	<div ng-show="isContentVisible" class="user-account-info-panel md-whiteframe-z1">
 		<ul>
 	        <!-- <li><a href="#"><i class="fa fa-fw fa-user"></i>Account</a></li> -->
-	        <li><a href="#" ng-click='signOut()'><i class="fa fa-fw fa-sign-out"></i>Logout</a></li>
+
+	        <li>
+	        	<md-button  ng-disabled="true" class="md-primary">
+	        	<i class="fa fa-fw fa-user"></i>
+		        	Account
+	        	</md-button>
+	        </li>
+	        <li>
+	        	<!-- <a href="#" ng-click='signOut()'>Logout</a> -->
+	        	<md-button class="md-primary" ng-click="signOut()">
+		        	<i class="fa fa-fw fa-sign-out"></i>
+	        		Sign Out
+	        	</md-button>
+	        </li>
 	    </ul>
 	</div>
 </div>

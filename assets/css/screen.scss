@@ -480,6 +480,17 @@ div.user-account-info-panel ul li a {
     }
 }
 
+div.user-account-info-panel ul li button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    text-transform: initial;
+    line-height: 24px;
+    &.md-primary {
+        border-radius:0;
+    }
+}
+
 
 /*
  * Patient popup
@@ -491,3 +502,6 @@ div.user-account-info-panel ul li a {
         font-size: 20px;
     }
  }
+.patient-registration-popup-content h1 {
+    padding-bottom: 1em;
+}

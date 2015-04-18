@@ -33,3 +33,22 @@ app.factory('sessionexpiry', ['$http', function($http){
 }]);
 
 
+app.factory('PatientSignupService', ['$http', '$sanitize', 'CSRF_TOKEN', function($http, $sanitize, CSRF_TOKEN){
+
+  var sanitizePatientData = function sanitizePatientData(patient) {
+    return {
+      name: $sanitize(patient.name),
+      nic: $sanitize(patient.nic),
+      csrf_token: CSRF_TOKEN
+    };
+  };
+
+  return {
+    create: function createPatient(patient) {
+      var patient = $http.post('/patient/generate-profile', sanitizePatientData(patient));
+      return patient;
+    }
+  };
+
+}]);
+

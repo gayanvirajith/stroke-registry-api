@@ -65,13 +65,6 @@ Route::get('/',
         'as'   => 'home'
     ));
 
-// Generate patient profile
-
-Route::get('patient/generate-profile',
-    array(
-        'uses' => 'PatientProfileController@generateProfile',
-        'as'   => 'generateProfile'
-    ));
 
 // Get patient data
 Route::get('patient/{id}',
@@ -134,6 +127,13 @@ Route::get('expiry',
 /*
  * POST Routes
  */
+// Generate patient profile
+
+Route::post('patient/generate-profile',
+    array(
+        'uses' => 'PatientProfileController@generateProfile',
+        'as'   => 'generateProfile'
+    ));
 
 // Update patient profile
 
