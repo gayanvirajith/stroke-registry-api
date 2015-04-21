@@ -53,6 +53,7 @@ body {
     background-color: #e5e5e5;
     overflow-y:hidden;
     position: relative;
+    color: #333;
 }
 
 hr {
@@ -356,7 +357,8 @@ https://github.com/google/material-design-icons
 
 #login-form h2 {
     font-size: 22px;
-    text-align: center;
+    text-align: left;
+    color: #555;
 }
 
 md-toast {
@@ -367,8 +369,8 @@ md-toast {
 #toastContent {
     position: absolute;
     /*bottom: ;*/
-    bottom: 40px;
-    left: 10px;
+    bottom: 20px;
+    left: 0px;
 }
 
 md-content.nsr-main-content {
@@ -445,16 +447,16 @@ div.user-account-info-panel {
 }
 
 div.user-account-info-panel.ng-hide-add-active {
-    -webkit-animation: fadeOutUp .4s;
-    -moz-animation: fadeOutUp .4s;
-    -ms-animation: fadeOutUp .4s;
-    animation: fadeOutUp .4s;
+    -webkit-animation: fadeOut .2s;
+    -moz-animation: fadeOut .2s;
+    -ms-animation: fadeOut .2s;
+    animation: fadeOut .2s;
 }
 div.user-account-info-panel.ng-hide-remove-active {
-    -webkit-animation: fadeInDown .4s;
-    -moz-animation: fadeInDown .4s;
-    -ms-animation: fadeInDown .4s;
-    animation: fadeInDown .4s;
+    -webkit-animation: fadeIn .4s;
+    -moz-animation: fadeIn .4s;
+    -ms-animation: fadeIn .4s;
+    animation: fadeIn .4s;
 }
 
 .user-account-backdrop {
@@ -500,8 +502,57 @@ div.user-account-info-panel ul li button {
     max-width: 500px;
     h1 {
         font-size: 20px;
+        color: #555;
     }
  }
 .patient-registration-popup-content h1 {
     padding-bottom: 1em;
 }
+
+.message-notice {
+    position: relative;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    color: #333;
+    background-color: #FFF;
+    border-color: #ddd;
+}
+
+.message-notice .close-icon {
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    padding-left: 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+.message-notice.ng-hide-remove {
+    -webkit-animation: fadeIn .4s;
+    -moz-animation: fadeIn .4s;
+    -ms-animation: fadeIn .4s;
+    animation: fadeIn .4s;
+}
+.message-notice.ng-hide-add {
+    -webkit-animation: fadeOut .2s;
+    -moz-animation: fadeOut .2s;
+    -ms-animation: fadeOut .2s;
+    animation: fadeOut .2s;
+}
+
+/*
+ * Patient actions
+ */ 
+ .sidebar-common-actions a.md-button {
+    display: block;
+    border-radius: 0;
+    text-transform: initial;
+    text-align: left;
+    line-height: 40px;
+    background-color: #eee;
+    padding: 0 16px;
+ }

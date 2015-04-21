@@ -1,5 +1,5 @@
 'use strict';
 
-var app = angular
+angular
   .module('stroke-registry.patientSignup', []);
 

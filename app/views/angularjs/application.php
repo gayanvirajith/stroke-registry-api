@@ -47,6 +47,10 @@
     <script src="/angularapp/modules/patient-signup/patient-signup.module.js"></script>
     <script src="/angularapp/modules/patient-signup/patient-signup.ctrl.js"></script>
 
+    <!-- patient module -->
+    <script src="/angularapp/modules/patient/patient.module.js"></script>
+
+
     <!-- common service  -->
     <script src="/angularapp/modules/common-service.js"></script>
     <!-- endbuild -->
@@ -62,28 +66,53 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-   <div layout="column" tabindex="-1" role="main" flex="">
-     <md-toolbar class="md-default-theme">
-       <div class="md-toolbar-tools"  tabindex="0">
+  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
+          md-is-locked-open="$mdMedia('gt-md')" ng-if="$state.current.name == 'patient'">
+    <md-toolbar class="md-default-theme">
+        <h1 class="md-toolbar-tools">
+            <a ng-href="/" layout="row" flex="" href="/">
+                <div class="docs-logotype">NSR</div>
+            </a>
+        </h1>
+    </md-toolbar>
+    <md-content flex="" class="md-default-theme">
+      <div class="sidebar-common-actions">
+        <md-button ng-href="dashboard">Back to Dashboard</md-button>    
+      </div>
+    </md-content>
+  </md-sidenav> 
 
-         <div layout="row" flex class="fill-height">
-           <h1>NSR</h1>
-         </div>
+  <div layout="column" tabindex="-1" role="main" flex="">
+   <md-toolbar class="md-default-theme">
+     <div class="md-toolbar-tools"  tabindex="0">
 
-         <div ng-show="isLoggedin" class="account-toggle" ng-controller="LoginController">
-           <account name="NHS Admin" on-logout="logout()"> </account>
-         </div>
+       <div layout="row" flex class="fill-height" ng-if="$state.current.name != 'patient'">
+        <h1>NSR</h1>
        </div>
-     </md-toolbar>
-     <md-content md-scroll-y="" flex=""
-                 class="md-default-theme nsr-main-content md-padding">
-       <div ui-view></div>
-       <div id="toastContent">
-         <loading-indicator></loading-indicator>
-       </div>       
-     </md-content>
-   </div>
 
+       <div layout="row" flex class="fill-height" ng-if="$state.current.name == 'patient'">
+        <h1></h1>
+       </div>
 
+       <div ng-show="isLoggedin" class="account-toggle" ng-controller="LoginController">
+         <account name="NHS Admin" on-logout="logout()"> </account>
+       </div>
+     </div>
+   </md-toolbar>
+   <md-content md-scroll-y="" flex=""
+               class="md-default-theme nsr-main-content md-padding">
+      <div class="message-notice" ng-show="successNotice">
+        {{successNotice}}
+        <span class="close-icon" ng-click="appCtrl.closeNotice();">x</span>
+      </div>
+
+      <div ui-view></div>
+     
+   </md-content>
+  </div>
+
+    <div id="toastContent">
+      <loading-indicator></loading-indicator>
+    </div>       
   </body>
 </html>

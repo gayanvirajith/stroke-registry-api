@@ -1,8 +1,9 @@
 'use strict';
 
-var app = angular.module('stroke-registry', [
+var   app = angular.module('stroke-registry', [
   'underscore',
   'ui.router',
+  'ui.bootstrap',
   'ngSanitize',
   'ngAnimate',
   'ngAria',
@@ -13,14 +14,27 @@ var app = angular.module('stroke-registry', [
   'stroke-registry.commonService',
   'stroke-registry.loginModule',  
   'stroke-registry.patientSignup',  
+  'stroke-registry.patientModule',  
+]);
+
+app.run(['$rootScope', '$state', '$stateParams', function ($rootScope,   $state, $stateParams) {
+
+    // It's very handy to add references to $state and $stateParams to the $rootScope
+    // so that you can access them from any scope within your applications.For example,
+    // <li ng-class="{ active: $state.includes('contacts.list') }"> will set the <li>
+    // to active whenever 'contacts.list' or one of its decendents is active.
+    $rootScope.$state = $state;
+    $rootScope.$stateParams = $stateParams;
+    }
 ]);
 
 
 app.controller('AppCtrl', [
-  '$rootScope', '$mdDialog', 'PatientSignupService', 
-  function ($rootScope, $mdDialog, PatientSignupService) {
+  '$rootScope', '$mdDialog', 'PatientSignupService', '$stateParams', '$state', 
+  function ($rootScope, $mdDialog, PatientSignupService, $stateParams, $state) {
   
   var self = this;
+  $rootScope.successNotice = null;
 
   $rootScope.$on('event:auth-loginConfirmed', function(event, data){
     $rootScope.isLoggedin = true;
@@ -31,6 +45,10 @@ app.controller('AppCtrl', [
     $rootScope.isLoggedin = false;
   });
 
+  self.closeNotice = function closeNotice() {
+    $rootScope.successNotice = null;
+  }
+  
   self.patientRegistrationPopup = function patientRegistrationPopup($event) {
     var parentEl = angular.element(document.body);
     
@@ -47,7 +65,7 @@ app.controller('AppCtrl', [
       controller: patientSignupController
     });
     
-    function patientSignupController(scope, $mdDialog, $rootScope, PatientSignupService) {
+    function patientSignupController(scope, $mdDialog, $rootScope, PatientSignupService, $stateParams, $state) {
 
       scope.patient = {
         name: '',
@@ -63,7 +81,10 @@ app.controller('AppCtrl', [
         console.log(scope.patient);
 
         PatientSignupService.create(scope.patient).success(function(data) {
-          console.log("Success: " + data.data.id);
+          // console.log("Success: " + data.data.id);
+          $mdDialog.hide();
+          $state.go('patient', {patientId: data.data.id});
+          $rootScope.successNotice = 'Patient has been successfully added!';
         }).error(function(data){
           console.log("Error: " + data);
         });

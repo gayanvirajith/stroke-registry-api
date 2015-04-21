@@ -15,6 +15,38 @@ app.config(['$urlRouterProvider', '$locationProvider', '$stateProvider',  functi
       url: "/signin",
       templateUrl: "angularapp/modules/login/login.html"
     })
+    .state('patient', {
+      url: "/dashboard/patient/:patientId",
+      templateUrl: "angularapp/modules/patient/patient.html",
+      controller: 'PatientController',
+      resolve: {
+        authExpiry: function(sessionexpiry, authService) {
+          var exp = sessionexpiry.get();
+          exp.success(function(data, status, headers, config){
+            authService.loginConfirmed(); 
+          });
+          exp.error(function(data, status, headers, config){
+            // console.log(data);
+          });
+        } 
+      }
+    })
+    .state('patient.prof', {
+      url: "/profile",
+      templateUrl: "angularapp/modules/patient/patient-profile.html",
+      constroller: 'AppCtrl',
+      resolve: {
+        authExpiry: function(sessionexpiry, authService) {
+          var exp = sessionexpiry.get();
+          exp.success(function(data, status, headers, config){
+            authService.loginConfirmed(); 
+          });
+          exp.error(function(data, status, headers, config){
+            // console.log(data);
+          });
+        } 
+      }
+    })
     .state('dashboard', {
       url: "/dashboard",
       templateUrl: "angularapp/templates/dashboard.html",
@@ -41,7 +73,7 @@ app.config(['$urlRouterProvider', '$locationProvider', '$stateProvider',  functi
 
   }]);
 
-app.run(['$rootScope', '$location', 'flash', function($rootScope, $location, flash) {
+  app.run(['$rootScope', '$location', 'flash', function($rootScope, $location, flash) {
 
   $rootScope.$on('event:auth-loginRequired', function() {
     $location.path('/signin');
