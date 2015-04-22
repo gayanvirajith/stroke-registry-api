@@ -82,8 +82,8 @@
               On Admission <i class="pull-right fa" ng-class="{'fa-chevron-up': status.open, 'fa-chevron-down': !status.open}"></i>
           </accordion-heading>
           <div class="sidebar-common-actions">
-            <md-button ng-click="appCtrl.goTo('patient-profile', {patientId: $stateParams.patientId})">Registration Details</md-button>
-            <md-button ng-click="appCtrl.goTo('patient', {patientId: $stateParams.patientId})">Event Details</md-button>
+            <md-button ng-click="appCtrl.goTo('patient', {patientId: $stateParams.patientId})">Registration Details</md-button>
+            <md-button ng-click="appCtrl.goTo('patient-profile', {patientId: $stateParams.patientId})">Event Details</md-button>
             <md-button>Risk Factors</md-button>
           </div>
         </accordion-group>
@@ -135,8 +135,8 @@
       </div>
 
       <div ui-view></div>
-      {{$stateParams}}
-    {{$state.current}}
+      <!-- {{$stateParams}} -->
+      <!-- {{$state.current}} -->
    </md-content>
   </div>
 

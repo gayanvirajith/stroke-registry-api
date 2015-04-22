@@ -497,6 +497,33 @@ div.user-account-info-panel ul li button {
 /*
  * Patient popup
  */
+
+.patient-form-container {
+    padding: 16px;
+}
+
+.patient-form-container h1 {
+    font-size: 18px;
+    padding-bottom: 10px;
+    margin-left: -16px;
+    margin-right: -16px;
+    border-bottom: 1px solid #eee;
+    padding: 0 16px 16px 16px;
+}
+
+.patient-form-container md-input-container {
+    align-self: flex-end;
+}
+
+.patient-form-container md-input-container md-radio-button {
+    display: inline;
+    margin: 0;
+}
+
+.patient-form-container md-input-container md-radio-group.md-default-theme:focus:not(:empty) {
+    border-color: transparent;
+}
+
  .patient-registration-popup-content {
     min-width: 300px;
     max-width: 500px;

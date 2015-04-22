@@ -29,6 +29,83 @@ app.run(['$rootScope', '$state', '$stateParams', function ($rootScope,   $state,
 ]);
 
 
+app.config(['$urlRouterProvider', '$locationProvider', '$stateProvider',  function($urlRouterProvider, $locationProvider, $stateProvider) {
+
+  // For any unmatched url, redirect to /login
+  $urlRouterProvider.otherwise("/signin");
+
+  // Now set up the states
+  $stateProvider
+    .state('login', {
+      url: "/signin",
+      templateUrl: "angularapp/modules/login/login.html"
+    })
+    .state('patient', {
+      url: "/dashboard/patient/:patientId",
+      templateUrl: "angularapp/modules/patient/patient.html",
+      controller: 'PatientController',
+      resolve: {
+        authExpiry: function(sessionexpiry, authService) {
+          var exp = sessionexpiry.get();
+          exp.success(function(data, status, headers, config){
+            authService.loginConfirmed(); 
+          });
+          exp.error(function(data, status, headers, config){
+            // console.log(data);
+          });
+        } 
+      }
+    })
+    .state('patient-profile', {
+      url: "/dashboard/patient-profile/:patientId",
+      templateUrl: "angularapp/modules/patient/patient-profile.html",
+      constroller: 'AppCtrl',
+      resolve: {
+        authExpiry: function(sessionexpiry, authService) {
+          var exp = sessionexpiry.get();
+          exp.success(function(data, status, headers, config){
+            authService.loginConfirmed(); 
+          });
+          exp.error(function(data, status, headers, config){
+            // console.log(data);
+          });
+        } 
+      }
+    })
+    .state('dashboard', {
+      url: "/dashboard",
+      templateUrl: "angularapp/templates/dashboard.html",
+      constroller: 'AppCtrl',
+      resolve: {
+        authExpiry: function(sessionexpiry, authService) {
+          var exp = sessionexpiry.get();
+          exp.success(function(data, status, headers, config){
+            authService.loginConfirmed(); 
+          });
+          exp.error(function(data, status, headers, config){
+            // console.log(data);
+          });
+        } 
+      }
+    });
+
+    
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: true,
+      rewriteLinks: true
+    }).hashPrefix('!');
+
+  }]);
+
+  app.run(['$rootScope', '$location', 'flash', function($rootScope, $location, flash) {
+
+  $rootScope.$on('event:auth-loginRequired', function() {
+    $location.path('/signin');
+  });  
+
+}]);
+  
 app.controller('AppCtrl', [
   '$rootScope', '$mdDialog', 'PatientSignupService', '$stateParams', '$state', 
   function ($rootScope, $mdDialog, PatientSignupService, $stateParams, $state) {
