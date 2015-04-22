@@ -49,6 +49,14 @@ app.controller('AppCtrl', [
     $rootScope.successNotice = null;
   }
   
+  self.goTo = function goTo(routName, paramObject) {
+    if (paramObject === undefined) { 
+        paramObject = {}
+    }
+    $state.go(routName, paramObject);
+  }
+
+
   self.patientRegistrationPopup = function patientRegistrationPopup($event) {
     var parentEl = angular.element(document.body);
     

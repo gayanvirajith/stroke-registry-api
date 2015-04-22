@@ -67,7 +67,7 @@
     <![endif]-->
 
   <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
-          md-is-locked-open="$mdMedia('gt-md')" ng-if="$state.current.name == 'patient'">
+          md-is-locked-open="$mdMedia('gt-md')" ng-if="$state.current.name == 'patient' || $state.current.name == 'patient-profile'">
     <md-toolbar class="md-default-theme">
         <h1 class="md-toolbar-tools">
             <a ng-href="/" layout="row" flex="" href="/">
@@ -75,7 +75,35 @@
             </a>
         </h1>
     </md-toolbar>
-    <md-content flex="" class="md-default-theme">
+    <md-content flex="" class="md-default-theme side-nav-md-content">
+      <accordion close-others="oneAtATime">
+        <accordion-group>
+          <accordion-heading>
+              On Admission <i class="pull-right fa" ng-class="{'fa-chevron-up': status.open, 'fa-chevron-down': !status.open}"></i>
+          </accordion-heading>
+          <div class="sidebar-common-actions">
+            <md-button ng-click="appCtrl.goTo('patient-profile', {patientId: $stateParams.patientId})">Registration Details</md-button>
+            <md-button ng-click="appCtrl.goTo('patient', {patientId: $stateParams.patientId})">Event Details</md-button>
+            <md-button>Risk Factors</md-button>
+          </div>
+        </accordion-group>
+
+
+        <accordion-group>
+          <accordion-heading>
+              At Discharge <i class="pull-right fa" ng-class="{'fa-chevron-up': status.open, 'fa-chevron-down': !status.open}"></i>
+          </accordion-heading>
+          <div class="sidebar-common-actions">
+            <md-button>Investigation</md-button>
+            <md-button>Management</md-button>
+            <md-button>Diagnosis</md-button>
+            <md-button>Final Disposition</md-button>
+          </div>
+        </accordion-group>
+
+
+
+      </accordion>
       <div class="sidebar-common-actions">
         <md-button ng-href="dashboard">Back to Dashboard</md-button>    
       </div>
@@ -107,7 +135,8 @@
       </div>
 
       <div ui-view></div>
-     
+      {{$stateParams}}
+    {{$state.current}}
    </md-content>
   </div>
 

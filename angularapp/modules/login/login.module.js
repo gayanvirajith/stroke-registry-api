@@ -31,8 +31,8 @@ app.config(['$urlRouterProvider', '$locationProvider', '$stateProvider',  functi
         } 
       }
     })
-    .state('patient.prof', {
-      url: "/profile",
+    .state('patient-profile', {
+      url: "/dashboard/patient-profile/:patientId",
       templateUrl: "angularapp/modules/patient/patient-profile.html",
       constroller: 'AppCtrl',
       resolve: {

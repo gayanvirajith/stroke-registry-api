@@ -7,7 +7,8 @@ var app = angular
 app.controller('PatientController', ['$stateParams', '$state', function ($stateParams, $state) {
   console.log("patient controller");
   
-  $scope.patientId = $stateParams.patientId;
+  var self = this;
+  self.patientId = $stateParams.patientId;
 
   
 }]);
@@ -15,8 +16,9 @@ app.controller('PatientController', ['$stateParams', '$state', function ($stateP
 
 app.controller('PatientProfileController', ['$stateParams', '$state', function ($stateParams, $state) {
   console.log("patient controller");
-  
-  $scope.patientId = $stateParams.patientId;
+
+  var self = this;
+  self.patientId = $stateParams.patientId;
 
 
 }]);

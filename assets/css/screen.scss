@@ -544,10 +544,23 @@ div.user-account-info-panel ul li button {
     animation: fadeOut .2s;
 }
 
-/*
- * Patient actions
- */ 
- .sidebar-common-actions a.md-button {
+.side-nav-md-content .panel-body { padding:0;}
+.side-nav-md-content .panel-group .panel { border-radius:0; margin-top:0; border: none;}
+.side-nav-md-content .panel-group .panel .panel-heading { 
+    // border-top: none;
+    // border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.side-nav-md-content .panel-group .panel a.accordion-toggle { 
+    outline: 0; 
+    text-decoration: none !important;
+    &:hover, &:focus, &:active {
+        text-decoration: underline;
+    }
+} 
+
+
+ .sidebar-common-actions a.md-button, .sidebar-common-actions button {
     display: block;
     border-radius: 0;
     text-transform: initial;
@@ -555,4 +568,21 @@ div.user-account-info-panel ul li button {
     line-height: 40px;
     background-color: #eee;
     padding: 0 16px;
+    width: 100%;
+
+    &.md-button.md-default-theme {
+        border-radius: 0px;
+    }
+ }
+
+ .side-nav-md-content .panel-group .panel .sidebar-common-actions button {
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+   
+    &:last-child {
+        // border-bottom: none;
+    }
+    &:hover {
+        background-color: #eee;
+    }
  }
