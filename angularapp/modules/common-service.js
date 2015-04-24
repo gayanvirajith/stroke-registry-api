@@ -52,3 +52,36 @@ app.factory('PatientSignupService', ['$http', '$sanitize', 'CSRF_TOKEN', functio
 
 }]);
 
+app.factory('PatientService', ['$http', '$filter', '$sanitize', 'CSRF_TOKEN', function($http, $filter, $sanitize, CSRF_TOKEN){
+
+  var sanitizePatientProfileData = function sanitizePatientProfileData(patient) {
+    return {
+      health_care_number: $sanitize(patient.health_care_number),
+      nic: $sanitize(patient.nic),
+      name: $sanitize(patient.name),
+      sex: $sanitize(patient.sex),
+      dob: $sanitize(patient.dob),
+      hospital_id: $sanitize(patient.hospital_id),
+      admitted_to: $sanitize(patient.admitted_to),
+      address_1: $sanitize(patient.address_1),
+      contact_no_1: $sanitize(patient.contact_no_1),
+      contact_no_2: $sanitize(patient.contact_no_2),
+      guardian_name: $sanitize(patient.guardian_name),
+      guardian_contact_no_1: $sanitize(patient.guardian_contact_no_1),
+      guardian_contact_no_2: $sanitize(patient.guardian_contact_no_2),
+    };
+  }
+  return {
+    getPatientProfile: function getPatientProfile(id) {
+      return $http.get('/patient/'+id);
+    },
+    updatePatientProfile: function getPatientProfile(patient, id) {
+      var patient = $http.post('/patient/update-profile/' + id, sanitizePatientProfileData(patient));
+      return patient;
+    }
+  };
+
+}]);
+
+
+

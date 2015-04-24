@@ -266,6 +266,12 @@ https://github.com/google/material-design-icons
     transition-property: max-height;
 }
 
+.md-sidenav-left {
+      width: 200px !important;
+  min-width: 200px !important;
+  max-width: 200px !important;
+}
+
 .menu-toggle-list.ng-hide {
     max-height: 0;
 }
@@ -359,6 +365,7 @@ https://github.com/google/material-design-icons
     font-size: 22px;
     text-align: left;
     color: #555;
+    padding-bottom: 16px;
 }
 
 md-toast {
@@ -405,7 +412,8 @@ div.account-toggle {
     }
     &:active {
       // box-shadow:  inset  0  6px 6px -6px darken(rgb(56, 72, 163), 20%), inset  0 -6px 6px -6px darken(rgb(56, 72, 163), 20%);
-      box-shadow: inset  0 -6px 6px -6px darken(rgb(56, 72, 163), 20%);
+      box-shadow:  inset  0  6px 6px -6px darken(rgb(56, 72, 163), 30%);
+      // box-shadow: inset  0 -6px 6px -6px darken(rgb(56, 72, 163), 20%);
     }
 }
 
@@ -499,25 +507,62 @@ div.user-account-info-panel ul li button {
  */
 
 .patient-form-container {
-    padding: 16px;
+    padding: 0;
+}
+
+.patient-form-container .header{
+    height: 50px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    align-items: center;
+    padding: 0 16px;
+
+    &.align-to-right {
+        justify-content: flex-end;
+    }
+}
+
+.patient-form-container .header {
+    border-bottom: 1px solid #eee;    
+}
+
+.patient-form-container .footer {
+    border-top: 1px solid #eee;
+    height: 50px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+   justify-content: flex-end;
+    align-content: flex-start;
+    align-items: center;
+    padding: 0 16px;
+
 }
 
 .patient-form-container h1 {
     font-size: 18px;
-    padding-bottom: 10px;
-    margin-left: -16px;
-    margin-right: -16px;
-    border-bottom: 1px solid #eee;
-    padding: 0 16px 16px 16px;
+    text-transform: uppercase;
+}
+
+.patient-form-container .patient-form-wrapper {
+    padding: 16px;
 }
 
 .patient-form-container md-input-container {
-    align-self: flex-end;
+    padding-bottom: 20px;
 }
 
-.patient-form-container md-input-container md-radio-button {
-    display: inline;
-    margin: 0;
+.patient-form-container md-radio-button {
+    margin-left: 0;
+    font-size: 13px;
+}
+
+.patient-form-container md-radio-group label {
+    color: rgba(0,0,0,0.54);
+    font-size: 12px;
 }
 
 .patient-form-container md-input-container md-radio-group.md-default-theme:focus:not(:empty) {
@@ -539,23 +584,25 @@ div.user-account-info-panel ul li button {
 .message-notice {
     position: relative;
     padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-
+    margin-bottom: 16px;
     color: #333;
     background-color: #FFF;
-    border-color: #ddd;
+    box-shadow: 0px 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
 
 .message-notice .close-icon {
     position: absolute;
     right: 10px;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     padding-left: 0;
     text-align: center;
     cursor: pointer;
+    background-color: #DDD;
+    border-radius: 50%;
+    top:13px;
+    vertical-align: middle;
+    display: inline-block;
 }
 
 .message-notice.ng-hide-remove {
@@ -565,10 +612,10 @@ div.user-account-info-panel ul li button {
     animation: fadeIn .4s;
 }
 .message-notice.ng-hide-add {
-    -webkit-animation: fadeOut .2s;
-    -moz-animation: fadeOut .2s;
-    -ms-animation: fadeOut .2s;
-    animation: fadeOut .2s;
+    -webkit-animation: fadeOut .5s;
+    -moz-animation: fadeOut .5s;
+    -ms-animation: fadeOut .5s;
+    animation: fadeOut .5s;
 }
 
 .side-nav-md-content .panel-body { padding:0;}

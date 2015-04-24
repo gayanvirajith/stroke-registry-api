@@ -44,6 +44,7 @@ app.config(['$urlRouterProvider', '$locationProvider', '$stateProvider',  functi
       url: "/dashboard/patient/:patientId",
       templateUrl: "angularapp/modules/patient/patient.html",
       controller: 'PatientController',
+      controllerAs: 'p',
       resolve: {
         authExpiry: function(sessionexpiry, authService) {
           var exp = sessionexpiry.get();
@@ -53,12 +54,12 @@ app.config(['$urlRouterProvider', '$locationProvider', '$stateProvider',  functi
           exp.error(function(data, status, headers, config){
             // console.log(data);
           });
-        } 
+        }  
       }
     })
-    .state('patient-profile', {
-      url: "/dashboard/patient-profile/:patientId",
-      templateUrl: "angularapp/modules/patient/patient-profile.html",
+    .state('patient-event-details', {
+      url: "/dashboard/patient-event-details/:patientId",
+      templateUrl: "angularapp/modules/patient/patient-event-details.html",
       constroller: 'AppCtrl',
       resolve: {
         authExpiry: function(sessionexpiry, authService) {

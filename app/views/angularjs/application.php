@@ -66,8 +66,8 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-  <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
-          md-is-locked-open="$mdMedia('gt-md')" ng-if="$state.current.name == 'patient' || $state.current.name == 'patient-profile'">
+  <md-sidenav class="md-sidenav-left nsr-sidebar-left md-whiteframe-z2" md-component-id="left"
+          md-is-locked-open="$mdMedia('gt-md')" ng-if="$state.current.name == 'patient' || $state.current.name == 'patient-event-details'">
     <md-toolbar class="md-default-theme">
         <h1 class="md-toolbar-tools">
             <a ng-href="/" layout="row" flex="" href="/">
@@ -83,7 +83,7 @@
           </accordion-heading>
           <div class="sidebar-common-actions">
             <md-button ng-click="appCtrl.goTo('patient', {patientId: $stateParams.patientId})">Registration Details</md-button>
-            <md-button ng-click="appCtrl.goTo('patient-profile', {patientId: $stateParams.patientId})">Event Details</md-button>
+            <md-button ng-click="appCtrl.goTo('patient-event-details', {patientId: $stateParams.patientId})">Event Details</md-button>
             <md-button>Risk Factors</md-button>
           </div>
         </accordion-group>
