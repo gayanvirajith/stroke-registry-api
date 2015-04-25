@@ -562,11 +562,14 @@ div.user-account-info-panel ul li button {
 .patient-form-container md-radio-button, .patient-form-container md-checkbox {
     margin-left: 0;
     font-size: 13px;
+    margin: 4px 15px 4px 0;
+
 }
 
 .patient-form-container md-radio-group label {
     color: rgba(0,0,0,0.54);
     font-size: 12px;
+    padding-bottom: 5px;
 }
 
 .patient-form-container .checkbox-items-group {

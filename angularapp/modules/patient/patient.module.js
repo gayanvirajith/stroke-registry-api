@@ -7,6 +7,7 @@ var app = angular
 app.controller('PatientController', ['$filter', '$rootScope', '$stateParams', '$state', 'PatientService', function ($filter, $rootScope, $stateParams, $state, PatientService) {
   
   var self = this;
+  $rootScope.successNotice = '';
   self.patientId = $stateParams.patientId;
   var patientProfile = PatientService.getPatientProfile(self.patientId);
   self.patient = {};
@@ -44,8 +45,7 @@ app.controller('PatientController', ['$filter', '$rootScope', '$stateParams', '$
 
 
   self.updateProfile = function updateProfile() {
-
-    console.log(self.patient.dob);
+    $rootScope.successNotice = '';
     if (self.patient.dob) self.patient.dob = $filter('date')(self.patient.dob, 'yyyy-MM-dd');
 
     var patientProfileUpdate = PatientService.updatePatientProfile(self.patient, self.patientId);
@@ -54,7 +54,7 @@ app.controller('PatientController', ['$filter', '$rootScope', '$stateParams', '$
       $state.go('patient', {patientId: self.patientId});
     });
     patientProfileUpdate.error(function(data, status, headers, config){
-      console.log(data.data);
+      //todo handle errors
     });
 
   };
@@ -62,12 +62,13 @@ app.controller('PatientController', ['$filter', '$rootScope', '$stateParams', '$
 }]);
 
 
-app.controller('PatientEventController', ['$filter', '$stateParams', '$state', '$scope', 'PatientService', function ($filter, $stateParams, $state, $scope, PatientService) {
+app.controller('PatientEventController', ['$rootScope', '$filter', '$stateParams', '$state', '$scope', 'PatientService', function ($rootScope, $filter, $stateParams, $state, $scope, PatientService) {
   
   var self = this;
   self.patientId = $stateParams.patientId;
   
-  self.patient = {};  
+  self.patient = {}; 
+  $rootScope.successNotice  = ''; 
 
   self.patient.symptoms = [
     { id: 1, name: 'Weakness', status: false},
@@ -223,24 +224,36 @@ app.controller('PatientEventController', ['$filter', '$stateParams', '$state', '
 
 
   self.updateDetails = function updateDetails() {
-
+    $rootScope.successNotice = '';
     var eventData =  angular.copy(self.patient);
-    var datee = '';
+    var admission_time,onset_of_stroke_at = '';
+    var symptoms = [];
+
     if (eventData.admission_time) 
-      datee = $filter('date')(eventData.admission_time, 'yyyy-MM-dd HH:mm:ss');
+      admission_time = $filter('date')(eventData.admission_time, 'yyyy-MM-dd HH:mm:ss');
+    if (eventData.onset_of_stroke_at)
+      onset_of_stroke_at = $filter('date')(eventData.onset_of_stroke_at, 'yyyy-MM-dd HH:mm:ss'); 
+    
 
-    console.log(datee);
+    if (admission_time != '' && onset_of_stroke_at){
+      eventData.onset_of_stroke_at = onset_of_stroke_at;
+      eventData.admission_time = admission_time;
+    }
 
-    // // if (self.patient.onset_to_admission_time) self.patient.onset_to_admission_time = getDatetimeAsString(self.patient.onset_to_admission_time);
-    // var patientEventData = PatientService.updatePatientEvent(self.patient, self.patientId);
-    // patientEventData.success(function(data, status, headers, config){
-    //   // $rootScope.successNotice = 'Patient profile has been successfully updated!';
-    //   // $state.go('patient', {patientId: self.patientId});
-    //   console.log(data.data);
-    // });
-    // patientEventData.error(function(data, status, headers, config){
-    //   console.log(data.data);
-    // });
+    self.patient.symptoms.forEach(function(symtom){
+        if (symtom.status) symptoms.push(symtom.id);
+    });
+
+    eventData.symptoms = symptoms;
+
+    var patientEventData = PatientService.updatePatientEvent(eventData, self.patientId);
+    patientEventData.success(function(data, status, headers, config){
+      $rootScope.successNotice = 'Patient event details has been successfully updated!';
+      console.log("Success");
+    });
+    patientEventData.error(function(data, status, headers, config){
+      //todo handle errors
+    });
 
   };
 
