@@ -3,102 +3,139 @@
     <h1>Patient Registration Details</h1>
     <md-button class="md-raised pull-right md-primary" ng-click="p.updateProfile()">Save</md-button>
   </div>
-  <form>
-  <div class="patient-form-wrapper">
+  <form name="patientForm">
+    <div class="patient-form-wrapper">
+      <div  layout="row" layout-sm="column" class="patient-form-row-item">
+        <div flex class="patient-form-column-item">
+          <md-input-container>
+            <label>Stroke ID</label>
+            <input ng-model="p.patient.id" disabled>
+          </md-input-container>
+        </div>
+        <div flex class="patient-form-column-item">
+          <md-input-container>
+              <label>Health Care Number</label>
+              <input  md-maxlength="11" name="health_care_number" ng-model="p.patient.health_care_number" type="text" required>
+              <div ng-messages="patientForm.health_care_number.$error">
+                <div ng-message="required">This is required.</div>
+                <div ng-message="md-maxlength">Has not to be less than 11 characters long.</div>
+              </div>
+          </md-input-container>
+        </div>
+        <div flex class="patient-form-column-item">
+          <md-input-container>
+            <label>Patient Name</label>
+            <input ng-model="p.patient.name">
+          </md-input-container>
+        </div>
+        <div flex class="patient-form-column-item">
+          <md-input-container>
+            <label>NIC</label>
+            <input md-maxlength="10" md-minlength="10" ng-model="p.patient.nic"  name="nic" type="text" required>
+            <div ng-messages="patientForm.nic.$error">
+              <div ng-message="required">This is required.</div>
+              <div ng-message="md-maxlength">Has not to be less than 10 characters long.</div>
+              <div ng-message="md-minlength">Has not to be more than 10 characters long.</div>
+            </div>
+          </md-input-container>      
+        </div>
+      </div><!-- end patient-form-row-item -->
 
-    <md-content layout="row" layout-sm="column">
-    <md-input-container>
-      <label>Stroke ID</label>
-      <input ng-model="p.patient.id" disabled>
-    </md-input-container>
-    <md-input-container>
-      <label>Health Care Number</label>
-      <input ng-model="p.patient.health_care_number" type="text">
-    </md-input-container>
-    <md-input-container>
-      <label>NIC</label>
-      <input ng-model="p.patient.nic" type="text">
-    </md-input-container>
-    </md-content>
+      <div layout="row" layout-sm="column" class="patient-form-row-item">
 
+        <div class="flex" class="patient-form-column-item">
+          <md-input-container style="min-width: 272px;">
+            <label>Date of Birth</label>
+            <input type="date" ng-model="p.patient.dob" style="padding:0;">
+          </md-input-container>  
+        </div>
 
-    <md-content layout="row" layout-sm="column">
-      <md-input-container>
-        <label>Patient Name</label>
-        <input ng-model="p.patient.name">
-      </md-input-container>
-      <md-input-container style="min-width: 194px;">
-        <label>Date of Birth</label>
-        <input type="date" ng-model="p.patient.dob">
-      </md-input-container>
-      <md-input-container>
-        <label>Age</label>
-        <input type="text" ng-model="p.patient.age" disabled>
-      </md-input-container>
-    </md-content>
+        <div flex class="patient-form-column-item">
+          <md-input-container>
+            <label>Age</label>
+            <input type="text" ng-model="p.patient.age" disabled>
+          </md-input-container>
+        </div>
 
-    <md-content layout="row" layout-sm="column">
-      <md-input-container flex>
-        <label>Hospital</label>
-        <input type="text" ng-model="p.patient.hospital" disabled="">
-      </md-input-container>
-        <input type="hidden" ng-model="p.patient.hospital_id">
+        <div flex class="patient-form-column-item">
+          <md-input-container flex>
+            <label>Hospital</label>
+            <input type="text" ng-model="p.patient.hospital" disabled="">
+          </md-input-container>
+          <input type="hidden" ng-model="p.patient.hospital_id">
+        </div>
 
-    </md-content>
+        <div flex class="patient-form-column-item">
+          <md-input-container>
+            <label>Address</label>
+            <textarea ng-model="p.patient.address_1" columns="1"></textarea>
+          </md-input-container>
+        </div>
+        
+      </div><!-- end patient-form-row-item -->
 
-    <md-content layout="row" layout-sm="column">
+      <div layout="row" layout-sm="column" class="patient-form-row-item">
+        <div flex class="patient-form-column-item">
+          <md-input-container>
+            <label>Mobile phone number</label>
+            <input ng-model="p.patient.contact_no_1">
+          </md-input-container>
+        </div>
 
-      <md-input-container flex>
-        <label>Address</label>
-        <textarea ng-model="p.patient.address_1" columns="1"></textarea>
-      </md-input-container>
-    </md-content>
+        <div flex class="patient-form-column-item">
+          <md-input-container>
+            <label>Other contact number</label>
+            <input ng-model="p.patient.contact_no_2">
+          </md-input-container>
+        </div>
 
-    <md-content layout="row" layout-sm="column">
-      <md-radio-group ng-model="p.patient.sex" style="min-width: 195px;">
-        <label>Gender</label>
-        <md-radio-button value="M" class="md-primary">Male</md-radio-button>
-        <md-radio-button value="F" class="md-primary"> Female </md-radio-button>
-      </md-radio-group>
+        <div flex class="patient-form-column-item">
+          <md-radio-group ng-model="p.patient.sex" style="min-width: 195px;">
+            <label>Gender</label>
+            <md-radio-button value="M" class="md-primary">Male</md-radio-button>
+            <md-radio-button value="F" class="md-primary"> Female </md-radio-button>
+          </md-radio-group>
+        </div>
 
-      <md-radio-group ng-model="p.patient.admitted_to">
-        <label>Admitted To</label>
-        <md-radio-button value="1" class="md-primary">Medical ward/Medical ICU</md-radio-button>
-        <md-radio-button value="2" class="md-primary"> Stroke unit </md-radio-button>
-        <md-radio-button value="3" class="md-primary"> Neurosurgery
-        ward/Neurosurgery ICU </md-radio-button>
-        <md-radio-button value="4" class="md-primary"> Neurology ward/Neurology
-         ICU </md-radio-button>
-      </md-radio-group>
-    </md-content>
+        <div flex class="patient-form-column-item">
+          <md-radio-group ng-model="p.patient.admitted_to">
+            <label>Admitted To</label>
+            <md-radio-button value="1" class="md-primary">Medical ward/Medical ICU</md-radio-button>
+            <md-radio-button value="2" class="md-primary"> Stroke unit </md-radio-button>
+            <md-radio-button value="3" class="md-primary"> Neurosurgery
+            ward/Neurosurgery ICU </md-radio-button>
+            <md-radio-button value="4" class="md-primary"> Neurology ward/Neurology
+             ICU </md-radio-button>
+          </md-radio-group>
+        </div>
+      </div><!-- end patient-form-row-item -->
 
-    <md-content layout="row" layout-sm="column">
-      <md-input-container>
-        <label>Mobile phone number</label>
-        <input ng-model="p.patient.contact_no_1">
-      </md-input-container>
-      <md-input-container>
-        <label>Other contact number</label>
-        <input ng-model="p.patient.contact_no_2">
-      </md-input-container>
-    </md-content>
+      <div layout="row" layout-sm="column" class="patient-form-row-item">
 
-     <md-content layout="row" layout-sm="column">
-      <md-input-container>
-        <label>Guardian Name</label>
-        <input ng-model="p.patient.guardian_name">
-      </md-input-container>
-      <md-input-container>
-        <label>Guardian mobile number</label>
-        <input type="text" ng-model="p.patient.guardian_contact_no_1">
-      </md-input-container>
-      <md-input-container>
-        <label>Guardian other contact number</label>
-        <input type="text" ng-model="p.patient.guardian_contact_no_2">
-      </md-input-container>
-    </md-content>
+        <div flex class="patient-form-column-item">
+          <md-input-container>
+            <label>Guardian Name</label>
+            <input ng-model="p.patient.guardian_name">
+          </md-input-container>
+        </div>
+
+        <div flex class="patient-form-column-item">
+           <md-input-container>
+              <label>Guardian mobile number</label>
+              <input type="text" ng-model="p.patient.guardian_contact_no_1">
+            </md-input-container>
+        </div>
+
+        <div flex class="patient-form-column-item">
+          <md-input-container>
+            <label>Guardian other contact number</label>
+            <input type="text" ng-model="p.patient.guardian_contact_no_2">
+          </md-input-container>
+        </div>
+
+        <div flex class="patient-form-column-item"></div>
+      </div><!-- end patient-form-row-item -->      
   </div>
-
   <div class="footer align-to-right">
     <md-button class="md-raised pull-right md-primary" ng-click="p.updateProfile()">Save</md-button>
   </div>

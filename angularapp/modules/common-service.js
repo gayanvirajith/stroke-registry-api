@@ -70,15 +70,34 @@ app.factory('PatientService', ['$http', '$filter', '$sanitize', 'CSRF_TOKEN', fu
       guardian_contact_no_1: $sanitize(patient.guardian_contact_no_1),
       guardian_contact_no_2: $sanitize(patient.guardian_contact_no_2),
     };
-  }
+  };
+
+  var sanitizeEventDetails = function sanitizeEventDetails(eventDetail) {
+    return {
+      episode_id: $sanitize(eventDetail.episode_id),
+      onset_of_stroke_at: $sanitize(eventDetail.onset_of_stroke_at),
+      admission_time: $sanitize(eventDetail.admission_time),
+      modified_rankin_scale: $sanitize(eventDetail.modified_rankin_scale),
+      symptoms: eventDetail.symptoms,
+    };
+  };
+
   return {
     getPatientProfile: function getPatientProfile(id) {
       return $http.get('/patient/'+id);
     },
+    getPatientEventDetail: function getPatientEventDetail(id) {
+      return $http.get('/patient/event-onset/'+id);
+    },
     updatePatientProfile: function getPatientProfile(patient, id) {
       var patient = $http.post('/patient/update-profile/' + id, sanitizePatientProfileData(patient));
       return patient;
+    },
+    updatePatientEvent: function getPatientProfile(eventDetail, id) {
+      var patient = $http.post('/patient/update-event-onset/' + id, sanitizeEventDetails(eventDetail));
+      return patient;
     }
+
   };
 
 }]);

@@ -17,7 +17,8 @@ app.controller('PatientController', ['$filter', '$rootScope', '$stateParams', '$
     return Math.abs(ageDate.getUTCFullYear() - 1970);
   }
 
-  patientProfile.success(function(data, status, headers, config){
+  patientProfile.success(function(data, status, headers, config) {
+
     self.patient.id = data.data.id;
     self.patient.health_care_number = data.data.health_care_number;
     self.patient.nic = data.data.nic;
@@ -34,7 +35,9 @@ app.controller('PatientController', ['$filter', '$rootScope', '$stateParams', '$
     self.patient.admitted_to = data.data.admitted_to;
     self.patient.hospital = data.data.hospital.name;
     self.patient.hospital_id = data.data.hospital.id;
+
   });
+  
   patientProfile.error(function(data, status, headers, config){
     console.log(data.data);
   });
@@ -59,11 +62,186 @@ app.controller('PatientController', ['$filter', '$rootScope', '$stateParams', '$
 }]);
 
 
-app.controller('PatientProfileController', ['$stateParams', '$state', function ($stateParams, $state) {
-  console.log("patient controller");
-
+app.controller('PatientEventController', ['$filter', '$stateParams', '$state', '$scope', 'PatientService', function ($filter, $stateParams, $state, $scope, PatientService) {
+  
   var self = this;
   self.patientId = $stateParams.patientId;
+  
+  self.patient = {};  
 
+  self.patient.symptoms = [
+    { id: 1, name: 'Weakness', status: false},
+    { id: 2, name: 'Speech disturbance', status: false},
+    { id: 3, name: 'Sensory symptoms', status: false},
+    { id: 4, name: 'Dysphagia', status: false},
+    { id: 5, name: 'Monocular blindness', status: false},
+    { id: 6, name: 'Field defect', status: false},
+    { id: 7, name: 'Brainstem', status: false},
+    { id: 8, name: 'Cerebellar', status: false},
+    { id: 9, name: 'Cognitive symptoms', status: false},
+    { id: 10, name: 'Seizure', status: false},
+    { id: 11, name: 'Headache', status: false}
+  ];
+
+
+  var patientEventDetail = PatientService.getPatientEventDetail(self.patientId);
+
+  /*
+   * Returns date diff between two dates
+   */
+  var datetimeDiff = function datetimeDiff(timeEnd, timeStart) {
+    var hourDiff = timeEnd - timeStart; //in ms
+    var secDiff = hourDiff / 1000; //in s
+    // return millisecondsToStr(hourDiff);
+    return secondsToString(secDiff);
+  };
+  
+  var secondsToString = function secondsToString(seconds) {
+    var numyears = Math.floor(seconds / 31536000);
+    var numdays = Math.floor((seconds % 31536000) / 86400); 
+    var numhours = Math.floor(((seconds % 31536000) % 86400) / 3600);
+    var numminutes = Math.floor((((seconds % 31536000) % 86400) % 3600) / 60);
+    var numseconds = (((seconds % 31536000) % 86400) % 3600) % 60;
+    // if (numyears != 0)
+    //   return numyears + " years " +  numdays + " days " + numhours + " hours " + numminutes + " minutes " + numseconds + " seconds";
+    // else if (numdays != 0)
+    //   return numdays + " days " + numhours + " hours " + numminutes + " minutes " + numseconds + " seconds";
+    // else if (numhours != 0)
+    //   return numhours + " hours " + numminutes + " minutes " + numseconds + " seconds";
+    // else if (numminutes != 0) 
+    //   return numminutes + " minutes " + numseconds + " seconds";
+    // else 
+    //   return numseconds + " seconds";
+
+    var str  = '';
+    if (numyears != 0) str = str + ' ' + numyears + ' year(s)';
+    if (numdays != 0) str = str + ' ' + numdays + ' day(s)';
+    if (numhours != 0) str = str + ' ' + numhours + ' hour(s)';
+    if (numminutes != 0) str = str + ' ' + numminutes + ' minute(s)';
+    return str;
+  }
+
+  var millisecondsToStr = function millisecondsToStr (milliseconds) {
+    // TIP: to find current time in milliseconds, use:
+    // var  current_time_milliseconds = new Date().getTime();
+
+    function numberEnding (number) {
+        return (number > 1) ? 's' : '';
+    }
+
+    var temp = Math.floor(milliseconds / 1000);
+    var years = Math.floor(temp / 31536000);
+    if (years) {
+        return years + ' year' + numberEnding(years);
+    }
+    //TODO: Months! Maybe weeks? 
+    var days = Math.floor((temp %= 31536000) / 86400);
+    if (days) {
+        return days + ' day' + numberEnding(days);
+    }
+    var hours = Math.floor((temp %= 86400) / 3600);
+    if (hours) {
+        return hours + ' hour' + numberEnding(hours);
+    }
+    var minutes = Math.floor((temp %= 3600) / 60);
+    if (minutes) {
+        return minutes + ' minute' + numberEnding(minutes);
+    }
+    var seconds = temp % 60;
+    if (seconds) {
+        return seconds + ' second' + numberEnding(seconds);
+    }
+    return 'less than a second'; //'just now' //or other string you like;
+  }
+
+  var getDatetimeAsString = function getDatetimeAsString(datetime) {
+    console.log(datetime);
+    var date = null;
+    if (datetime != '' || datetime != '0000-00-00 00:00:00') {
+      // Split timestamp into [ Y, M, D, h, m, s ]
+      var t = datetime.split(/[- :]/);
+      // Apply each element to the Date function
+      date = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+    }
+    return date;
+  };
+
+  patientEventDetail.success(function(data, status, headers, config){
+
+    self.patient.id = data.data.id;
+    self.patient.episode_id = data.data.episode_id;
+    self.patient.modified_rankin_scale = data.data.modified_rankin_scale;
+
+    var t = new Date();
+    if (data.data.onset_of_stroke_at != '0000-00-00 00:00:00') {
+      // Split timestamp into [ Y, M, D, h, m, s ]
+      var t = data.data.onset_of_stroke_at.split(/[- :]/);
+      // Apply each element to the Date function
+      var onsetSetAt = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+      self.patient.onset_of_stroke_at = onsetSetAt;
+    }
+    if (data.data.admission_time != '0000-00-00 00:00:00') {
+      t = data.data.admission_time.split(/[- :]/);
+      var admissionAt = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+      self.patient.admission_time = admissionAt;
+    }
+
+    if (admissionAt && onsetSetAt) {
+      self.patient.onset_to_admission_time = datetimeDiff(admissionAt.getTime(), onsetSetAt.getTime());
+    }
+
+    data.data.symptoms.forEach(function(entry) {
+        self.patient.symptoms.forEach(function(i){
+            if (entry.id == i.id)
+            {
+              i.status = true;
+            }
+        });
+    });
+
+  });
+
+  patientEventDetail.error(function(data, status, headers, config){
+
+  });
+
+  $scope.$watch('p.patient.onset_of_stroke_at', function() {    
+    if (self.patient.admission_time && self.patient.onset_of_stroke_at) {
+      self.patient.onset_to_admission_time = datetimeDiff(self.patient.admission_time.getTime(), self.patient.onset_of_stroke_at.getTime());
+    }else {
+      self.patient.onset_to_admission_time = '';
+    }
+  }, true); // <-- objectEquality
+
+  $scope.$watch('p.patient.admission_time', function() {    
+    if (self.patient.admission_time && self.patient.onset_of_stroke_at) {
+      self.patient.onset_to_admission_time = datetimeDiff(self.patient.admission_time.getTime(), self.patient.onset_of_stroke_at.getTime());      
+    }else {
+      self.patient.onset_to_admission_time = '';
+    }
+  }, true); // <-- objectEquality
+
+
+  self.updateDetails = function updateDetails() {
+
+    var eventData =  angular.copy(self.patient);
+    var datee = '';
+    if (eventData.admission_time) 
+      datee = $filter('date')(eventData.admission_time, 'yyyy-MM-dd HH:mm:ss');
+
+    console.log(datee);
+
+    // // if (self.patient.onset_to_admission_time) self.patient.onset_to_admission_time = getDatetimeAsString(self.patient.onset_to_admission_time);
+    // var patientEventData = PatientService.updatePatientEvent(self.patient, self.patientId);
+    // patientEventData.success(function(data, status, headers, config){
+    //   // $rootScope.successNotice = 'Patient profile has been successfully updated!';
+    //   // $state.go('patient', {patientId: self.patientId});
+    //   console.log(data.data);
+    // });
+    // patientEventData.error(function(data, status, headers, config){
+    //   console.log(data.data);
+    // });
+
+  };
 
 }]);

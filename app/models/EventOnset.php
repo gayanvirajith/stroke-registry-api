@@ -24,8 +24,8 @@ class EventOnset extends BaseModel {
       'episode_id'                  => 'required',
       'onset_of_stroke_at'          => 'required',
       'admission_time'              => 'required',
-      'onset_to_admission_time'     => 'required',
-      'patient_id'                  => 'required|exists:patients,id',
+      // 'onset_to_admission_time'     => 'required',
+      'patient_id'                  => 'exists:patients,id',
   ];
 
 

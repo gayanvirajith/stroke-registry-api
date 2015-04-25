@@ -160,6 +160,10 @@ https://github.com/google/material-design-icons
     width: 100%;
 }
 
+md-toolbar {
+    min-height: 50px;
+    max-height: 50px;
+}
 
 /************
  * DOCS MENU
@@ -402,7 +406,7 @@ md-content.nsr-main-content {
 
 div.account-toggle {
     cursor: pointer;
-    height: 64px;
+    height: 50px;
     border-left: 1px solid rgb(56, 72, 163);
     width: 200px;
     margin-right: -16px;
@@ -419,7 +423,7 @@ div.account-toggle {
 
 div.account-toggle .info-container {
     display: block;
-    height: 64px;
+    height: 50px;
     width: 100%;
     display:table;
 }
@@ -437,14 +441,14 @@ div.account-toggle .info-container .account-username {
   padding-left: 10px;
 }
 
-.profile-picture md-icon.s48 {
-  width: 48px;
-  height: 48px;
+.profile-picture md-icon.s30 {
+  width: 30px;
+  height: 30px;
 }
 
 div.user-account-info-panel {
     position: absolute; 
-    top:64px; 
+    top:50px; 
     right: 0px; 
     width:200px;
     border-radius: 0px;
@@ -526,16 +530,16 @@ div.user-account-info-panel ul li button {
 }
 
 .patient-form-container .header {
-    border-bottom: 1px solid #eee;    
+    border-bottom: 1px solid #ccc;    
 }
 
 .patient-form-container .footer {
-    border-top: 1px solid #eee;
+    border-top: 1px solid #ccc;
     height: 50px;
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
-   justify-content: flex-end;
+    justify-content: flex-end;
     align-content: flex-start;
     align-items: center;
     padding: 0 16px;
@@ -552,10 +556,10 @@ div.user-account-info-panel ul li button {
 }
 
 .patient-form-container md-input-container {
-    padding-bottom: 20px;
+    // padding-bottom: 20px;
 }
 
-.patient-form-container md-radio-button {
+.patient-form-container md-radio-button, .patient-form-container md-checkbox {
     margin-left: 0;
     font-size: 13px;
 }
@@ -563,6 +567,22 @@ div.user-account-info-panel ul li button {
 .patient-form-container md-radio-group label {
     color: rgba(0,0,0,0.54);
     font-size: 12px;
+}
+
+.patient-form-container .checkbox-items-group {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+}
+
+
+.patient-form-container .checkbox-items-group .symptom-item {
+    flex: 1 200px;
+    min-width: 200px;
+    max-width: 200px;
 }
 
 .patient-form-container md-input-container md-radio-group.md-default-theme:focus:not(:empty) {
@@ -581,6 +601,18 @@ div.user-account-info-panel ul li button {
     padding-bottom: 1em;
 }
 
+.patient-form-row-item .patient-form-column-item {
+    padding-right: 10px;
+
+    &:last-child {
+        padding-right: 0;
+    }
+}
+
+
+.symptoms-selection-label {
+    color: rgba(0,0,0,0.54);
+}
 .message-notice {
     position: relative;
     padding: 15px;
@@ -606,16 +638,16 @@ div.user-account-info-panel ul li button {
 }
 
 .message-notice.ng-hide-remove {
-    -webkit-animation: fadeIn .4s;
-    -moz-animation: fadeIn .4s;
-    -ms-animation: fadeIn .4s;
-    animation: fadeIn .4s;
+    -webkit-animation: fadeInDown .4s;
+    -moz-animation: fadeInDown .4s;
+    -ms-animation: fadeInDown .4s;
+    animation: fadeInDown .4s;
 }
 .message-notice.ng-hide-add {
-    -webkit-animation: fadeOut .5s;
-    -moz-animation: fadeOut .5s;
-    -ms-animation: fadeOut .5s;
-    animation: fadeOut .5s;
+    -webkit-animation: fadeOutUp .3s;
+    -moz-animation: fadeOutUp .3s;
+    -ms-animation: fadeOutUp .3s;
+    animation: fadeOutUp .3s;
 }
 
 .side-nav-md-content .panel-body { padding:0;}
@@ -649,7 +681,7 @@ div.user-account-info-panel ul li button {
     }
  }
 
- .side-nav-md-content .panel-group .panel .sidebar-common-actions button {
+ .side-nav-md-content .sidebar-common-actions button {
     border-bottom: 1px solid #ddd;
     background-color: #fff;
    
@@ -660,3 +692,16 @@ div.user-account-info-panel ul li button {
         background-color: #eee;
     }
  }
+
+ .side-nav-md-content h3 {
+    padding:0;
+    margin:0;
+    line-height: 40px;
+    height: 40px;
+    padding: 0 16px;
+    font-size: 14px;
+    background-color: #eee;
+    text-transform: uppercase;
+    border-bottom: 1px solid #ddd;
+ }   
+

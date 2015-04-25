@@ -168,13 +168,22 @@ Route::post('patient/update-risk-factor/{id}',
     ));
 
 
+/*
+ * Test route to check pdo support on a shared server
+ */
+Route::get('test-pdo', function() {
 
-Route::get('test-j', function() {
+    try {
+        $users = DB::table('users')->count();
+        echo $users;
 
-    $eo = EventOnset::find(1);
-    $eo->symptoms()->sync(array(1,2,3, 4));
-    return $eo->symptoms;
+    }catch(Exception $e){
+        echo "Error : " + $e;
+    }
+
 });
+
+
 
 
 //This will redirect all missing routes to AngularJS Framework .

@@ -60,7 +60,8 @@ app.config(['$urlRouterProvider', '$locationProvider', '$stateProvider',  functi
     .state('patient-event-details', {
       url: "/dashboard/patient-event-details/:patientId",
       templateUrl: "angularapp/modules/patient/patient-event-details.html",
-      constroller: 'AppCtrl',
+      controller: 'PatientEventController',
+      controllerAs: 'p',
       resolve: {
         authExpiry: function(sessionexpiry, authService) {
           var exp = sessionexpiry.get();

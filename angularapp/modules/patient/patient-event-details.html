@@ -1,1 +1,67 @@
-patient-profile.html
+<md-whiteframe class="md-whiteframe-z1 patient-form-container" layout="column">
+  <div class="header">
+    <h1>Patient Event Details</h1>
+    <md-button class="md-raised pull-right md-primary" ng-click="p.updateDetails()">Save</md-button>
+  </div>
+
+
+  <form name="patientEvent" ng-model="patientEvent">
+    <div class="patient-form-wrapper">
+      <div layout="row" layout-sm="column" class="patient-form-row-item">
+        <div flex class="patient-form-column-item">
+          <md-input-container>
+              <label>Episode ID</label>
+              <input name="episode_id" ng-model="p.patient.episode_id" type="text">
+              <div ng-messages="patientEvent.episode_id.$error">
+                <div ng-message="required">This is required.</div>
+              </div>
+          </md-input-container>
+        </div><!-- patient-form-column-item-->
+        <div flex class="patient-form-column-item">
+          <md-input-container style="min-width: 272px;">
+            <label>Onset of Stroke At</label>
+            <input type="datetime-local" ng-model="p.patient.onset_of_stroke_at" style="padding:0;">
+          </md-input-container>  
+        </div><!-- end patient-form-column-item-->
+        <div flex class="patient-form-column-item">
+          <md-input-container style="min-width: 272px;">
+            <label>Admission At</label>
+            <input type="datetime-local" ng-model="p.patient.admission_time" style="padding:0;">
+          </md-input-container>  
+        </div><!-- end patient-form-column-item-->
+        <div flex class="patient-form-column-item">
+          <md-input-container>
+            <label>Onset to admission time</label>
+            <input ng-model="p.patient.onset_to_admission_time" disabled>
+          </md-input-container>
+        </div><!-- end patient-form-column-item-->
+      </div><!-- end patient-form-row-item -->
+
+
+      <div layout="row" layout-sm="column" class="patient-form-row-item">
+        <div flex class="patient-form-column-item">
+          <label class="symptoms-selection-label">Initial symptoms(s)</label>
+          <div class="checkbox-items-group">
+            <span ng-repeat="symptom in p.patient.symptoms" class="symptom-item">
+            <md-checkbox class="md-primary" ng-model="symptom.status" aria-label="symptom.name"> {{symptom.name}} </md-checkbox>
+            </span>
+          </div>
+        </div><!-- end patient-form-column-item -->
+      </div>
+
+      <div layout="row" layout-sm="column" class="patient-form-row-item">
+        <div flex class="patient-form-column-item">        
+          <md-input-container>
+            <label>Modified rankin scale</label>
+            <textarea ng-model="p.patient.modified_rankin_scale" columns="1"></textarea>
+          </md-input-container>
+        </div>
+      </div>
+      
+    </div><!-- end patient-form-wrapper-->
+  </form>
+
+  <div class="footer">
+    <md-button class="md-raised pull-right md-primary" ng-click="p.updateDetails()">Save</md-button>
+  </div>
+</md-whiteframe>
