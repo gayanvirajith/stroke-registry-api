@@ -27,7 +27,7 @@ class CreatePatientsTable extends Migration {
 			$table->string('guardian_contact_no_2', 20)->default('');
 			$table->date('dob')->default('0000-00-00');
 			$table->tinyInteger('age')->default(0);
-			$table->integer('health_care_number')->unsigned()->default(0);
+			$table->string('health_care_number', 11)->default('');
 			$table->tinyInteger('province')->default(0);
 			$table->tinyInteger('admitted_to')->default('0.00');
 			$table->integer('hospital_id')->default(0);

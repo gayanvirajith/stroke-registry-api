@@ -56,7 +56,7 @@ class RolesAndPermisionTableSeeder extends Seeder {
     $hAdminRole = DB::table('roles')->where('name', '=', 'Hospital Admin')->pluck('id');
     $userRole = DB::table('roles')->where('name', '=', 'User')->pluck('id');
 
-    $user1 = User::where('username','=','admin')->first();
+    $user1 = User::where('username','=','nhsadmin')->first();
     $user1->roles()->attach($adminRole);
 
     $user2 = User::where('username','=','user')->first();

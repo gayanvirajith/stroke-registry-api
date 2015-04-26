@@ -1,0 +1,47 @@
+<div class="patient-directory-window-wrapper">
+<md-whiteframe class="md-whiteframe-z1 patient-form-container directory-container" layout="column">
+  <div class="header">
+    <h1>Patients Directory</h1>
+  </div>
+  <div class="patient-form-wrapper">
+    <div class="table-responsive patient-directory-table-wrapper">
+      <table class="table">
+        <thead>
+          <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>NIC</th>
+          <th>DOB</th>
+          <th>Age</th>
+          <th>Sex</th>
+          <th>Health care number</th>
+          <th>Action</th>
+          </tr>
+        </thead>       
+        <tbody>
+          <tr ng-repeat="patient in p.patients">
+            <td>{{ patient.id }}</td>
+            <td>{{ patient.name }}</td>
+            <td>{{ patient.nic }}</td>
+            <td>{{ patient.dob }}</td>
+            <td>{{ p.calculateAge(patient.dob) }}</td>
+            <td>{{ patient.sex }}</td>
+            <td>{{ patient.health_care_number }}</td>
+            <td>
+              <md-button ng-click="appCtrl.goTo('patient', {patientId: patient.id})" class="md-icon-button patient-directory-button" aria-label="Edit patient">
+                <md-icon md-svg-icon="img/icons/edit.svg"></md-icon>
+              </md-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</md-whiteframe>
+
+<md-button class="md-fab md-primary add-patient-fab-btn" aria-label="Add Patient" ng-click="appCtrl.patientRegistrationPopup(event)">
+    <md-tooltip>Add Patient</md-tooltip>
+    <md-icon md-svg-src="img/icons/add.svg"></md-icon>
+  </md-button>
+
+  </div>

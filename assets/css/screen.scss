@@ -359,6 +359,30 @@ md-toolbar {
     border-radius: 2px;
 }
 
+#login-form .login-error {
+    padding: 5px;
+    font-size: 12px;
+    line-height: 1.4;
+    color: #a94442;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+}
+
+#login-form .login-error.ng-hide-remove {
+    -webkit-animation: fadeIn .4s;
+    -moz-animation: fadeIn .4s;
+    -ms-animation: fadeIn .4s;
+    animation: fadeIn .4s;
+}
+#login-form .login-error.ng-hide-add {
+    -webkit-animation: fadeOut .3s;
+    -moz-animation: fadeOut .3s;
+    -ms-animation: fadeOut .3s;
+    animation: fadeOut .3s;
+}
+
+
+
 #login-form form {width: 100%; }
 
 #login-form button {
@@ -403,6 +427,17 @@ md-content.nsr-main-content {
     right: 16px;
 } 
 
+.patient-directory-window-wrapper .add-patient-fab-btn {
+    position: absolute;
+    bottom: 40px;
+    right: 32px;  
+}
+
+
+.patient-directory-button {
+    margin-right: 12px;
+}
+
 
 div.account-toggle {
     cursor: pointer;
@@ -420,6 +455,7 @@ div.account-toggle {
       // box-shadow: inset  0 -6px 6px -6px darken(rgb(56, 72, 163), 20%);
     }
 }
+
 
 div.account-toggle .info-container {
     display: block;
@@ -600,6 +636,9 @@ div.user-account-info-panel ul li button {
         color: #555;
     }
  }
+ .patient-registration-popup-content .button-set {
+    padding-top: 20px;
+ }
 .patient-registration-popup-content h1 {
     padding-bottom: 1em;
 }
@@ -713,3 +752,13 @@ div.user-account-info-panel ul li button {
     border-bottom: 1px solid #ddd;
  }   
 
+.directory-container {
+    min-height: 480px;
+}
+
+.patient-directory-table-wrapper table thead th {
+    font-weight: bold;
+} 
+.patient-directory-table-wrapper table tbody td {
+    vertical-align: middle;
+}

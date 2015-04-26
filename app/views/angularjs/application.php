@@ -126,7 +126,9 @@
        <div layout="row" flex class="fill-height" ng-if="$state.current.url.indexOf('patient') !== -1">
         <h1></h1>
        </div>
-
+      <md-button ng-show="isLoggedin"  ng-click="appCtrl.goTo('directory', {})" class="md-icon-button patient-directory-button" aria-label="Patient Directory">
+        <md-icon md-svg-icon="img/icons/search.svg"></md-icon>
+      </md-button>
        <div ng-show="isLoggedin" class="account-toggle" ng-controller="LoginController">
          <account name="NHS Admin" on-logout="logout()"> </account>
        </div>

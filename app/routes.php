@@ -98,6 +98,15 @@ Route::get('patient/risk-factor/{id}',
         'as'   => 'showRiskFactor'
     ));
 
+// Show patient directory
+Route::get('patients',
+    array(
+        'uses' => 'PatientDirectoryController@index',
+        'as'   => 'patientDirectory'
+    ));
+
+
+
 /*
  * Authentication routes
  */
@@ -199,8 +208,8 @@ App::missing(function($exception)
      * before the browser tries to hit the server and handle it accordingly.
      * @see: http://stackoverflow.com/questions/16569841/angularjs-html5-mode-reloading-the-page-gives-wrong-get-request/16570533#16570533
      */
-    if (App::environment() === 'production')
-        return View::make('angularjs.application_production');
+    // if (App::environment() === 'production')
+        // return View::make('angularjs.application_production');
     
     return View::make('angularjs.application');
 

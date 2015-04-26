@@ -1,18 +1,29 @@
 <md-dialog aria-label="Patient Registration">
   <md-content class="patient-registration-popup-content">
     <h1>Create Patient Account</h1>
+    <form name="patientForm" novalidate ng-submit="patientForm.$valid && saveForm()">
+      <md-input-container>
+        <label for="patient-name">Patient name</label>
+        <input type="text" name="patient_name" ng-model="patient.name" required id="patient-name" class="md-input">
+        <div ng-messages="patientForm.patient_name.$error">
+          <div ng-message="required">Patient name is required.</div>
+        </div>
+      </md-input-container>
 
-    <md-input-container>
-      <label for="patient-name">Patient name</label>
-      <input type="text" ng-model="patient.name" required="" id="patient-name" class="md-input">
-    </md-input-container>
+      <md-input-container>
+        <label for="patient-nic">NIC number</label>
+        <input md-maxlength="10" md-minlength="10" type="text" ng-model="patient.nic" required name="patient_nic" id="patient-nic" class="md-input">
+        <div ng-messages="patientForm.patient_nic.$error">
+          <div ng-message="required">Patient nic is required.</div>
+          <div ng-message="md-maxlength">Should have 10 characters long.</div>
+          <div ng-message="md-minlength">Should have 10 characters long.</div>
+        </div>
+      </md-input-container>
 
-    <md-input-container>
-      <label for="patient-nic">NIC number</label>
-      <input type="text" ng-model="patient.nic" required="" id="patient-nic" class="md-input">
-    </md-input-container>
-
-    <md-button class="md-raised  md-primary" ng-click="saveForm()">Save</md-button>
-    <md-button class="md-raised  md-primary md-hue-1" ng-click="closeDialog()">Cancel</md-button>
+      <div class="button-set">
+      <md-button class="md-raised  md-primary" ng-submit="saveForm()">Save</md-button>
+      <md-button class="md-raised  md-primary md-hue-1" ng-click="closeDialog()">Cancel</md-button>
+      </div>
+    </form>
   </md-content>
 </md-dialog>

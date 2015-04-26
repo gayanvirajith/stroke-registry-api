@@ -106,6 +106,9 @@ app.factory('PatientService', ['$http', '$filter', '$sanitize', 'CSRF_TOKEN', fu
     getPatientRiskFactors: function getPatientRiskFactors(id) {
       return $http.get('/patient/risk-factor/'+id);
     },
+    getPatientDirectory: function getPatientDirectory() {
+      return $http.get('/patients');
+    },
     updatePatientProfile: function getPatientProfile(patient, id) {
       var patient = $http.post('/patient/update-profile/' + id, sanitizePatientProfileData(patient));
       return patient;

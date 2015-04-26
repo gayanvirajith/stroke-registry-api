@@ -91,6 +91,23 @@ app.config(['$urlRouterProvider', '$locationProvider', '$stateProvider',  functi
         } 
       }
     })
+    .state('directory', {
+      url: "/directory",
+      templateUrl: "angularapp/modules/patient/patient-directory.html",
+      controller: 'PatientDirectoryController',
+      controllerAs: 'p',
+      resolve: {
+        authExpiry: function(sessionexpiry, authService) {
+          var exp = sessionexpiry.get();
+          exp.success(function(data, status, headers, config){
+            authService.loginConfirmed(); 
+          });
+          exp.error(function(data, status, headers, config){
+            // console.log(data);
+          });
+        } 
+      }
+    })
     .state('dashboard', {
       url: "/dashboard",
       templateUrl: "angularapp/templates/dashboard.html",

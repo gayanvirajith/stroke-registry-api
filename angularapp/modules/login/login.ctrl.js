@@ -28,6 +28,8 @@ app.controller("LoginController",[
     var login = $http.post('/login', sanitizeCredential($scope.credential));
     
     $scope.loginFailed = false;
+    $scope.loginErrorMessage = '';
+
 
     login.success(function(data, status, headers, config){
       if (status === 200) {
@@ -44,8 +46,9 @@ app.controller("LoginController",[
 
     login.error(function(data, status, headers, config){
       $scope.loginFailed = true;
-      // console.log(data);
+      $scope.loginErrorMessage = '';
       flash.setMessage(data.message, 'danger');
+      $scope.loginErrorMessage = data.message;
     });
 
 

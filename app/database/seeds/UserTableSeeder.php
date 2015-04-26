@@ -6,14 +6,14 @@ class UserTableSeeder extends Seeder {
 	{
 
     User::create([
-      'username'    => 'admin',
-      'password'    => Hash::make('admin'),
+      'username'    => 'nhsadmin',
+      'password'    => Hash::make('nhsnhs!'),
       'hospital_id' => Hospital::first()->id
     ]); 
 
     User::create([
       'username'    => 'user',
-      'password'    => Hash::make('user'),
+      'password'    => Hash::make('user!'),
       'hospital_id' => Hospital::first()->id
     ]);
     

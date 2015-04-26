@@ -4,7 +4,7 @@ var app = angular
   .module('stroke-registry.patientModule', ['ui.router']);
 
 
-app.controller('PatientController', ['$filter', '$rootScope', '$stateParams', '$state', 'PatientService', function ($filter, $rootScope, $stateParams, $state, PatientService) {
+app.controller('PatientController', ['$scope', '$filter', '$rootScope', '$stateParams', '$state', 'PatientService', function ($scope, $filter, $rootScope, $stateParams, $state, PatientService) {
   
   var self = this;
   $rootScope.successNotice = '';
@@ -18,6 +18,14 @@ app.controller('PatientController', ['$filter', '$rootScope', '$stateParams', '$
     var ageDate = new Date(ageDifMs); // miliseconds from epoch
     return Math.abs(ageDate.getUTCFullYear() - 1970);
   }
+
+
+  $scope.$watch('p.patient.dob', function() {    
+    if (self.patient.dob) {
+      self.patient.age = calculateAge(self.patient.dob.getTime());      
+    }
+  }, true); // <-- objectEquality
+
 
   patientProfile.success(function(data, status, headers, config) {
 
@@ -331,5 +339,28 @@ app.controller('PatientRiskFactorsController', ['$filter', '$rootScope', '$state
       //todo handle errors
     });
   };
+
+}]);
+
+
+app.controller('PatientDirectoryController', ['$filter', '$rootScope', '$stateParams', '$state', 'PatientService', function ($filter, $rootScope, $stateParams, $state, PatientService) {
+
+  var self = this;
+  $rootScope.successNotice = '';
+  self.patients = [];
+
+  var directoryList = PatientService.getPatientDirectory();
+
+  directoryList.success(function(data, status, headers, config) {
+      self.patients = data.data;
+  });
+
+  self.calculateAge = function(birthday) { // pass in player.dateOfBirth
+    var ageDifMs = Date.now() - new Date(birthday);
+    var ageDate = new Date(ageDifMs); // miliseconds from epoch
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
+
+  //getPatientDirectory
 
 }]);
