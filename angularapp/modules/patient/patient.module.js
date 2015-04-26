@@ -8,6 +8,7 @@ app.controller('PatientController', ['$filter', '$rootScope', '$stateParams', '$
   
   var self = this;
   $rootScope.successNotice = '';
+  self.isDisabled = false;
   self.patientId = $stateParams.patientId;
   var patientProfile = PatientService.getPatientProfile(self.patientId);
   self.patient = {};
@@ -45,18 +46,20 @@ app.controller('PatientController', ['$filter', '$rootScope', '$stateParams', '$
 
 
   self.updateProfile = function updateProfile() {
+    self.isDisabled = true;
     $rootScope.successNotice = '';
     if (self.patient.dob) self.patient.dob = $filter('date')(self.patient.dob, 'yyyy-MM-dd');
 
     var patientProfileUpdate = PatientService.updatePatientProfile(self.patient, self.patientId);
     patientProfileUpdate.success(function(data, status, headers, config){
       $rootScope.successNotice = 'Patient profile has been successfully updated!';
-      $state.go('patient', {patientId: self.patientId});
+      self.isDisabled = false;
     });
     patientProfileUpdate.error(function(data, status, headers, config){
       //todo handle errors
+      self.isDisabled = false;
     });
-
+    return patientProfileUpdate;
   };
   
 }]);
@@ -66,6 +69,7 @@ app.controller('PatientEventController', ['$rootScope', '$filter', '$stateParams
   
   var self = this;
   self.patientId = $stateParams.patientId;
+  self.isDisabled = false;
   
   self.patient = {}; 
   $rootScope.successNotice  = ''; 
@@ -168,7 +172,6 @@ app.controller('PatientEventController', ['$rootScope', '$filter', '$stateParams
   };
 
   patientEventDetail.success(function(data, status, headers, config){
-
     self.patient.id = data.data.id;
     self.patient.episode_id = data.data.episode_id;
     self.patient.modified_rankin_scale = data.data.modified_rankin_scale;
@@ -200,6 +203,7 @@ app.controller('PatientEventController', ['$rootScope', '$filter', '$stateParams
         });
     });
 
+
   });
 
   patientEventDetail.error(function(data, status, headers, config){
@@ -224,6 +228,8 @@ app.controller('PatientEventController', ['$rootScope', '$filter', '$stateParams
 
 
   self.updateDetails = function updateDetails() {
+    self.isDisabled = true;
+
     $rootScope.successNotice = '';
     var eventData =  angular.copy(self.patient);
     var admission_time,onset_of_stroke_at = '';
@@ -249,9 +255,11 @@ app.controller('PatientEventController', ['$rootScope', '$filter', '$stateParams
     var patientEventData = PatientService.updatePatientEvent(eventData, self.patientId);
     patientEventData.success(function(data, status, headers, config){
       $rootScope.successNotice = 'Patient event details has been successfully updated!';
-      console.log("Success");
+      self.isDisabled = false;
+
     });
     patientEventData.error(function(data, status, headers, config){
+      self.isDisabled = false;
       //todo handle errors
     });
 

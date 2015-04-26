@@ -1,7 +1,7 @@
 <md-whiteframe class="md-whiteframe-z1 patient-form-container" layout="column">
   <div class="header">
     <h1>Patient Registration Details</h1>
-    <md-button class="md-raised pull-right md-primary" ng-click="p.updateProfile()">Save</md-button>
+    <md-button class="md-raised pull-right md-primary" ng-click="p.updateProfile()" ng-disabled="p.isDisabled">Save</md-button>
   </div>
   <form name="patientForm">
     <div class="patient-form-wrapper">
@@ -15,10 +15,11 @@
         <div flex class="patient-form-column-item">
           <md-input-container>
               <label>Health Care Number</label>
-              <input  md-maxlength="11" name="health_care_number" ng-model="p.patient.health_care_number" type="text" required>
+              <input  md-min-length="11" md-maxlength="11" name="health_care_number" ng-model="p.patient.health_care_number" type="text" required>
               <div ng-messages="patientForm.health_care_number.$error">
                 <div ng-message="required">This is required.</div>
                 <div ng-message="md-maxlength">Has not to be less than 11 characters long.</div>
+                <div ng-message="md-minlength">Has not to be more than 11 characters long.</div>
               </div>
           </md-input-container>
         </div>
@@ -137,7 +138,7 @@
       </div><!-- end patient-form-row-item -->      
   </div>
   <div class="footer align-to-right">
-    <md-button class="md-raised pull-right md-primary" ng-click="p.updateProfile()">Save</md-button>
+    <md-button class="md-raised pull-right md-primary" ng-click="p.updateProfile()" ng-disabled="p.isDisabled">Save</md-button>
   </div>
   </form>  
 </md-whiteframe>

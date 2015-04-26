@@ -118,7 +118,6 @@ class PatientProfileController extends ApiController {
 
 			// Update patient data
 			$patient->save();
-
 			return Response::make($response);
 
 		} else {

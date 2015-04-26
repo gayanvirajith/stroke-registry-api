@@ -218,3 +218,27 @@ app.directive("loadingIndicator", function($mdToast) {
     }
   };
 });
+
+/*
+ * Disable button on $http/$q calls
+ * - Accepts an option, passed by attribute, of a 
+ *   function in the scope that must return a promise
+ * - On click of the button, calls this function, and disables the button
+ * - On finally of the promise, it re-enables the button
+ *
+ */
+app.directive('clickAndDisable', function() {
+  return {
+    scope: {
+      clickAndDisable: '&'
+    },
+    link: function(scope, iElement, iAttrs) {
+      iElement.bind('click', function() {
+        iElement.prop('disabled',true);
+        scope.clickAndDisable().finally(function() {
+          iElement.prop('disabled',false);
+        })
+      });
+    }
+  };
+});

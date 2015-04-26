@@ -78,33 +78,36 @@
     <md-content flex="" class="md-default-theme side-nav-md-content nano">
       <div class="nano-content">
         <h3>On Admission</h3>
-      <div class="sidebar-common-actions">
-        <md-button ng-click="appCtrl.goTo('patient', {patientId: $stateParams.patientId})">Registration Details</md-button>
-        <md-button ng-click="appCtrl.goTo('patient-event-details', {patientId: $stateParams.patientId})">Event Details</md-button>
-        <md-button>Risk Factors</md-button>
-      </div>
-      <h3>At Discharge</h3>
-      <div class="sidebar-common-actions">
-        <md-button>Investigation</md-button>
-        <md-button>Management</md-button>
-        <md-button>Diagnosis</md-button>
-        <md-button>Final Disposition</md-button>
-      </div>
-      <div class="sidebar-common-seperator"></div>
+        <div class="sidebar-common-actions">
+          <md-button ng-click="appCtrl.goTo('patient', {patientId: $stateParams.patientId})">Registration Details</md-button>
+          <md-button ng-click="appCtrl.goTo('patient-event-details', {patientId: $stateParams.patientId})">Event Details</md-button>
+          <md-button>Risk Factors</md-button>
+        </div>
+        <!--<h3>At Discharge</h3>
+        <div class="sidebar-common-actions">
+          <md-button>Investigation</md-button>
+          <md-button>Management</md-button>
+          <md-button>Diagnosis</md-button>
+          <md-button>Final Disposition</md-button>
+        </div>
+        <div class="sidebar-common-seperator"></div>
       
-      <h3>Optional</h3> 
-      <div class="sidebar-common-actions">
-        <md-button>Thrombolysis</md-button>
-        <md-button>Stroke unit care</md-button>
-        <md-button>Complications</md-button>
-      </div>
-      <h3>Folow up</h3> 
-      <div class="sidebar-common-actions">
-        <md-button>Follow up at 3 months</md-button>
-      </div>
-      <div class="sidebar-common-actions">
-        <md-button ng-href="dashboard">Back to Dashboard</md-button>    
-      </div>
+        <h3>Optional</h3> 
+        <div class="sidebar-common-actions">
+          <md-button>Thrombolysis</md-button>
+          <md-button>Stroke unit care</md-button>
+          <md-button>Complications</md-button>
+        </div>
+        <h3>Folow up</h3> 
+        <div class="sidebar-common-actions">
+          <md-button>Follow up at 3 months</md-button>
+        </div>-->
+        <div class="sidebar-common-actions">
+          <md-button ng-href="dashboard">
+          <md-icon md-svg-src="img/icons/arrow-back.svg"></md-icon>          
+          To Dashboard
+          </md-button>    
+        </div>
       </div>
     </md-content>
   </md-sidenav> 
