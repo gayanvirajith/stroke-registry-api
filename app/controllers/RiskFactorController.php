@@ -95,7 +95,7 @@ class RiskFactorController extends \ApiController {
         $validator = RiskFactor::validate(Input::all());
 
         if ($validator->passes()) {
-
+            
             // Build event onset object object
 
             $data = Input::all();

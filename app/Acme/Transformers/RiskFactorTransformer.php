@@ -30,7 +30,7 @@ class RiskFactorTransformer extends Transformer{
             'current_smoker'                            => $item->current_smoker,
             'unsafe_alcohol_intake'                     => $item->unsafe_alcohol_intake,
             'patient_id'                                => $item->patient_id,
-            'otherHeartDisease'                         => array_map(function($i){
+            'otherHeartDiseases'                         => array_map(function($i){
                 return [
                     'id' => $i['id'],
                     'name' => $i['name']

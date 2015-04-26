@@ -20,7 +20,10 @@ class UserTransformer extends Transformer {
     {
         return [
             'username'      => $user->username,
-            'hospital_id'   => (int) $user->hospital_id,
+            'hospital'      => [
+                'id'        => $user->hospital->id, 
+                'name'      => $user->hospital->name
+            ],
             'lastLoginAt'   => $user->updated_at->format('Y-m-d H:i:s')
         ];
     }

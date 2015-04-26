@@ -1,0 +1,84 @@
+<md-whiteframe class="md-whiteframe-z1 patient-form-container" layout="column">
+  <div class="header">
+    <h1>Patient Risk Factors</h1>
+    <md-button class="md-raised pull-right md-primary" ng-click="p.updateDetails()" ng-disabled="p.isDisabled">Save</md-button>
+  </div>
+
+  <form name="patientRiskFactors" ng-model="patientRiskFactors">
+    <div class="patient-form-wrapper risk-factor-form-wrapper">
+      <div layout="row" layout-sm="column" class="patient-form-row-item radio-select-group-row">
+        <div flex class="patient-form-column-item">
+          <md-radio-group ng-model="p.patient.antiplatelet_drug_at_the_time_of_stroke" style="min-width: 195px;">
+              <label>Patient was on antiplatelet drug at the time of stroke</label>
+              <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+              <md-radio-button value="0" class="md-primary"> No </md-radio-button>
+          </md-radio-group>
+        </div><!-- end patient-form-column-item -->
+
+        <div flex class="patient-form-column-item">
+          <md-radio-group ng-model="p.patient.warfarin_at_the_time_of_stroke" style="min-width: 195px;">
+              <label>Patient was on warfarin at the time of stroke</label>
+              <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+              <md-radio-button value="0" class="md-primary"> No </md-radio-button>
+          </md-radio-group>
+        </div>
+      </div><!-- end patient-form-column-item -->
+
+      <div layout="row" layout-sm="column" class="patient-form-row-item radio-select-group-row">
+        <div flex class="patient-form-column-item">
+          <md-radio-group ng-model="p.patient.past_history_of_stroke" style="min-width: 195px;">
+              <label>Past history of stroke</label>
+              <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+              <md-radio-button value="2" class="md-primary"> No </md-radio-button>
+              <md-radio-button value="3" class="md-primary"> Do not know </md-radio-button>
+          </md-radio-group>
+        </div><!-- patient-form-column-item -->
+
+        <div flex class="patient-form-column-item">
+          <md-radio-group ng-model="p.patient.hypertension" style="min-width: 195px;">
+              <label>Hypertension</label>
+              <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+              <md-radio-button value="2" class="md-primary"> No </md-radio-button>
+              <md-radio-button value="4" class="md-primary"> Newly diagnosed </md-radio-button>
+          </md-radio-group>
+        </div><!-- patient-form-column-item -->
+
+        <div flex class="patient-form-column-item">
+          <md-radio-group ng-model="p.patient.diabetes_mellitus" style="min-width: 195px;">
+              <label>Diabetes mellitus</label>
+              <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+              <md-radio-button value="2" class="md-primary"> No </md-radio-button>
+              <md-radio-button value="4" class="md-primary"> Newly diagnosed </md-radio-button>
+          </md-radio-group>
+        </div><!-- patient-form-column-item -->
+
+        <div flex class="patient-form-column-item">
+          <md-radio-group ng-model="p.patient.ischaemic_heart_disease" style="min-width: 195px;">
+              <label>Ischaemic heart disease</label>
+              <md-radio-button value="1" class="md-primary">Yes</md-radio-button>
+              <md-radio-button value="2" class="md-primary"> No </md-radio-button>
+              <md-radio-button value="4" class="md-primary"> Newly diagnosed </md-radio-button>
+          </md-radio-group>
+        </div><!-- patient-form-column-item -->
+
+      </div><!-- end patient-form-row-item -->
+
+      <div layout="row" layout-sm="column" class="patient-form-row-item">
+        <div flex class="patient-form-column-item">
+          <label class="symptoms-selection-label">Initial symptoms(s)</label>
+          <div class="checkbox-items-group">
+            <span ng-repeat="symptom in p.patient.otherHeartDiseases" class="symptom-item">
+            <md-checkbox class="md-primary" ng-model="symptom.status" aria-label="symptom.name"> {{symptom.name}} </md-checkbox>
+            </span>
+          </div>
+        </div><!-- end patient-form-column-item -->
+        <div flex class="patient-form-column-item"></div>
+      </div>
+
+    </div><!-- end patient-form-wrapper -->
+  </form>
+
+  <div class="footer">
+    <md-button class="md-raised pull-right md-primary" ng-click="p.updateDetails()" ng-disabled="p.isDisabled">Save</md-button>
+  </div>
+</md-whiteframe>

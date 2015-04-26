@@ -23,9 +23,9 @@ class CreateRiskFactorsTable extends Migration {
 			$table->tinyInteger('ischaemic_heart_disease')->unsigned()->default(0);
 			$table->boolean('current_smoker')->default(false);
 			$table->boolean('unsafe_alcohol_intake')->default(false);
-            $table->integer('patient_id')->default(0);
-            $table->timestamps();
-            $table->index('patient_id');
+      $table->integer('patient_id')->default(0);
+      $table->timestamps();
+      $table->index('patient_id');
 		});
 	}
 

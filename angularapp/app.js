@@ -74,6 +74,23 @@ app.config(['$urlRouterProvider', '$locationProvider', '$stateProvider',  functi
         } 
       }
     })
+    .state('patient-risk-factors', {
+      url: "/dashboard/patient-risk-factors/:patientId",
+      templateUrl: "angularapp/modules/patient/patient-risk-factors.html",
+      controller: 'PatientRiskFactorsController',
+      controllerAs: 'p',
+      resolve: {
+        authExpiry: function(sessionexpiry, authService) {
+          var exp = sessionexpiry.get();
+          exp.success(function(data, status, headers, config){
+            authService.loginConfirmed(); 
+          });
+          exp.error(function(data, status, headers, config){
+            // console.log(data);
+          });
+        } 
+      }
+    })
     .state('dashboard', {
       url: "/dashboard",
       templateUrl: "angularapp/templates/dashboard.html",
@@ -199,6 +216,17 @@ app.config(function($httpProvider) {
       }
     };
   });
+});
+
+app.config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('default')
+    .primaryPalette('deep-purple', {
+      'default': '400', // by default use shade 400 from the pink palette for primary intentions
+      'hue-1': '100', // use shade 100 for the <code>md-hue-1</code> class
+      'hue-2': '600', // use shade 600 for the <code>md-hue-2</code> class
+      'hue-3': 'A100' // use shade A100 for the <code>md-hue-3</code> class
+    })
+   
 });
 
 app.directive("loadingIndicator", function($mdToast) {

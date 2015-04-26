@@ -10,8 +10,8 @@ app.controller('PatientController', ['$filter', '$rootScope', '$stateParams', '$
   $rootScope.successNotice = '';
   self.isDisabled = false;
   self.patientId = $stateParams.patientId;
-  var patientProfile = PatientService.getPatientProfile(self.patientId);
   self.patient = {};
+  var patientProfile = PatientService.getPatientProfile(self.patientId);
 
   var calculateAge = function(birthday) { // pass in player.dateOfBirth
     var ageDifMs = Date.now() - new Date(birthday);
@@ -263,6 +263,73 @@ app.controller('PatientEventController', ['$rootScope', '$filter', '$stateParams
       //todo handle errors
     });
 
+  };
+
+}]);
+
+
+app.controller('PatientRiskFactorsController', ['$filter', '$rootScope', '$stateParams', '$state', 'PatientService', function ($filter, $rootScope, $stateParams, $state, PatientService) {
+
+  var self = this;
+  $rootScope.successNotice = '';
+  self.isDisabled = false;
+  self.patientId = $stateParams.patientId;
+  self.patient = {};
+
+  self.patient.otherHeartDiseases = [
+    { id: 1, name: 'Atrial fibrillation', status: false},
+    { id: 2, name: 'Prosthetic valve', status: false},
+    { id: 3, name: 'ASD/PFO', status: false},
+    { id: 4, name: 'Heart failure', status: false},
+    { id: 5, name: 'Rheumatic valvular disease', status: false},
+    { id: 6, name: 'VSD', status: false},
+  ];
+
+   var patientRiskFactors = PatientService.getPatientRiskFactors(self.patientId);
+
+   patientRiskFactors.success(function(data, status, headers, config) {
+
+    self.patient.antiplatelet_drug_at_the_time_of_stroke = data.data.antiplatelet_drug_at_the_time_of_stroke;
+    self.patient.warfarin_at_the_time_of_stroke = data.data.warfarin_at_the_time_of_stroke;
+    self.patient.past_history_of_stroke = data.data.past_history_of_stroke;
+    self.patient.hypertension = data.data.hypertension;
+    self.patient.diabetes_mellitus = data.data.diabetes_mellitus;
+    self.patient.ischaemic_heart_disease = data.data.ischaemic_heart_disease;
+    self.patient.current_smoker = data.data.current_smoker;
+    self.patient.unsafe_alcohol_intake = data.data.unsafe_alcohol_intake;
+
+    data.data.otherHeartDiseases.forEach(function(entry) {
+      self.patient.otherHeartDiseases.forEach(function(i){
+          if (entry.id == i.id)
+          {
+            i.status = true;
+          }
+      });
+    });
+
+   });
+
+  self.updateDetails = function updateDetails() {
+    self.isDisabled = true;
+    var riskFactors =  angular.copy(self.patient);
+    $rootScope.successNotice = '';
+    var diseases = [];
+
+    self.patient.otherHeartDiseases.forEach(function(d){
+        if (d.status) diseases.push(d.id);
+    });
+
+    riskFactors.otherHeartDiseases = diseases;
+    var patientRiskFactorsResponse = PatientService.updateRiskFactors(riskFactors, self.patientId);
+
+    patientRiskFactorsResponse.success(function(data, status, headers, config){
+      $rootScope.successNotice = 'Patient risk factors have been successfully updated!';
+      self.isDisabled = false;
+    });
+    patientRiskFactorsResponse.error(function(data, status, headers, config){
+      self.isDisabled = false;
+      //todo handle errors
+    });
   };
 
 }]);

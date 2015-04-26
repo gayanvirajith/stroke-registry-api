@@ -67,7 +67,10 @@
     <![endif]-->
 
   <md-sidenav class="md-sidenav-left nsr-sidebar-left md-whiteframe-z2 " md-component-id="left"
-          md-is-locked-open="$mdMedia('gt-md')" ng-if="$state.current.name == 'patient' || $state.current.name == 'patient-event-details'">
+          md-is-locked-open="$mdMedia('gt-md')" 
+          ng-if="$state.current.name == 'patient' || 
+          $state.current.name == 'patient-event-details' || 
+          $state.current.name == 'patient-risk-factors'">
     <md-toolbar class="md-default-theme">
         <h1 class="md-toolbar-tools">
             <a ng-href="/" layout="row" flex="" href="/">
@@ -81,7 +84,7 @@
         <div class="sidebar-common-actions">
           <md-button ng-click="appCtrl.goTo('patient', {patientId: $stateParams.patientId})">Registration Details</md-button>
           <md-button ng-click="appCtrl.goTo('patient-event-details', {patientId: $stateParams.patientId})">Event Details</md-button>
-          <md-button>Risk Factors</md-button>
+          <md-button ng-click="appCtrl.goTo('patient-risk-factors', {patientId: $stateParams.patientId})">Risk Factors</md-button>
         </div>
         <!--<h3>At Discharge</h3>
         <div class="sidebar-common-actions">
@@ -116,11 +119,11 @@
    <md-toolbar class="md-default-theme">
      <div class="md-toolbar-tools"  tabindex="0">
 
-       <div layout="row" flex class="fill-height" ng-if="$state.current.name != 'patient'">
+       <div layout="row" flex class="fill-height" ng-if="$state.current.url.indexOf('patient') === -1">
         <h1>NSR</h1>
        </div>
 
-       <div layout="row" flex class="fill-height" ng-if="$state.current.name == 'patient'">
+       <div layout="row" flex class="fill-height" ng-if="$state.current.url.indexOf('patient') !== -1">
         <h1></h1>
        </div>
 

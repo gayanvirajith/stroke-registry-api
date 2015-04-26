@@ -82,6 +82,20 @@ app.factory('PatientService', ['$http', '$filter', '$sanitize', 'CSRF_TOKEN', fu
     };
   };
 
+  var sanitizeRiskFactors = function sanitizeRiskFactors(riskFactors) {
+    return {
+      antiplatelet_drug_at_the_time_of_stroke: $sanitize(riskFactors.antiplatelet_drug_at_the_time_of_stroke),
+      warfarin_at_the_time_of_stroke: $sanitize(riskFactors.warfarin_at_the_time_of_stroke),
+      past_history_of_stroke: $sanitize(riskFactors.past_history_of_stroke),
+      hypertension: $sanitize(riskFactors.hypertension),
+      diabetes_mellitus: $sanitize(riskFactors.diabetes_mellitus),
+      ischaemic_heart_disease: $sanitize(riskFactors.ischaemic_heart_disease),
+      current_smoker: $sanitize(riskFactors.current_smoker),
+      unsafe_alcohol_intake: $sanitize(riskFactors.unsafe_alcohol_intake),
+      otherHeartDiseases: riskFactors.otherHeartDiseases,
+    };
+  };
+
   return {
     getPatientProfile: function getPatientProfile(id) {
       return $http.get('/patient/'+id);
@@ -89,12 +103,19 @@ app.factory('PatientService', ['$http', '$filter', '$sanitize', 'CSRF_TOKEN', fu
     getPatientEventDetail: function getPatientEventDetail(id) {
       return $http.get('/patient/event-onset/'+id);
     },
+    getPatientRiskFactors: function getPatientRiskFactors(id) {
+      return $http.get('/patient/risk-factor/'+id);
+    },
     updatePatientProfile: function getPatientProfile(patient, id) {
       var patient = $http.post('/patient/update-profile/' + id, sanitizePatientProfileData(patient));
       return patient;
     },
     updatePatientEvent: function getPatientProfile(eventDetail, id) {
       var patient = $http.post('/patient/update-event-onset/' + id, sanitizeEventDetails(eventDetail));
+      return patient;
+    },
+    updateRiskFactors: function updateRiskFactors(riskFactor, id) {
+      var patient = $http.post('/patient/update-risk-factor/' + id, sanitizeRiskFactors(riskFactor));
       return patient;
     }
 

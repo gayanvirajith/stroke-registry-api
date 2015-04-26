@@ -15,18 +15,20 @@
         <div flex class="patient-form-column-item">
           <md-input-container>
               <label>Health Care Number</label>
-              <input  md-min-length="11" md-maxlength="11" name="health_care_number" ng-model="p.patient.health_care_number" type="text" required>
+              <input md-maxlength="11" name="health_care_number" ng-model="p.patient.health_care_number" type="text" required>
               <div ng-messages="patientForm.health_care_number.$error">
                 <div ng-message="required">This is required.</div>
                 <div ng-message="md-maxlength">Has not to be less than 11 characters long.</div>
-                <div ng-message="md-minlength">Has not to be more than 11 characters long.</div>
               </div>
           </md-input-container>
         </div>
         <div flex class="patient-form-column-item">
           <md-input-container>
             <label>Patient Name</label>
-            <input ng-model="p.patient.name">
+            <input type="text" name="name" ng-model="p.patient.name" required>
+            <div ng-messages="patientForm.name.$error">
+              <div ng-message="required">This is required.</div>
+            </div>
           </md-input-container>
         </div>
         <div flex class="patient-form-column-item">
